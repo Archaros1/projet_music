@@ -71,6 +71,11 @@ class Annonce
      */
     private $type_event;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organisateur", inversedBy="annonces")
+     */
+    private $organisateur;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -231,6 +236,18 @@ class Annonce
     public function setTypeEvent(?EventType $type_event): self
     {
         $this->type_event = $type_event;
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?Organisateur
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?Organisateur $organisateur): self
+    {
+        $this->organisateur = $organisateur;
 
         return $this;
     }

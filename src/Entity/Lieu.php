@@ -33,6 +33,16 @@ class Lieu
      */
     private $annonces;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $departement;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -114,6 +124,30 @@ class Lieu
                 $annonce->setLieu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getDepartement(): ?string
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(string $departement): self
+    {
+        $this->departement = $departement;
 
         return $this;
     }

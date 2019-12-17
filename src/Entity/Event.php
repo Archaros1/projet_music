@@ -66,10 +66,16 @@ class Event
      */
     private $style;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="event")
+     */
+    private $photos;
+
     public function __construct()
     {
         $this->groupes = new ArrayCollection();
         $this->style = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +214,37 @@ class Event
     {
         if ($this->style->contains($style)) {
             $this->style->removeElement($style);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+            // set the owning side to null (unless already changed)
+            if ($photo->getEvent() === $this) {
+                $photo->setEvent(null);
+            }
         }
 
         return $this;
