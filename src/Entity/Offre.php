@@ -31,6 +31,18 @@ class Offre
      */
     private $validated;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groupe", inversedBy="offres")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $groupe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Annonce", inversedBy="offres")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $annonce;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +80,30 @@ class Offre
     public function setValidated(bool $validated): self
     {
         $this->validated = $validated;
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Groupe $groupe): self
+    {
+        $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    public function getAnnonce(): ?Annonce
+    {
+        return $this->annonce;
+    }
+
+    public function setAnnonce(?Annonce $annonce): self
+    {
+        $this->annonce = $annonce;
 
         return $this;
     }

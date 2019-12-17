@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +52,40 @@ class Groupe
      * @ORM\Column(type="boolean")
      */
     private $a_tout_son_materiel;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="groupe", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contacts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offre", mappedBy="groupe")
+     */
+    private $offres;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="groupes")
+     */
+    private $events;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Musicien", mappedBy="groupes")
+     */
+    private $musiciens;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="groupes")
+     */
+    private $style;
+
+    public function __construct()
+    {
+        $this->offres = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->musiciens = new ArrayCollection();
+        $this->style = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +172,131 @@ class Groupe
     public function setAToutSonMateriel(bool $a_tout_son_materiel): self
     {
         $this->a_tout_son_materiel = $a_tout_son_materiel;
+
+        return $this;
+    }
+
+    public function getContacts(): ?Contact
+    {
+        return $this->contacts;
+    }
+
+    public function setContacts(Contact $contacts): self
+    {
+        $this->contacts = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->contains($offre)) {
+            $this->offres->removeElement($offre);
+            // set the owning side to null (unless already changed)
+            if ($offre->getGroupe() === $this) {
+                $offre->setGroupe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->addGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            $event->removeGroupe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Musicien[]
+     */
+    public function getMusiciens(): Collection
+    {
+        return $this->musiciens;
+    }
+
+    public function addMusicien(Musicien $musicien): self
+    {
+        if (!$this->musiciens->contains($musicien)) {
+            $this->musiciens[] = $musicien;
+            $musicien->addGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMusicien(Musicien $musicien): self
+    {
+        if ($this->musiciens->contains($musicien)) {
+            $this->musiciens->removeElement($musicien);
+            $musicien->removeGroupe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Style[]
+     */
+    public function getStyle(): Collection
+    {
+        return $this->style;
+    }
+
+    public function addStyle(Style $style): self
+    {
+        if (!$this->style->contains($style)) {
+            $this->style[] = $style;
+        }
+
+        return $this;
+    }
+
+    public function removeStyle(Style $style): self
+    {
+        if ($this->style->contains($style)) {
+            $this->style->removeElement($style);
+        }
 
         return $this;
     }

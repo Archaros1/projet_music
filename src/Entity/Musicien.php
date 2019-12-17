@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,22 @@ class Musicien
      * @ORM\Column(type="string", length=255)
      */
     private $sex;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Groupe", inversedBy="musiciens")
+     */
+    private $groupes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Instrument", inversedBy="musiciens")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $instrument;
+
+    public function __construct()
+    {
+        $this->groupes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +86,44 @@ class Musicien
     public function setSex(string $sex): self
     {
         $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Groupe[]
+     */
+    public function getGroupes(): Collection
+    {
+        return $this->groupes;
+    }
+
+    public function addGroupe(Groupe $groupe): self
+    {
+        if (!$this->groupes->contains($groupe)) {
+            $this->groupes[] = $groupe;
+        }
+
+        return $this;
+    }
+
+    public function removeGroupe(Groupe $groupe): self
+    {
+        if ($this->groupes->contains($groupe)) {
+            $this->groupes->removeElement($groupe);
+        }
+
+        return $this;
+    }
+
+    public function getInstrument(): ?Instrument
+    {
+        return $this->instrument;
+    }
+
+    public function setInstrument(?Instrument $instrument): self
+    {
+        $this->instrument = $instrument;
 
         return $this;
     }

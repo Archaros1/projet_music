@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LieuRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\EventTypeRepository")
  */
-class Lieu
+class EventType
 {
     /**
      * @ORM\Id()
@@ -24,12 +24,12 @@ class Lieu
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="lieu")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="type")
      */
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="lieu")
+     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="type_event")
      */
     private $annonces;
 
@@ -68,7 +68,7 @@ class Lieu
     {
         if (!$this->events->contains($event)) {
             $this->events[] = $event;
-            $event->setLieu($this);
+            $event->setType($this);
         }
 
         return $this;
@@ -79,8 +79,8 @@ class Lieu
         if ($this->events->contains($event)) {
             $this->events->removeElement($event);
             // set the owning side to null (unless already changed)
-            if ($event->getLieu() === $this) {
-                $event->setLieu(null);
+            if ($event->getType() === $this) {
+                $event->setType(null);
             }
         }
 
@@ -99,7 +99,7 @@ class Lieu
     {
         if (!$this->annonces->contains($annonce)) {
             $this->annonces[] = $annonce;
-            $annonce->setLieu($this);
+            $annonce->setTypeEvent($this);
         }
 
         return $this;
@@ -110,8 +110,8 @@ class Lieu
         if ($this->annonces->contains($annonce)) {
             $this->annonces->removeElement($annonce);
             // set the owning side to null (unless already changed)
-            if ($annonce->getLieu() === $this) {
-                $annonce->setLieu(null);
+            if ($annonce->getTypeEvent() === $this) {
+                $annonce->setTypeEvent(null);
             }
         }
 

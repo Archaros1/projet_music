@@ -36,6 +36,26 @@ class Contact
      */
     private $fb;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Groupe", mappedBy="contacts", cascade={"persist", "remove"})
+     */
+    private $groupe;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Organisateur", mappedBy="contacts", cascade={"persist", "remove"})
+     */
+    private $organisateur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Annonce", mappedBy="contacts", cascade={"persist", "remove"})
+     */
+    private $annonce;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Event", mappedBy="contacts", cascade={"persist", "remove"})
+     */
+    private $event;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +105,74 @@ class Contact
     public function setFb(?string $fb): self
     {
         $this->fb = $fb;
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(Groupe $groupe): self
+    {
+        $this->groupe = $groupe;
+
+        // set the owning side of the relation if necessary
+        if ($groupe->getContacts() !== $this) {
+            $groupe->setContacts($this);
+        }
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?Organisateur
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(Organisateur $organisateur): self
+    {
+        $this->organisateur = $organisateur;
+
+        // set the owning side of the relation if necessary
+        if ($organisateur->getContacts() !== $this) {
+            $organisateur->setContacts($this);
+        }
+
+        return $this;
+    }
+
+    public function getAnnonce(): ?Annonce
+    {
+        return $this->annonce;
+    }
+
+    public function setAnnonce(Annonce $annonce): self
+    {
+        $this->annonce = $annonce;
+
+        // set the owning side of the relation if necessary
+        if ($annonce->getContacts() !== $this) {
+            $annonce->setContacts($this);
+        }
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(Event $event): self
+    {
+        $this->event = $event;
+
+        // set the owning side of the relation if necessary
+        if ($event->getContacts() !== $this) {
+            $event->setContacts($this);
+        }
 
         return $this;
     }

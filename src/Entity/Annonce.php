@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,40 @@ class Annonce
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="annonce", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contacts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offre", mappedBy="annonce")
+     */
+    private $offres;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lieu;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="annonces")
+     */
+    private $style_recherche;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\EventType", inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type_event;
+
+    public function __construct()
+    {
+        $this->offres = new ArrayCollection();
+        $this->style_recherche = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +138,99 @@ class Annonce
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getContacts(): ?Contact
+    {
+        return $this->contacts;
+    }
+
+    public function setContacts(Contact $contacts): self
+    {
+        $this->contacts = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->contains($offre)) {
+            $this->offres->removeElement($offre);
+            // set the owning side to null (unless already changed)
+            if ($offre->getAnnonce() === $this) {
+                $offre->setAnnonce(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Style[]
+     */
+    public function getStyleRecherche(): Collection
+    {
+        return $this->style_recherche;
+    }
+
+    public function addStyleRecherche(Style $styleRecherche): self
+    {
+        if (!$this->style_recherche->contains($styleRecherche)) {
+            $this->style_recherche[] = $styleRecherche;
+        }
+
+        return $this;
+    }
+
+    public function removeStyleRecherche(Style $styleRecherche): self
+    {
+        if ($this->style_recherche->contains($styleRecherche)) {
+            $this->style_recherche->removeElement($styleRecherche);
+        }
+
+        return $this;
+    }
+
+    public function getTypeEvent(): ?EventType
+    {
+        return $this->type_event;
+    }
+
+    public function setTypeEvent(?EventType $type_event): self
+    {
+        $this->type_event = $type_event;
 
         return $this;
     }

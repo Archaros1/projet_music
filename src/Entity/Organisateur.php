@@ -36,6 +36,12 @@ class Organisateur
      */
     private $type;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="organisateur", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contacts;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,4 +94,17 @@ class Organisateur
 
         return $this;
     }
+
+    public function getContacts(): ?Contact
+    {
+        return $this->contacts;
+    }
+
+    public function setContacts(Contact $contacts): self
+    {
+        $this->contacts = $contacts;
+
+        return $this;
+    }
+
 }
