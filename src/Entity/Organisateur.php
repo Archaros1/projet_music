@@ -34,11 +34,6 @@ class Organisateur
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="organisateur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -48,6 +43,12 @@ class Organisateur
      * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="organisateur")
      */
     private $annonces;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrganisateurType", inversedBy="organisateurs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
 
     public function __construct()
     {
@@ -95,18 +96,6 @@ class Organisateur
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getContacts(): ?Contact
     {
         return $this->contacts;
@@ -146,6 +135,18 @@ class Organisateur
                 $annonce->setOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?OrganisateurType
+    {
+        return $this->type;
+    }
+
+    public function setType(?OrganisateurType $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
