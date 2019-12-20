@@ -84,6 +84,17 @@ class Groupe
      */
     private $photos;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\GroupeType", inversedBy="groupes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Avis", mappedBy="groupe", cascade={"persist", "remove"})
+     */
+    private $avis;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -333,6 +344,35 @@ class Groupe
             if ($photo->getGroupe() === $this) {
                 $photo->setGroupe(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getType(): ?GroupeType
+    {
+        return $this->type;
+    }
+
+    public function setType(?GroupeType $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getAvis(): ?Avis
+    {
+        return $this->avis;
+    }
+
+    public function setAvis(Avis $avis): self
+    {
+        $this->avis = $avis;
+
+        // set the owning side of the relation if necessary
+        if ($avis->getGroupe() !== $this) {
+            $avis->setGroupe($this);
         }
 
         return $this;

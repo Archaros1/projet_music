@@ -50,6 +50,11 @@ class Organisateur
      */
     private $type;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Avis", mappedBy="organisateur", cascade={"persist", "remove"})
+     */
+    private $avis;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -147,6 +152,23 @@ class Organisateur
     public function setType(?OrganisateurType $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getAvis(): ?Avis
+    {
+        return $this->avis;
+    }
+
+    public function setAvis(Avis $avis): self
+    {
+        $this->avis = $avis;
+
+        // set the owning side of the relation if necessary
+        if ($avis->getOrganisateur() !== $this) {
+            $avis->setOrganisateur($this);
+        }
 
         return $this;
     }
