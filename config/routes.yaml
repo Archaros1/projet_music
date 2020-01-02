@@ -2,20 +2,17 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-sign-in_orga:
-  path: /sign-in/orga
-  controller: App\Controller\FormController::createOrga
-
 login:
   path: /login
   controller: App\Controller\SecurityController::login
+
 home:
   path: /
   controller: App\Controller\HomeController::home
 
 form_orga:
-  path: /formulaire-organisateur
-  controller: App\Controller\HomeController::form_orga
+  path: /form-organisateur
+  controller: App\Controller\FormController::createOrga
 
 form_music:
   path: /formulaire-groupe
