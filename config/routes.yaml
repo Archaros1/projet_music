@@ -12,7 +12,7 @@ form_orga:
 
 form_music:
   path: /formulaire-groupe
-  controller: App\Controller\HomeController::form_orga
+  controller: App\Controller\HomeController::form_music
 
 compte_orga:
   path: /compte-organisateur
