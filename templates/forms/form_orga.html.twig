@@ -1,0 +1,24 @@
+{% extends "admin/admin-base.html.twig" %}
+
+{% block body %}
+    <h1>Inscription d'un organisateur</h1>
+    {{ form_start(orgaForm) }}
+
+        <div class="row mt-3">
+            <div>
+                {{ form_row(orgaForm.name, {'attr' : {placeholder : "Title", 'class': 'form-control'}, 'label' : false}) }}
+            </div>
+            
+            <div>
+                {{ form_row(orgaForm.category, {'attr' : {'class': 'form-control'}, 'label' : false}) }}
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col">
+                {{ form_row(orgaForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}
+            </div>
+        </div>
+
+    {{ form_end(orgaForm) }}
+{% endblock %}
