@@ -24,16 +24,6 @@ class Groupe
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pw;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $mail;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $nombre_membre;
@@ -95,6 +85,11 @@ class Groupe
      */
     private $avis;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Account", mappedBy="groupe", cascade={"persist", "remove"})
+     */
+    private $account;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -117,30 +112,6 @@ class Groupe
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPw(): ?string
-    {
-        return $this->pw;
-    }
-
-    public function setPw(string $pw): self
-    {
-        $this->pw = $pw;
-
-        return $this;
-    }
-
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $mail): self
-    {
-        $this->mail = $mail;
 
         return $this;
     }
@@ -373,6 +344,24 @@ class Groupe
         // set the owning side of the relation if necessary
         if ($avis->getGroupe() !== $this) {
             $avis->setGroupe($this);
+        }
+
+        return $this;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newGroupe = null === $account ? null : $this;
+        if ($account->getGroupe() !== $newGroupe) {
+            $account->setGroupe($newGroupe);
         }
 
         return $this;
