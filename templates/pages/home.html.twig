@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+{% include 'site-parts/slider.html.twig' }
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        Acces à l agenda
+      </div>
+      <div class="col-sm">
+        Description de l organisateur
+      </div>
+      <div class="col-sm">
+        Description du groupe
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <input type="button" value="Accueil" OnClick="pages/agenda.html.twig" />
+      </div>
+      <div class="col-sm">
+        <input type="button" value="Accueil" OnClick="forms/form_orga.html.twig" />
+      </div>
+      <div class="col-sm">
+        <input type="button" value="Accueil" OnClick="forms/form_groupe.html.twig" />
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+
+
