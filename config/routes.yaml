@@ -1,3 +1,75 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+home:
+  path: /
+  controller: App\Controller\HomeController::home
+
+form_orga:
+  path: /formulaire-organisateur
+  controller: App\Controller\HomeController::form_orga
+
+form_music:
+  path: /formulaire-groupe
+  controller: App\Controller\HomeController::form_orga
+
+compte_orga:
+  path: /compte-organisateur
+  controller: App\Controller\HomeController::compte_orga
+
+compte_music:
+  path: /compte-groupe
+  controller: App\Controller\HomeController::compte_music
+
+search_ann:
+  path: /recherche-annonce
+  controller: App\Controller\HomeController::search_ann
+
+offre:
+  path: /offre
+  controller: App\Controller\HomeController::offre
+
+form_ann:
+  path: /formulaire-annonce
+  controller: App\Controller\HomeController::form_ann
+
+form_event:
+  path: /formulaire-evenements
+  controller: App\Controller\HomeController::form_event
+
+gestion_ann:
+  path: /annonce-gestion
+  controller: App\Controller\HomeController::gestion_ann
+
+vitrine_event:
+  path: /vitrine-event
+  controller: App\Controller\HomeController::vit_event
+
+vitrine_groupe:
+  path: /vitrine-groupe
+  controller: App\Controller\HomeController::vitrine_groupe
+
+avis:
+  path: /avis
+  controller: App\Controller\HomeController::avis
+  
+agenda:
+  path: /agenda
+  controller: App\Controller\HomeController::agenda
+
+admin_home:
+  path: /admin/home
+  controller: App\Controller\HomeController::admin_home
+
+admin_form:
+  path: /admin/sous-formulaire
+  controller: App\Controller\HomeController::admin_form
+
+
+
+
+
+
+
+
