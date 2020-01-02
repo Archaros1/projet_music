@@ -2,16 +2,20 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+
 home:
   path: /
   controller: App\Controller\HomeController::home
 
 form_orga:
-  path: /formulaire-organisateur
-  controller: App\Controller\HomeController::form_orga
+  path: /form-organisateur
+  controller: App\Controller\FormController::createOrga
 
 form_music:
-  path: /formulaire-groupe
+  path: /form-groupe
   controller: App\Controller\HomeController::form_music
 
 compte_orga:
@@ -31,11 +35,11 @@ offre:
   controller: App\Controller\HomeController::offre
 
 form_ann:
-  path: /formulaire-annonce
+  path: /form-annonce
   controller: App\Controller\HomeController::form_ann
 
 form_event:
-  path: /formulaire-evenements
+  path: /form-evenements
   controller: App\Controller\HomeController::form_event
 
 gestion_ann:
@@ -63,7 +67,7 @@ admin_home:
   controller: App\Controller\HomeController::admin_home
 
 admin_form:
-  path: /admin/sous-formulaire
+  path: /admin/sous-form
   controller: App\Controller\HomeController::admin_form
 
 
