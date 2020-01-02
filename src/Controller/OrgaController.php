@@ -17,4 +17,5 @@ class OrgaController extends AbstractController
     {
         return $this->render('organisateur/orga_home.html.twig');
     }
+    
 }
