@@ -10,9 +10,9 @@ class HomeController extends AbstractController
 {
 
 
-    public function ActionHome()
+    public function home()
     {
-        return $this->render('home.html.twig');
+        return $this->render('pages/home.html.twig');
     }
 
     
