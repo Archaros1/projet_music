@@ -1,0 +1,55 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Update</h1>
+
+    {{ form_start(organisateurForm) }}
+    <div class="form-group mt-5">
+        <div class="row">
+            <div class="col-2">
+                {{ form_row(organisateurForm.name, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(organisateurForm.nombre_membre, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(organisateurForm.description, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(organisateurForm.a_domicile, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.a_tout_son_materiel, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.contacts {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.offres, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.events, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.musiciens, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.style, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(organisateurForm.avis, {'attr': {class : "form-control"}}) }}
+            </div>
+             <div class="col-2">
+                {{ form_row(organisateurForm.account, {'attr': {class : "form-control"}}) }}
+            </div
+            <div class="col-4 mt-5">
+                {{ form_row(organisateurForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}
+            </div>
+          
+        </div>
+    </div>
+
+    {{ form_end(groupeForm) }}
+
+{% endblock %}
+

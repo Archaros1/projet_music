@@ -1,0 +1,52 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Update</h1>
+
+    {{ form_start(evenementForm) }}
+    <div class="form-group mt-5">
+        <div class="row">
+            <div class="col-2">
+                {{ form_row(evenementForm.name, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-4">
+                {{ form_row(evenementForm.description, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(evenementForm.date_begin, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(evenementForm.date_end, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-2">
+                {{ form_row(evenementForm.type, {'attr': {class : "form-control"}}) }}
+            </div>
+             <div class="col-2">
+                {{ form_row(evenementForm.lieu, {'attr': {class : "form-control"}}) }}
+            </div>
+             <div class="col-2">
+                {{ form_row(evenementForm.contacts, {'attr': {class : "form-control"}}) }}
+            </div>
+             <div class="col-2">
+                {{ form_row(evenementForm.groupes, {'attr': {class : "form-control"}}) }}
+            </div>
+             <div class="col-2">
+                {{ form_row(evenementForm.style, {'attr': {class : "form-control"}}) }}
+            </div>
+             <div class="col-2">
+                {{ form_row(evenementForm.photos, {'attr': {class : "form-control"}}) }}
+            </div>
+            <div class="col-4 mt-5">
+                {{ form_row(evenementForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}
+            </div>
+            
+
+        </div>
+    </div>
+
+    {{ form_end(evenementsForm) }}
+
+{% endblock %}
+
+
+

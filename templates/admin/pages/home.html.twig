@@ -1,0 +1,244 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block body %}
+<h1>Accueil admin</h1>
+    <div class="container-fluid mt-5">
+        <h3 class="mt-3 mb-5">Liste des organisateurs : </h3>
+        <div class="row">
+            <div class="col-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Contacts</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for organisateur in organisateurs %}
+                        <tr>
+                            <th scope="row">{{ organisateur.id }}</th>
+                            <td>{{ organisateur.name }}</td>
+                            <td>{{ organisateur.mail }}</td>
+                            <td>{{ organisateur.pw }}</td>
+                            <td>{{ organisateur.type }}</td>
+                            <td>{{ organisateur.contacts }}</td>
+                            <td><a href="{{ path('admin_update_article', {id : organisateur.id}) }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3 class="mt-3 mb-5">Liste des annonces : </h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Organisateur</th>
+                        <th scope="col">Offres</th>
+                        <th scope="col">Type-groupe</th>
+                        <th scope="col">Type-event</th>
+                        <th scope="col">Style recherche</th>
+                        <th scope="col">Date-début</th>
+                        <th scope="col">Date-fin</th>
+                        <th scope="col">Lieu</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Contacts</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for annonce in annonces %}
+                        <tr>
+                            <th scope="row">{{ annonce.id }}</th>
+                            <td>{{annonce.nom_event}}</td>
+                            <td>{{annonce.organisateur }}</td>
+                            <td>{{annonce.offres }}</td>
+                            <td>{{annonce.genre_event }}</td>
+                            <td>{{annonce.type_event }}</td>
+                            <td>{{annonce.style_recherche }}</td>
+                            <td>{{annonce.date_begin | date("d/m/Y")}}</td>
+                            <td>{{annonce.date_end | date("d/m/Y")}}</td>
+                            <td>{{annonce.lieu }}</td>
+                            <td>{{annonce.description}}</td>
+                            <td>{{annonce.contacts }}</td> 
+                            <td><a href="{{ path('admin_update_article', {id : annonce.id}) }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3 class="mt-3 mb-5">Liste des groupes : </h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Nombre de membre</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Lieu</th>
+                        <th scope="col">Matériel</th>
+                        <th scope="col">Contatcs</th>
+                        <th scope="col">offres</th>
+                        <th scope="col">Events</th>
+                        <th scope="col">Musiciens</th>
+                        <th scope="col">Style</th>
+                        <th scope="col">Avis</th>
+                        <th scope="col">Compte</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for groupe in groupes %}
+                        <tr>
+                            <th scope="row">{{ groupe.id }}</th>
+                            <td>{{groupe.name}}</td>
+                            <td>{{groupe.nombre_membre}}</td>
+                            <td>{{groupe.description}}</td>
+                            <td>{{groupe.a_domicile}}</td>
+                            <td>{{groupe.a_tout_son_materiel}}</td>
+                            <td>{{groupe.contacts}}</td>
+                            <td>{{groupe.offres}}</td>
+                            <td>{{groupe.events}}</td>
+                            <td>{{groupe.musiciens}}</td>
+                            <td>{{groupe.style}}</td>
+                            <td>{{groupe.avis}}</td>
+                            <td>{{groupe.account}}</td>
+                            <td><a href="{{ path('admin_update_article', {id : groupe.id}) }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3 class="mt-3 mb-5">Liste des musiciens : </h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Surnom</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Groupes</th>
+                        <th scope="col">Instruments</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for musiciens in musiciens %}
+                        <tr>
+                            <th scope="row">{{ musiciens.id }}</th>
+                            <td>{{musiciens.name}}</td>
+                            <td>{{musiciens.surname}}</td>
+                            <td>{{musiciens.sex}}</td>
+                            <td>{{musiciens.groupes}}</td>
+                            <td>{{musiciens.instruments}}</td>
+                            <td><a href="{{ path('admin_update_article', {id : musiciens.id}) }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3 class="mt-3 mb-5">Liste des évènements : </h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date-début</th>
+                        <th scope="col">Date-fin</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Lieu</th>
+                        <th scope="col">Contacts</th>
+                        <th scope="col">Groupes</th>
+                        <th scope="col">Style</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for evenement in evenements %}
+                        <tr>
+                            <th scope="row">{{ evenement.id }}</th>
+                            <td>{{evenement.name}}</td>
+                            <td>{{evenement.description}}</td>
+                            <td>{{evenements.date_begin | date("d/m/Y")}}</td>
+                            <td>{{evenements.date_end | date("d/m/Y")}}</td>
+                            <td>{{evenements.type}}</td>
+                            <td>{{evenements.lieu}}</td>
+                            <td>{{evenements.contacts}}</td>
+                            <td>{{evenements.groupes}}</td>
+                            <td>{{evenements.style}}</td>
+                            <td>{{evenements.photos}}</td>
+                            <td><a href="{{ path('admin_update_article', {id : evenement.id}) }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            <h3 class="mt-3 mb-5">Liste des évènements : </h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date-début</th>
+                        <th scope="col">Date-fin</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Lieu</th>
+                        <th scope="col">Contacts</th>
+                        <th scope="col">Groupes</th>
+                        <th scope="col">Style</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for evenement in evenements %}
+                        <tr>
+                            <th scope="row">{{ evenement.id }}</th>
+                            <td>{{evenement.name}}</td>
+                            <td>{{evenement.description}}</td>
+                            <td>{{evenements.date | date("d/m/Y")}}</td>
+                            <td>{{evenements.date_begin | date("d/m/Y")}}</td>
+                            <td>{{evenements.date_end | date("d/m/Y")}}</td>
+                            <td>{{evenements.type}}</td>
+                            <td>{{evenements.lieu}}</td>
+                            <td>{{evenements.contacts}}</td>
+                            <td>{{evenements.groupes}}</td>
+                            <td>{{evenements.style}}</td>
+                            <td>{{evenements.photos}}</td>
+                            <td><a href="{{ path('admin_update_article', {id : evenement.id}) }}">Update</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+    </div>
+{% endblock %}
+
+
