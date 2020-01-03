@@ -2,6 +2,12 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Account;
+use App\Entity\Contact;
+use App\Entity\Groupe;
+use App\Entity\Organisateur;
+
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -24,8 +30,7 @@ class FakerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        
 
         $manager->flush();
     }
