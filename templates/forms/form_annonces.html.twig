@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include "site-parts/slider.html.twig" %}
+
+<form method="post" action="traitement.php">
+    <form name="mon-formulaire1" action="page-envoi.html" method="get">
+       Vous etes:
+        <p>
+           <input type="radio" name="civi" value="Mme" /> groupe
+           <input type="radio" name="civi" value="Mlle" /> musicien
+           <input type="radio" name="civi" value="Mr" /> DJ
+           <input type="radio" name="civi" value="Mr" /> chanteur
+        </p>
+
+        type d'etablissement:
+        <p>
+           <input type="radio" name="civi" value="Mme" /> BAR/PUB
+           <input type="radio" name="civi" value="Mlle" /> RESTAURANT
+           <input type="radio" name="civi" value="Mr" /> DISCOTHEQUE
+           <input type="radio" name="civi" value="Mr" /> PARTICULIER
+        </p>
+
+        <p>
+           Style de l'evenement :<br />
+           <input type="text" name="name" value="" />
+        </p>
+        <p>
+           Lieu de l'evenement :<br />
+           <input type="text" name="name" value="" />
+        </p>
+        <p>
+           Date de l'evenement :<br />
+           <input type="date" name="datedebut">
+           <input type="date" name="datefin">
+        </p>
+        <p>
+           Vous êtes<br />
+           <select name="profil">
+              <option value="parti">Un particulier</option>
+              <option value="profe" selected="selected">Un professionnel</option>
+              <option value="insti">Un institutionnel</option>
+           </select>
+        </p>
+        
+        <p>
+           mon evenement :<br />
+           <textarea name="le-message" rows="6" cols="40">Vous pouvez saisir ici un message.</textarea>
+        </p>
+        <p>
+           <input type="submit" value="Envoyer" />
+           <input type="reset" value="Annuler" />
+        </p>
+        </form>
+    
