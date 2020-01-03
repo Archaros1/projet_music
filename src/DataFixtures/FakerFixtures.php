@@ -58,6 +58,12 @@ class FakerFixtures extends Fixture
             ->setContacts($contact)
             ->setAccount($account)
             ;
+
+            $manager->persist($groupe);
+            $manager->persist($contact);
+            $manager->persist($account);
+            $manager->persist($groupeType);
+            // $manager->flush();
         }
 
         for ($i=0; $i < 6; $i++) {
@@ -82,6 +88,12 @@ class FakerFixtures extends Fixture
             ->setContacts($contact)
             ->setAccount($account)
             ;
+
+            $manager->persist($orga);
+            $manager->persist($contact);
+            $manager->persist($account);
+            $manager->persist($orgaType);
+
         }
 
         $manager->flush();
