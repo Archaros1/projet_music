@@ -17,17 +17,15 @@
 
 	{{ form_start(groupeForm) }}
 		<div class="row">
-			<div class="col">
+			<div class="col-9">
 				{{ form_row(groupeForm.name, {'attr' : {placeholder : "Nom du groupe", 'class': 'form-control'}, 'label' : false}) }}
 
 			</div>
-		</div>
-		<div class="row">
-			<div class="col">
+			<div class="col-3">
 				{{ form_row(groupeForm.nombre_membre, {'attr' : {placeholder : "Nombre de membre", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mt-2">
 			<div class="col">
 				{{ form_row(groupeForm.description, {'attr' : {placeholder : "Descrivez votre groupe en quelques mots", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
@@ -48,7 +46,7 @@
 		</div>
 
 	{{ form_start(contactForm) }}
-	<p>Contact :</p>
+	<p class="mt-2">Contact :</p>
 		<div class="row">
 			<div class="col">
 				{{ form_row(contactForm.phone, {'attr' : {placeholder : "Téléphone", 'class': ''}, 'label' : false}) }}

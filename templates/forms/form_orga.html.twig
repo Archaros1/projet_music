@@ -1,25 +1,56 @@
-{% extends "admin/admin-base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Inscription d'un organisateur</h1>
-    {{ form_start(orgaForm) }}
+	<div class="container">
+	{{ form_start(accountForm) }}
+		<div class="row mt-3">
+			<div class="col">
+				{{ form_row(accountForm.email, {'attr' : {placeholder : "Email (il vous servira d'identifiant)", 'class': 'form-control'}, 'label' : false}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-2">
+				{{ form_row(accountForm.password, {'attr' : {placeholder : "Mot de passe", 'class': 'form-control'}, 'label' : false}) }}
+			</div>
+		</div>
+	{{ form_end(accountForm) }}
 
-        <div class="row mt-3">
-            <div>
-                {{ form_row(orgaForm.name, {'attr' : {placeholder : "Title", 'class': 'form-control'}, 'label' : false}) }}
-            </div>
-            
-            <div>
-                {{ form_row(orgaForm.category, {'attr' : {'class': 'form-control'}, 'label' : false}) }}
-            </div>
-        </div>
-        
-        <div class="row mt-3">
-            <div class="col">
-                {{ form_row(orgaForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}
-            </div>
-        </div>
+	{{ form_start(orgaForm) }}
+		<div class="row">
+			<div class="col">
+				{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur (nom de l'association, entreprise, etc)", 'class': 'form-control'}, 'label' : false}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
+			</div>
+		</div>
 
-    {{ form_end(orgaForm) }}
-    
+	{{ form_start(contactForm) }}
+	<p class="mt-2">Contact :</p>
+		<div class="row">
+			<div class="col">
+				{{ form_row(contactForm.phone, {'attr' : {placeholder : "Téléphone", 'class': ''}, 'label' : false}) }}
+			</div>
+			<div class="col">
+				{{ form_row(contactForm.website, {'attr' : {placeholder : "Site web", 'class': ''}, 'label' : false}) }}
+			</div>
+			<div class="col">
+				{{ form_row(contactForm.twitter, {'attr' : {placeholder : "Twitter", 'class': ''}, 'label' : false}) }}
+			</div>
+			<div class="col">
+				{{ form_row(contactForm.fb, {'attr' : {placeholder : "Facebook", 'class': ''}, 'label' : false}) }}
+			</div>
+		</div>
+    {{ form_end(contactForm) }}
+
+		<div class="row">
+			<div class="col">
+				{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }}
+			</div>
+		</div>
+
+	{{ form_end(orgaForm) }}
+	</div>
 {% endblock %}

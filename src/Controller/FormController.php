@@ -27,7 +27,12 @@ class FormController extends AbstractController
 
     public function createOrga(Request $request){
         $orga = new Organisateur();
+        $account = new Account();
+        $contact = new Contact();
+
         $form = $this->createForm(OrganisateurFormType::class, $orga);
+        $formAccount = $this->createForm(AccountFormType::class, $account);
+        $formContact = $this->createForm(ContactFormType::class, $contact);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -40,7 +45,9 @@ class FormController extends AbstractController
         }
 
         return $this->render("forms/form_orga.html.twig", [
-            "orgaForm" => $form->createView()
+            "orgaForm" => $form->createView(),
+            "accountForm" => $formAccount->createView(),
+            "contactForm" => $formContact->createView()
         ]);
 
 
