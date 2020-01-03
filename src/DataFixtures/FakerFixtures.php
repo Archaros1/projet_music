@@ -5,7 +5,9 @@ namespace App\DataFixtures;
 use App\Entity\Account;
 use App\Entity\Contact;
 use App\Entity\Groupe;
+use App\Entity\GroupeType;
 use App\Entity\Organisateur;
+use App\Entity\OrganisateurType;
 
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -30,7 +32,57 @@ class FakerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        
+        for ($i=0; $i < 25; $i++) {
+            $groupe = new Groupe();
+            $contact = new Contact();
+            $account = new Account();
+            $groupeType = new GroupeType();
+
+            $contact->setPhone($this->faker->phoneNumber)
+            ->setWebsite('https://www.google.com')
+            ->setTwitter('@ElsasZikos')
+            ->setFb()
+            ;
+
+            $account->setEmail($this->faker->email)
+            ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
+
+            $groupeType->setName('groupe');
+
+            $groupe->setName($this->faker->name)
+            ->setNombreMembre(rand(0, 5))
+            ->setDescription($this->faker->realText(200, 2))
+            ->setADomicile(rand(0,1) < 0.5) //bool random
+            ->setAToutSonMateriel(rand(0,1) < 0.5)
+            ->setType($groupeType)
+            ->setContacts($contact)
+            ->setAccount($account)
+            ;
+        }
+
+        for ($i=0; $i < 6; $i++) {
+            $orga = new Organisateur();
+            $contact = new Contact();
+            $account = new Account();
+            $orgaType = new OrganisateurType();
+
+            $contact->setPhone($this->faker->phoneNumber)
+            ->setWebsite('https://www.google.com')
+            ->setTwitter('@ElsasZikos')
+            ->setFb()
+            ;
+
+            $account->setEmail($this->faker->email)
+            ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
+
+            $orgaType->setName('entreprise');
+
+            $orga->setName($this->faker->name)
+            ->setType($orgaType)
+            ->setContacts($contact)
+            ->setAccount($account)
+            ;
+        }
 
         $manager->flush();
     }
