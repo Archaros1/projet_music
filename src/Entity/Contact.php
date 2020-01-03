@@ -66,7 +66,7 @@ class Contact
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 
