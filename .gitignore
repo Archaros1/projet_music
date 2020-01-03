@@ -15,4 +15,4 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-# /src/Migrations/
+/src/Migrations/
