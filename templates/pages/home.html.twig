@@ -1,5 +1,9 @@
 {% extends "base.html.twig" %}
 
+{% block style %}
+  <link rel="stylesheet" href="{{asset('css/custom_style.css')}}">
+{% endblock %}
+
 {% block body %}
 {% include "site-parts/slider.html.twig" %}
 <div class="container-fluid">
