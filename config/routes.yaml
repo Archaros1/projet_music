@@ -16,7 +16,7 @@ form_orga:
 
 form_groupe:
   path: /form-groupe
-  controller: App\Controller\HomeController::form_groupe
+  controller: App\Controller\FormController::createGroupe
 
 orga_home:
   path: /home-organisateur
