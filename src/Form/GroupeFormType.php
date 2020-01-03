@@ -3,19 +3,20 @@
 namespace App\Form;
 
 use App\Entity\Groupe;
+use App\Entity\Style;
+use App\Entity\GroupeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class GroupeFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ACCOUNT data
-            ->add('email')
-            ->add('pw')
-            // GROUPE data
             ->add('name')
             ->add('nombre_membre')
             ->add('description')
@@ -26,16 +27,11 @@ class GroupeFormType extends AbstractType
                 'choice_label' => 'Style'
             ])
             ->add('type', EntityType::class, [
-                'class' => OrganisateurType::class,
+                'class' => GroupeType::class,
                 'choice_label' => 'Type'
             ])
-            // CONTACT data
-            ->add('phone')
-            ->add('website')
-            ->add('twitter')
-            ->add('fb')
             // SUBMIT
-            ->add('inscrire', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 
