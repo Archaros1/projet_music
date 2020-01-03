@@ -41,7 +41,7 @@ class FakerFixtures extends Fixture
             $contact->setPhone($this->faker->phoneNumber)
             ->setWebsite('https://www.google.com')
             ->setTwitter('@ElsasZikos')
-            ->setFb()
+            ->setFb(NULL)
             ;
 
             $account->setEmail($this->faker->email)
@@ -69,7 +69,7 @@ class FakerFixtures extends Fixture
             $contact->setPhone($this->faker->phoneNumber)
             ->setWebsite('https://www.google.com')
             ->setTwitter('@ElsasZikos')
-            ->setFb()
+            ->setFb(NULL)
             ;
 
             $account->setEmail($this->faker->email)
