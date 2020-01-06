@@ -18,46 +18,21 @@
     </div>
   </div>
 
+  {% for evenement in evenements %}
+
   <div class="row">
     <div class="col-8">
         <p>La je choisis si ton annonce dégage ou pas</p>
     </div>
     <div class="col-4">
-        <button type="button" class="btn btn-success">Accepter</button>
-        <button type="button" class="btn btn-danger">Refuser</button>
+        <button type="button" class="btn btn-success" href="{{ path('admin_event_add', { 'id': evenement.id }) }}">Accepter</button>
+        <button type="button" class="btn btn-danger" href="{{ path('admin_event_delete', { 'id': evenement.id }) }}">Refuser</button>
     </div>
   </div>
 
-   <div class="row">
-    <div class="col-8">
-        <p>La je choisis si ton annonce dégage ou pas</p>
-    </div>
-    <div class="col-4">
-        <button type="button" class="btn btn-success">Accepter</button>
-        <button type="button" class="btn btn-danger">Refuser</button>
-    </div>
-  </div>
-
-   <div class="row">
-    <div class="col-8">
-        <p>La je choisis si ton annonce dégage ou pas</p>
-    </div>
-    <div class="col-4">
-        <button type="button" class="btn btn-success">Accepter</button>
-        <button type="button" class="btn btn-danger">Refuser</button>
-    </div>
-  </div>
-
-   <div class="row">
-    <div class="col-8">
-        <p>La je choisis si ton annonce dégage ou pas</p>
-    </div>
-    <div class="col-4">
-        <button type="button" class="btn btn-success">Accepter</button>
-        <button type="button" class="btn btn-danger">Refuser</button>
-    </div>
-  </div>
+  {% endfor %}
+  
 </div>
 
-
 {% endblock %}
+

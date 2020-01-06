@@ -15,8 +15,7 @@
                         <th scope="col">Password</th>
                         <th scope="col">Contacts</th>
                         <th scope="col">Annonces</th>
-                        <th scope="col">Type</th>
-                       
+                        <th scope="col">Type</th>       
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -29,8 +28,7 @@
                             <td>{{ organisateur.pw }}</td>
                             <td>{{ organisateur.contacts }}</td>
                             <td>{{ organisateur.annonces }}</td>
-                            <td>{{ organisateur.type }}</td>
-                           
+                            <td>{{ organisateur.type }}</td>         
                             <td><a href="{{ path('admin_update_article', {id : organisateur.id}) }}">Update</a></td>
                         </tr>
                     {% endfor %}

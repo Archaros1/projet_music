@@ -79,6 +79,18 @@ class AdminController extends AbstractController
         return $this->render('admin/pages/update_groupe.html.twig', ["groupeForm" => $form->createView()]);
     }
 
+    public function updateAnnonce(Request $request, Security $security, $id){
+
+    }
+
+    public function updateMusicien(Request $request, Security $security, $id){
+
+    }
+
+    public function updateEvent(Request $request, Security $security, $id){
+        
+    }
+
 
 
 }
