@@ -12,17 +12,23 @@ use App\Repository\OrganisateurRepository;
 use App\Entity\Account;
 use App\Repository\AccountRepository;
 
+use App\Entity\Annonce;
+use App\Repository\AnnonceRepository;
+
+
 
 
 class OrgaController extends AbstractController
 {
     private $orgaRepo;
     private $accountRepo;
+    private $annonceRepo;
     private $user;
     private $security;
 
-    public function __construct(OrganisateurRepository $orgaRepository, AccountRepository $accountRepository, Security $security){
+    public function __construct(OrganisateurRepository $orgaRepository, AccountRepository $accountRepository, AnnonceRepository $annonceRepository, Security $security){
         $this->orgaRepo = $orgaRepository;
+        $this->annonceRepo = $annonceRepository;
         $this->accountRepo = $accountRepository;
         $this->security = $security;
         $this->user = $security->getUser();
@@ -34,12 +40,17 @@ class OrgaController extends AbstractController
     {
         $account = new Account();
         $orga = new Organisateur();
+
         $id = $this->user->getId();
         // echo $id;
         $account = $this->accountRepo->findOneById($id);
         $orga = $account->getOrganisateur();
         // echo '<pre>' . var_export($account, true) . '</pre>';
-        return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga]);
+
+        $annonces = $this->annonceRepo->findAllAnnonceByOrga($id);
+
+
+        return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga, "annonces"=>$annonces]);
     }
     
 }

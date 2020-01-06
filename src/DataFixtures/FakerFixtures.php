@@ -32,6 +32,7 @@ class FakerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        // FAKE ACCOUNTS LAMBDA
         $groupeType = new GroupeType();
         $groupeType->setName('groupe');
         $manager->persist($groupeType);
@@ -98,7 +99,7 @@ class FakerFixtures extends Fixture
 
         }
 
-        // test USER ORGA
+        // FAKE USER ORGA pour test
         $contact = new Contact();
         $contact->setPhone($this->faker->phoneNumber)
             ->setWebsite('https://www.google.com')

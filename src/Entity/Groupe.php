@@ -81,7 +81,7 @@ class Groupe
     private $type;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Avis", mappedBy="groupe", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="groupe", cascade={"persist", "remove"})
      */
     private $avis;
 
