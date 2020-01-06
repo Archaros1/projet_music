@@ -30,7 +30,7 @@ class Organisateur
     private $contacts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="organisateur", cascade={"persist", "remove"})
      */
     private $annonces;
 
@@ -41,7 +41,7 @@ class Organisateur
     private $type;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Avis", mappedBy="organisateur", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="organisateur", cascade={"persist", "remove"})
      */
     private $avis;
 
