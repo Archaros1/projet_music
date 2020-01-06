@@ -36,6 +36,11 @@ class AdminController extends AbstractController
         $this->musicienRepo = $musicienRepository;
         $this->eventRepo = $eventRepository;
     }
+
+    public function admin_sous_form(){
+        return $this->render('admin/pages/sous_form.html.twig');
+    }
+    
     
     public function admin_home(Request $request){
         $organisateur = $this->organisateurRepo->findAll();
@@ -52,7 +57,6 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $organisateur = $form->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($organisateur);
             $entityManager->flush();
@@ -61,6 +65,20 @@ class AdminController extends AbstractController
         return $this->render('admin/pages/update_orga.html.twig', ["organisateurForm" => $form->createView()]);
     }
 
-    
+    public function updateGroupe(Request $request, Security $security, $id){
+        $groupe = $this->groupeRepo->find($id);
+        $form = $this->createForm(GroupeFormType::class, $groupe);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $groupe = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($groupe);
+            $entityManager->flush();
+            return $this->redirectToRoute("home");
+        }
+        return $this->render('admin/pages/update_groupe.html.twig', ["groupeForm" => $form->createView()]);
+    }
+
+
 
 }

@@ -68,7 +68,7 @@ admin_home:
 
 admin_form:
   path: /admin/sous-form
-  controller: App\Controller\AdminController::admin_form
+  controller: App\Controller\AdminController::admin_sous_form
 
 
 

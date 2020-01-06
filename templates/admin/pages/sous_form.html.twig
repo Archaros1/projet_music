@@ -1,1 +1,63 @@
-{% extends 'admin_base.html.twig' %}
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('assets/css/sous_form.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+  <h1>Modération de l'agenda</h1>
+  <div class="row">
+    <div class="col-8">
+        <h3>Liste de tous les events en attente de validation</h3>
+    </div>
+    <div class="col-4">
+        <h3>Non-modéré</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+        <p>La je choisis si ton annonce dégage ou pas</p>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-success">Accepter</button>
+        <button type="button" class="btn btn-danger">Refuser</button>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="col-8">
+        <p>La je choisis si ton annonce dégage ou pas</p>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-success">Accepter</button>
+        <button type="button" class="btn btn-danger">Refuser</button>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="col-8">
+        <p>La je choisis si ton annonce dégage ou pas</p>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-success">Accepter</button>
+        <button type="button" class="btn btn-danger">Refuser</button>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="col-8">
+        <p>La je choisis si ton annonce dégage ou pas</p>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-success">Accepter</button>
+        <button type="button" class="btn btn-danger">Refuser</button>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
