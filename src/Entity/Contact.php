@@ -61,7 +61,7 @@ class Contact
         return $this->id;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }

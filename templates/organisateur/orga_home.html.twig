@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {# {{ dump(app.user) }} #}
+    <div class="container">
+    <h1>Vous êtes sur la page utilisateur de {{orga.name}}</h1>
+    <p>Vous êtes un organisateur enregistré en tant que {{orga.type.name}}.</p>
+    <p>Il est possible de vous contacter grâce aux adresses suivantes :</p>
+    <ul>
+        <li>Tel : {{orga.contacts.phone}}</li>
+        <li>Site internet : {{orga.contacts.website}}</li>
+        <li>Twitter : {{orga.contacts.twitter}}</li>
+        <li>Facebook : {{orga.contacts.fb}}</li>
+    </ul>
+
+    <p>Votre email identifiant est {{orga.account.email}}</p>
+
+    <a href="#" class="btn btn-primary">Créer une annonce</a>
+    <a href="#" class="btn btn-primary">Chercher une annonce</a>
+
+</div>
+
+
+{% endblock %}

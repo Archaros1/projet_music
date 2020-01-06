@@ -64,4 +64,24 @@ class AccountRepository extends ServiceEntityRepository implements PasswordUpgra
         ;
     }
     */
+
+    public function findOneByEmail($email): ?Account
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.email = :val')
+            ->setParameter('val', $email)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneById($id): ?Account
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
