@@ -35,7 +35,7 @@ class FormController extends AbstractController
         $formContact = $this->createForm(ContactFormType::class, $contact);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $formAccount->isSubmitted() && $formContact->isSubmitted()) {
             $orga = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($orga);
