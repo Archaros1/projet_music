@@ -17,13 +17,13 @@ class Avis
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Groupe", inversedBy="avis", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groupe", inversedBy="avis", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $groupe;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Organisateur", inversedBy="avis", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organisateur", inversedBy="avis", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;

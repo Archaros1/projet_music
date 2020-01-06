@@ -16,15 +16,15 @@ form_orga:
 
 form_groupe:
   path: /form-groupe
-  controller: App\Controller\HomeController::form_groupe
+  controller: App\Controller\FormController::createGroupe
 
 orga_home:
   path: /home-organisateur
-  controller: App\Controller\HomeController::home_orga
+  controller: App\Controller\OrgaController::index
 
 groupe_home:
   path: /home-groupe
-  controller: App\Controller\HomeController::home_groupe
+  controller: App\Controller\GroupeController::index
 
 search_ann:
   path: /recherche-annonce

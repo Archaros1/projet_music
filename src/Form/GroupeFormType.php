@@ -2,10 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Organisateur;
-use App\Entity\OrganisateurType;
-
-use App\Entity\Account;
+use App\Entity\Groupe;
+use App\Entity\Style;
+use App\Entity\GroupeType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,15 +13,22 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
-class OrganisateurFormType extends AbstractType
+class GroupeFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ORGA data
             ->add('name')
+            ->add('nombre_membre')
+            ->add('description')
+            ->add('a_domicile')
+            ->add('a_tout_son_materiel')
+            ->add('style', EntityType::class, [
+                'class' => Style::class,
+                'choice_label' => 'name'
+            ])
             ->add('type', EntityType::class, [
-                'class' => OrganisateurType::class,
+                'class' => GroupeType::class,
                 'choice_label' => 'name'
             ])
             // SUBMIT
@@ -33,7 +39,7 @@ class OrganisateurFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Organisateur::class,
+            'data_class' => Groupe::class,
         ]);
     }
 }
