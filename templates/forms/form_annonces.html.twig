@@ -7,18 +7,24 @@
     <form name="mon-formulaire1" action="page-envoi.html" method="get">
        Vous etes:
         <p>
-           <input type="radio" name="civi" value="Mme" /> groupe
-           <input type="radio" name="civi" value="Mlle" /> musicien
-           <input type="radio" name="civi" value="Mr" /> DJ
-           <input type="radio" name="civi" value="Mr" /> chanteur
+           <input type="radio" name="civi" value="groupe" /> groupe
+           <input type="radio" name="civi" value="musicien" /> musicien
+        </p>
+        
+        <p>
+           <input type="radio" name="civi" value="dj" /> DJ
+           <input type="radio" name="civi" value="chanteur" /> chanteur
         </p>
 
         type d'etablissement:
         <p>
-           <input type="radio" name="civi" value="Mme" /> BAR/PUB
-           <input type="radio" name="civi" value="Mlle" /> RESTAURANT
-           <input type="radio" name="civi" value="Mr" /> DISCOTHEQUE
-           <input type="radio" name="civi" value="Mr" /> PARTICULIER
+           <input type="radio" name="civi" value="" /> BAR/PUB
+           <input type="radio" name="civi" value="" /> RESTAURANT
+        </p>
+
+        <p>
+           <input type="radio" name="civi" value="" /> DISCOTHEQUE
+           <input type="radio" name="civi" value="" /> PARTICULIER
         </p>
 
         <p>
@@ -35,18 +41,64 @@
            <input type="date" name="datefin">
         </p>
         <p>
-           Vous êtes<br />
-           <select name="profil">
-              <option value="parti">Un particulier</option>
-              <option value="profe" selected="selected">Un professionnel</option>
-              <option value="insti">Un institutionnel</option>
-           </select>
-        </p>
+          
         
         <p>
            mon evenement :<br />
            <textarea name="le-message" rows="6" cols="40">Vous pouvez saisir ici un message.</textarea>
         </p>
+
+        Styles musicaux
+        <p>
+            <input type="radio" name="civi" value="" /> Reprises diverses
+            <input type="radio" name="civi" value="" /> Variété française/Musette
+        </p>
+
+        <p>
+            <input type="radio" name="civi" value="" /> Pop/Rock
+            <input type="radio" name="civi" value="" /> Jazz/Blues
+            <input type="radio" name="civi" value="" /> Hip-Hop/RB/Soul/Funk
+        </p>
+
+        <p>
+            <input type="radio" name="civi" value="" /> Electro/Dance
+            <input type="radio" name="civi" value="" /> Année 80/Disco
+        </p>
+        <p>
+            <input type="radio" name="civi" value="" /> Metal/Hard Rock
+
+            <input type="radio" name="civi" value="" /> M2dieval/Viking
+        </p>
+
+        <p>
+            <input type="radio" name="civi" value="Mr" /> Musique pour enfants
+            <input type="radio" name="civi" value="Mr" /> Classique/Chant/Gospel
+        </p>
+
+        <p>
+            <input type="radio" name="civi" value="Mr" /> Reggaae/Musique du monde/Country
+        </p>
+
+        <p>
+            <input type="radio" name="civi" value="Mr" /> DJ généraliste
+         </p>
+       
+         Mes liens de contact
+
+         <p>
+            .Facebook <input type="text" name="name" value="" />
+         </p>
+
+         <p>
+            .Twitter <input type="text" name="name" value="" />
+         </p>
+
+         <p>
+            .www <input type="text" name="name" value="" />
+         </p>
+
+        
+
         <p>
            <input type="submit" value="Envoyer" />
            <input type="reset" value="Annuler" />
