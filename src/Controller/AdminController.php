@@ -80,17 +80,47 @@ class AdminController extends AbstractController
     }
 
     public function updateAnnonce(Request $request, Security $security, $id){
-
+        $annonce = $this->annonceRepo->find($id);
+        $form = $this->createForm(AnnonceFormType::class, $groupe);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $annonce = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($annonce);
+            $entityManager->flush();
+            return $this->redirectToRoute("home");
+        }
+        return $this->render('admin/pages/update_annonce.html.twig', ["annonceForm" => $form->createView()]);
     }
+
 
     public function updateMusicien(Request $request, Security $security, $id){
-
+        $musicien = $this->groupeRepo->find($id);
+        $form = $this->createForm(MusicienFormType::class, $musicien);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $musicien = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($musicien);
+            $entityManager->flush();
+            return $this->redirectToRoute("home");
+        }
+        return $this->render('admin/pages/update_musicien.html.twig', ["musicienForm" => $form->createView()]);
     }
+    
 
     public function updateEvent(Request $request, Security $security, $id){
-        
+        $event = $this->eventRepo->find($id);
+        $form = $this->createForm(EventFormType::class, $event);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $event = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($event);
+            $entityManager->flush();
+            return $this->redirectToRoute("home");
+        }
+        return $this->render('admin/pages/update_event.html.twig', ["eventForm" => $form->createView()]);
     }
-
-
 
 }
