@@ -15,6 +15,11 @@ class HomeController extends AbstractController
         return $this->render('pages/home.html.twig');
     }
 
+    public function agenda()
+    {
+        return $this->render('pages/agenda.html.twig');
+    }
+
     
 
     
