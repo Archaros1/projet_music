@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Groupe;
 use App\Entity\Style;
 use App\Entity\GroupeType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,11 +25,11 @@ class GroupeFormType extends AbstractType
             ->add('a_tout_son_materiel')
             ->add('style', EntityType::class, [
                 'class' => Style::class,
-                'choice_label' => 'Style'
+                'choice_label' => 'name'
             ])
             ->add('type', EntityType::class, [
                 'class' => GroupeType::class,
-                'choice_label' => 'Type'
+                'choice_label' => 'name'
             ])
             // SUBMIT
             ->add('submit', SubmitType::class)

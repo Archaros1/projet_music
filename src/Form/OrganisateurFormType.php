@@ -23,7 +23,7 @@ class OrganisateurFormType extends AbstractType
             ->add('name')
             ->add('type', EntityType::class, [
                 'class' => OrganisateurType::class,
-                'choice_label' => 'Type'
+                'choice_label' => 'name'
             ])
             // SUBMIT
             ->add('submit', SubmitType::class)

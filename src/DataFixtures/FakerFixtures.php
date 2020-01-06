@@ -32,12 +32,15 @@ class FakerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $groupeType = new GroupeType();
+        $groupeType->setName('groupe');
+        $manager->persist($groupeType);
+
         for ($i=0; $i < 25; $i++) {
             $groupe = new Groupe();
             $contact = new Contact();
             $account = new Account();
-            $groupeType = new GroupeType();
-
+            
             $contact->setPhone($this->faker->phoneNumber)
             ->setWebsite('https://www.google.com')
             ->setTwitter('@ElsasZikos')
@@ -46,8 +49,6 @@ class FakerFixtures extends Fixture
 
             $account->setEmail($this->faker->email)
             ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
-
-            $groupeType->setName('groupe');
 
             $groupe->setName($this->faker->name)
             ->setNombreMembre(rand(0, 5))
@@ -66,12 +67,15 @@ class FakerFixtures extends Fixture
             // $manager->flush();
         }
 
+        $orgaType = new OrganisateurType();
+        $orgaType->setName('entreprise');
+        $manager->persist($orgaType);
+
         for ($i=0; $i < 6; $i++) {
             $orga = new Organisateur();
             $contact = new Contact();
             $account = new Account();
-            $orgaType = new OrganisateurType();
-
+            
             $contact->setPhone($this->faker->phoneNumber)
             ->setWebsite('https://www.google.com')
             ->setTwitter('@ElsasZikos')
@@ -80,8 +84,6 @@ class FakerFixtures extends Fixture
 
             $account->setEmail($this->faker->email)
             ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
-
-            $orgaType->setName('entreprise');
 
             $orga->setName($this->faker->name)
             ->setType($orgaType)
@@ -92,7 +94,6 @@ class FakerFixtures extends Fixture
             $manager->persist($orga);
             $manager->persist($contact);
             $manager->persist($account);
-            $manager->persist($orgaType);
 
         }
 
