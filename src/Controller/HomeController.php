@@ -15,9 +15,9 @@ class HomeController extends AbstractController
         return $this->render('pages/home.html.twig');
     }
 
-    public function vitrine_groupe()
+    public function agenda()
     {
-        return $this->render('pages/vitrine_groupe.html.twig');
+        return $this->render('pages/agenda.html.twig');
     }
 
     

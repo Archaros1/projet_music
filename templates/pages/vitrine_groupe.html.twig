@@ -1,7 +1,10 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
+
+
+
 {% include "site-parts/slider.html.twig" %}
+
 <div class="container">
   <div class="row">
     <div class="col-sm">
@@ -9,15 +12,25 @@
         <img width="80"  src="{{asset('assets/images/appph.svg')}}">
       </div>
     </div>
+
     <div class="col-sm">
       <h5>Information</h5>
     </div>
+
     <div class="col-sm">
       <h5>Description</h5>
+      <div class="d-flex  justify-content-between pb-3 border-bottom"><div class="pave-image"><div class="image img_vide"><i class="fa fa-camera"></i></div>
+</div><div class="h180 pave clearfix ellipsis is-truncated" style="overflow-wrap: break-word;">
+<a class="block titre" href="https://www.jds.fr/agenda/manifestations/offre-de-benevolat-145480_A" style="">Offre de bénévolat</a>
+<p class="fil-ariane d-flex falign-items-start mb-1 mt-md-1" style="">
+<a class="gris_2" href="https://www.jds.fr/agenda/manifestations-fetes-festivals-137_B">Manifestations</a><span class="ml-1 mr-1">&gt;</span><a class="gris_2" href="https://www.jds.fr/agenda/loisirs-stages-et-ateliers-434_B">Loisirs</a></p>
+<span class="date d-block mt-1 mb-1" style="">Du Lundi  2/09/2019 au Lundi 31/08/2020</span>
+<p class="lieu clearfix mt-1 mb-1" style=""><i class="gris_2 fa fa-angle-right"></i> <a class="gris_2" href="https://www.jds.fr/strasbourg-390_V">Strasbourg</a>
+</p><p class="description mt-md-2 mb-md-0 mt-1 mb-1" style="">résumé de votre animation</p></div>
+</div>
     </div>
   </div>
 </div>
-
 
 
 {% endblock %}
