@@ -14,17 +14,17 @@ form_orga:
   path: /form-organisateur
   controller: App\Controller\FormController::createOrga
 
-form_music:
+form_groupe:
   path: /form-groupe
-  controller: App\Controller\HomeController::form_music
+  controller: App\Controller\FormController::createGroupe
 
-compte_orga:
-  path: /compte-organisateur
-  controller: App\Controller\HomeController::compte_orga
+orga_home:
+  path: /home-organisateur
+  controller: App\Controller\HomeController::home_orga
 
-compte_music:
-  path: /compte-groupe
-  controller: App\Controller\HomeController::compte_music
+groupe_home:
+  path: /home-groupe
+  controller: App\Controller\HomeController::home_groupe
 
 search_ann:
   path: /recherche-annonce

@@ -17,13 +17,13 @@
 
     <div class="row">
       <div class="col-sm">
-        <input type="button" value="Voir L'agenda" OnClick="pages/agenda.html.twig" />
+        <a class="btn btn-primary" href="{{ path("agenda") }}">Agenda</a>
       </div>
       <div class="col-sm">
-        <input type="button" value="inscription organisateur" OnClick="forms/form_orga.html.twig" />
+        <a class="btn btn-primary" href="{{ path('form_orga') }}">S'inscrire</a>
       </div>
       <div class="col-sm">
-        <input type="button" value="inscription groupe" OnClick="forms/form_groupe.html.twig" />
+        <a class="btn btn-primary" href="{{ path('form_groupe') }}">S'inscrire</a>
       </div>
     </div>
   </div>
