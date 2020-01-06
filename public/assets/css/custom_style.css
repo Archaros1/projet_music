@@ -7,3 +7,12 @@ footer {
     color: #fff;
     bottom:0;
     position:absolute;
+}
+
+body{
+    background-image: url('assets/images/fond.jpg');
+}
+
+h5{
+    text-align: center;
+}
