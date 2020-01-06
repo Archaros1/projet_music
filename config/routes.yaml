@@ -64,11 +64,11 @@ agenda:
 
 admin_home:
   path: /admin/home
-  controller: App\Controller\HomeController::admin_home
+  controller: App\Controller\AdminController::admin_home
 
 admin_form:
   path: /admin/sous-form
-  controller: App\Controller\HomeController::admin_form
+  controller: App\Controller\AdminController::admin_form
 
 
 

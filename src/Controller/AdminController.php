@@ -2,43 +2,65 @@
 
 
 namespace App\Controller;
-use App\Entity\Article;
-use App\Entity\Category;
-use App\Form\ArticleType;
-use App\Form\CategoryType;
-use App\Repository\ArticleRepository;
-use App\Repository\CategoryRepository;
-use App\Repository\UserRepository;
+use App\Entity\Organisateur;
+use App\Entity\Annonce;
+use App\Form\Groupe;
+use App\Form\Musicien;
+use App\Form\Event;
+use App\Form\OrganisateurFormType;
+use App\Repository\OrganisateurRepository;
+use App\Repository\AnnonceRepository;
+use App\Repository\GroupeRepository;
+use App\Repository\MusicienRepository;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\String\Slugger\AsciiSlugger;
+
 
 
 class AdminController extends AbstractController
 {
 
-    private $corganisateurRepository;
-    private $annonceRepository;
-    private $groupeRepository;
-    private $musicienRepository;
-    private $eventRepository;
-        
+    private $organisateurRepo;
+    private $annonceRepo;
+    private $groupeRepo;
+    private $musicienRepo;
+    private $eventRepo;
 
-    public function admin_home(){
-        $organisateur = $this->organisateurRepository->findAllOrganisateur();
-        return $this->render('admin/home.html.twig', ["organisateur"=> $organisateur]);
-
-        $annonce = $this->annonceRepository->findAllAnnonce();
-        return $this->render('admin/home.html.twig', ["annonce"=> $annonce]);
-
-        $groupe = $this->groupeRepository->findAllGroupe();
-        return $this->render('admin/home.html.twig', ["groupe"=> $groupe]);
-
-        $musicien = $this->musicienRepository->findAllMusicien();
-        return $this->render('admin/home.html.twig', ["musicien"=> $musicien]);
-
-        $event = $this->eventRepository->findAllEvent();
-        return $this->render('admin/home.html.twig', ["event"=> $event]);
+    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, MusicienRepository $musicienRepository, EventRepository $eventRepository)
+    {
+        $this->organisateurRepo = $organisateurRepository;
+        $this->annonceRepo = $annonceRepository;
+        $this->groupeRepo = $groupeRepository;
+        $this->musicienRepo = $musicienRepository;
+        $this->eventRepo = $eventRepository;
     }
+    
+    public function admin_home(Request $request){
+        $organisateur = $this->organisateurRepo->findAll();
+        $annonce = $this->annonceRepo->findAll();
+        $groupe = $this->groupeRepo->findAll();
+        $musicien = $this->musicienRepo->findAll();
+        $event = $this->eventRepo->findAll();
+        return $this->render("admin/pages/home.html.twig", ["organisateurs" => $organisateur, "annonces" => $annonce, "groupes" => $groupe, "musiciens" => $musicien, "event" => $event]);
+    }
+
+    public function updateOrganisateur(Request $request, Security $security, $id){
+        $organisateur = $this->organisateurRepo->find($id);
+        $form = $this->createForm(OrganisateurFormType::class, $organisateur);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $organisateur = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($organisateur);
+            $entityManager->flush();
+            return $this->redirectToRoute("home");
+        }
+        return $this->render('admin/pages/update_orga.html.twig', ["organisateurForm" => $form->createView()]);
+    }
+
+    
+
 }
