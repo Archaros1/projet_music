@@ -54,4 +54,24 @@ class OrganisateurRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOneById($id): ?Organisateur
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByEmail($email): ?Organisateur
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.email = :val')
+            ->setParameter('val', $email)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

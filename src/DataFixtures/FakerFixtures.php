@@ -32,11 +32,12 @@ class FakerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        // FAKE ACCOUNTS LAMBDA
         $groupeType = new GroupeType();
         $groupeType->setName('groupe');
         $manager->persist($groupeType);
 
-        for ($i=0; $i < 25; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $groupe = new Groupe();
             $contact = new Contact();
             $account = new Account();
@@ -48,6 +49,7 @@ class FakerFixtures extends Fixture
             ;
 
             $account->setEmail($this->faker->email)
+            ->setRoles(['ROLE_USER', 'ROLE_GROUPE'])
             ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
 
             $groupe->setName($this->faker->name)
@@ -63,7 +65,6 @@ class FakerFixtures extends Fixture
             $manager->persist($groupe);
             $manager->persist($contact);
             $manager->persist($account);
-            $manager->persist($groupeType);
             // $manager->flush();
         }
 
@@ -71,7 +72,7 @@ class FakerFixtures extends Fixture
         $orgaType->setName('entreprise');
         $manager->persist($orgaType);
 
-        for ($i=0; $i < 6; $i++) {
+        for ($i=0; $i < 3; $i++) {
             $orga = new Organisateur();
             $contact = new Contact();
             $account = new Account();
@@ -83,6 +84,7 @@ class FakerFixtures extends Fixture
             ;
 
             $account->setEmail($this->faker->email)
+            ->setRoles(['ROLE_USER', 'ROLE_ORGA'])
             ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
 
             $orga->setName($this->faker->name)
@@ -96,6 +98,29 @@ class FakerFixtures extends Fixture
             $manager->persist($account);
 
         }
+
+        // FAKE USER ORGA pour test
+        $contact = new Contact();
+        $contact->setPhone($this->faker->phoneNumber)
+            ->setWebsite('https://www.google.com')
+            ->setTwitter('@ElsasZikos')
+            ->setFb(NULL);
+
+        $account = new Account();
+        $account->setEmail("usertest@hotmail.fr")
+            ->setPassword($this->passwordEncoder->encodePassword($account, "webforce"))
+            ->setRoles(['ROLE_USER', 'ROLE_ORGA']);
+
+        $orga = new Organisateur();
+        $orga->setName($this->faker->name)
+            ->setType($orgaType)
+            ->setContacts($contact)
+            ->setAccount($account);
+
+        $manager->persist($orga);
+        $manager->persist($contact);
+        $manager->persist($account);
+
 
         $manager->flush();
     }
