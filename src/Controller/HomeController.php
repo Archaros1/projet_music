@@ -34,10 +34,12 @@ class HomeController extends AbstractController
     public function index()
     {
         $roles = $this->user->getRoles();
-        if (in_array('ROLE_GROUPE', $roles)) {
+        /* if (in_array('ROLE_GROUPE', $roles)) {
             return $this->redirectToRoute("groupe_home");
-        } elseif (in_array('ROLE_ORGA', $roles)) {
+        } else */if (in_array('ROLE_ORGA', $roles)) {
             return $this->redirectToRoute("orga_home");
+        } elseif (in_array('ROLE_ADMIN', $roles)) {
+            return $this->redirectToRoute("admin_home");
         } else {
             return $this->redirectToRoute("login");
         }
