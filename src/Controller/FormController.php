@@ -20,6 +20,10 @@ use App\Form\AccountFormType;
 use App\Entity\Contact;
 use App\Form\ContactFormType;
 
+use App\Entity\Annonce;
+use App\Repository\AnnonceRepository;
+use App\Form\AnnonceFormType;
+
 
 class FormController extends AbstractController
 {
@@ -87,5 +91,27 @@ class FormController extends AbstractController
         ]);
 
 
+    }
+
+    public function createAnnonce(Request $request){
+        $annonce = new Annonce();
+        $formAnnonce = $this->createForm(AnnonceFormType::class, $annonce);
+
+        $formAnnonce->handleRequest($request);
+
+        if ($formAnnonce->isSubmitted()) {
+        $annonce = $formAnnonce->getData();
+
+        $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($annonce);
+            $entityManager->flush();
+            return $this->redirectToRoute("orga_home");
+
+}
+
+            return $this->render("forms/form_annonce.html.twig", [
+                "annonceForm" => $formAnnonce->createView(),
+                
+            ]);
     }
 }

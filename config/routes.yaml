@@ -36,7 +36,7 @@ offre:
 
 form_ann:
   path: /form-annonce
-  controller: App\Controller\HomeController::form_ann
+  controller: App\Controller\FormController::createAnnonce
 
 form_event:
   path: /form-evenements
