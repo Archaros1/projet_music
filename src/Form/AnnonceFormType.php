@@ -7,6 +7,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+
 
 class AnnonceFormType extends AbstractType
 {
@@ -16,12 +20,13 @@ class AnnonceFormType extends AbstractType
             ->add('nom_event')
             ->add('genre_event')
             ->add('date_begin' , DateTimeType::class)
-            
             ->add('date_end',DateTimeType::class)
             ->add('description')
             // ->add('lieu')
             // ->add('style_recherche')
             // ->add('type_event')
+            // SUBMIT
+            ->add('submit', SubmitType::class)
         ;
     }
 
