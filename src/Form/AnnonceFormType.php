@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Annonce;
+use App\Entity\Lieu;
+use App\Entity\Style;
+use App\Entity\EventType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,11 +23,20 @@ class AnnonceFormType extends AbstractType
             ->add('nom_event')
             ->add('genre_event')
             ->add('date_begin' , DateTimeType::class)
-            ->add('date_end',DateTimeType::class)
+            ->add('date_end', DateTimeType::class)
             ->add('description')
-            // ->add('lieu')
-            // ->add('style_recherche')
-            // ->add('type_event')
+            ->add('lieu', EntityType::class, [
+                'class' => Lieu::class,
+                'choice_label' => 'name'
+            ])
+            ->add('style_recherche', EntityType::class, [
+                'class' => Style::class,
+                'choice_label' => 'name'
+            ])
+            ->add('type_event', EntityType::class, [
+                'class' => EventType::class,
+                'choice_label' => 'name'
+            ])
             // SUBMIT
             ->add('submit', SubmitType::class)
         ;
