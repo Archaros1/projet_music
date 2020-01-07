@@ -5,13 +5,6 @@
 <div class="container">
     <h1>Vous êtes sur la page utilisateur de {{orga.name}}</h1>
     <p>Vous êtes un <strong>organisateur</strong> enregistré en tant que <strong>{{orga.type.name}}</strong>.</p>
-    <p>Il est possible de vous contacter grâce aux adresses suivantes :</p>
-    <ul>
-        <li>Tel : {{orga.contacts.phone}}</li>
-        <li>Site internet : <a href="{{orga.contacts.website}}" target="blank">{{orga.contacts.website}}</a></li>
-        <li>Twitter : {{orga.contacts.twitter}}</li>
-        <li>Facebook : {{orga.contacts.fb}}</li>
-    </ul>
 
     <p>Votre email identifiant est <strong>{{orga.account.email}}</strong></p>
     <a href="{{ path('form_ann') }}" class="btn btn-primary">Créer une annonce</a>
