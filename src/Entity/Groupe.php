@@ -44,12 +44,6 @@ class Groupe
     private $a_tout_son_materiel;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="groupe", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $contacts;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Offre", mappedBy="groupe")
      */
     private $offres;
@@ -79,11 +73,6 @@ class Groupe
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="groupe", cascade={"persist", "remove"})
-     */
-    private $avis;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Account", mappedBy="groupe", cascade={"persist", "remove"})
@@ -160,18 +149,6 @@ class Groupe
     public function setAToutSonMateriel(bool $a_tout_son_materiel): self
     {
         $this->a_tout_son_materiel = $a_tout_son_materiel;
-
-        return $this;
-    }
-
-    public function getContacts(): ?Contact
-    {
-        return $this->contacts;
-    }
-
-    public function setContacts(Contact $contacts): self
-    {
-        $this->contacts = $contacts;
 
         return $this;
     }
@@ -328,23 +305,6 @@ class Groupe
     public function setType(?GroupeType $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getAvis(): ?Avis
-    {
-        return $this->avis;
-    }
-
-    public function setAvis(Avis $avis): self
-    {
-        $this->avis = $avis;
-
-        // set the owning side of the relation if necessary
-        if ($avis->getGroupe() !== $this) {
-            $avis->setGroupe($this);
-        }
 
         return $this;
     }

@@ -24,10 +24,10 @@
         <a class="btn btn-primary" href="{{ path("agenda") }}">Agenda</a>
       </div>
       <div class="col-sm">
-        <a class="btn btn-primary" href="{{ path('form_orga') }}">S'inscrire</a>
+        <a class="btn btn-primary" href="{{ path('form_account', {typeUser : 'orga'}) }}">S'inscrire</a>
       </div>
       <div class="col-sm">
-        <a class="btn btn-primary" href="{{ path('form_groupe') }}">S'inscrire</a>
+        <a class="btn btn-primary" href="{{ path('form_account', {typeUser : 'groupe'}) }}">S'inscrire</a>
       </div>
     </div>
   </div>

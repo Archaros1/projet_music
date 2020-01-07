@@ -99,7 +99,7 @@ class FakerFixtures extends Fixture
 
         }
 
-        // FAKE USER ORGA pour test
+        // FAKE USER pour test
         $contact = new Contact();
         $contact->setPhone($this->faker->phoneNumber)
             ->setWebsite('https://www.google.com')
@@ -109,11 +109,21 @@ class FakerFixtures extends Fixture
         $account = new Account();
         $account->setEmail("usertest@hotmail.fr")
             ->setPassword($this->passwordEncoder->encodePassword($account, "webforce"))
-            ->setRoles(['ROLE_USER', 'ROLE_ORGA']);
+            ->setRoles(['ROLE_USER', 'ROLE_ORGA', 'ROLE_GROUPE']);
 
         $orga = new Organisateur();
         $orga->setName($this->faker->name)
             ->setType($orgaType)
+            ->setContacts($contact)
+            ->setAccount($account);
+
+        $groupe = new Groupe();
+        $groupe->setName($this->faker->name)
+            ->setNombreMembre(rand(0, 5))
+            ->setDescription($this->faker->realText(200, 2))
+            ->setADomicile(rand(0,1) < 0.5) //bool random
+            ->setAToutSonMateriel(rand(0,1) < 0.5)
+            ->setType($groupeType)
             ->setContacts($contact)
             ->setAccount($account);
 

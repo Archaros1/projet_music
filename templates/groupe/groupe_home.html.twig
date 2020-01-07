@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {# {{ dump(app.user) }} #}
+<div class="container">
+    <h1>Vous êtes sur votre page utilisateur, {{groupe.name}}</h1>
+    <p>Vous êtes un <strong>groupe</strong> catégorisé en tant que <strong>{{groupe.type.name}}</strong>.</p>
+    <p>Il est possible de vous contacter grâce aux adresses suivantes :</p>
+    <ul>
+        <li>Tel : {{groupe.contacts.phone}}</li>
+        <li>Site internet : <a href="{{groupe.contacts.website}}" target="blank">{{groupe.contacts.website}}</a></li>
+        <li>Twitter : {{groupe.contacts.twitter}}</li>
+        <li>Facebook : {{groupe.contacts.fb}}</li>
+    </ul>
+
+    <p>Votre email identifiant est <strong>{{groupe.account.email}}</strong></p>
+    <a href="#" class="btn btn-primary">Chercher une annonce</a>
+    <a href="{{ path("groupe_update") }}" class="btn btn-primary">Modifier mes informations</a>
+
+    <div class="row">
+    {# {% for annonce in annonces %}
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{annonce.id}} - {{annonce.nom_event}}</h5>
+                <p class="card-text">{{annonce.date_begin}} - {{annonce.date_end}}</p>
+                <a href="#" class="btn btn-primary">Détails</a>
+            </div>
+        </div>
+        
+    {% endfor %} #}
+    </div>
+</div>
+
+
+{% endblock %}

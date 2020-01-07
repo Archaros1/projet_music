@@ -44,12 +44,6 @@ class Annonce
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="annonce", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $contacts;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Offre", mappedBy="annonce")
      */
     private $offres;
@@ -143,18 +137,6 @@ class Annonce
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getContacts(): ?Contact
-    {
-        return $this->contacts;
-    }
-
-    public function setContacts(Contact $contacts): self
-    {
-        $this->contacts = $contacts;
 
         return $this;
     }
