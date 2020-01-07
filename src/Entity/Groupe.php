@@ -54,11 +54,6 @@ class Groupe
     private $events;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Musicien", mappedBy="groupes")
-     */
-    private $musiciens;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="groupes")
      */
     private $style;
@@ -83,7 +78,6 @@ class Groupe
     {
         $this->offres = new ArrayCollection();
         $this->events = new ArrayCollection();
-        $this->musiciens = new ArrayCollection();
         $this->style = new ArrayCollection();
         $this->photos = new ArrayCollection();
     }
@@ -207,34 +201,6 @@ class Groupe
         if ($this->events->contains($event)) {
             $this->events->removeElement($event);
             $event->removeGroupe($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Musicien[]
-     */
-    public function getMusiciens(): Collection
-    {
-        return $this->musiciens;
-    }
-
-    public function addMusicien(Musicien $musicien): self
-    {
-        if (!$this->musiciens->contains($musicien)) {
-            $this->musiciens[] = $musicien;
-            $musicien->addGroupe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMusicien(Musicien $musicien): self
-    {
-        if ($this->musiciens->contains($musicien)) {
-            $this->musiciens->removeElement($musicien);
-            $musicien->removeGroupe($this);
         }
 
         return $this;
