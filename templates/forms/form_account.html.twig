@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container">
+	{{ form_start(accountForm) }}
+		<div class="row mt-3">
+			<div class="col">
+				{{ form_row(accountForm.email, {'attr' : {placeholder : "Email (il vous servira d'identifiant)", 'class': 'form-control'}, 'label' : false}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-2">
+				{{ form_row(accountForm.password, {'attr' : {placeholder : "Mot de passe", 'class': 'form-control'}, 'label' : false}) }}
+			</div>
+		</div>
+    {{ form_end(accountForm) }}
+    
+    </div>
+{% endblock %}

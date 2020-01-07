@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+h1 {
+    text-align: center;
+    color: #fbf9f9;
+    text-shadow: 2px 2px 0px #0000, 5px 4px 0px #0000;
+    font-size: 72px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+  }
+
+ h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+ } 
+
+ p{
+    text-align: justify;
+ }
+
+ .card-body, .card{
+     background-color: lightgray;
+     -webkit-border-radius: 20px 20px 20px 20px;
+     border-radius: 20px 20px 20px 20px;
+ }
+
+ img{
+     margin-top: 60; 
+     margin-left:  6px;
+     box-shadow: 5px 5px 15px 5px hsl(0, 0%, 86%);  ;
+ }
+
+ body{
+     background: #1C6EA4;
+     background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+     background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+     background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
+ }
+
+ a:hover{
+    background: rgb(173, 165, 245);
+ }

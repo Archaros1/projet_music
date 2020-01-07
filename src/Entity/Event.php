@@ -51,12 +51,6 @@ class Event
     private $lieu;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="event", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $contacts;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Groupe", inversedBy="events")
      */
     private $groupes;
@@ -151,18 +145,6 @@ class Event
     public function setLieu(?Lieu $lieu): self
     {
         $this->lieu = $lieu;
-
-        return $this;
-    }
-
-    public function getContacts(): ?Contact
-    {
-        return $this->contacts;
-    }
-
-    public function setContacts(Contact $contacts): self
-    {
-        $this->contacts = $contacts;
 
         return $this;
     }

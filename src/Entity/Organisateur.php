@@ -24,13 +24,7 @@ class Organisateur
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="organisateur", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $contacts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="organisateur", cascade={"persist", "remove"})
      */
     private $annonces;
 
@@ -39,11 +33,6 @@ class Organisateur
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Avis", mappedBy="organisateur", cascade={"persist", "remove"})
-     */
-    private $avis;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Account", mappedBy="organisateur", cascade={"persist", "remove"})
@@ -68,18 +57,6 @@ class Organisateur
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getContacts(): ?Contact
-    {
-        return $this->contacts;
-    }
-
-    public function setContacts(Contact $contacts): self
-    {
-        $this->contacts = $contacts;
 
         return $this;
     }
@@ -123,23 +100,6 @@ class Organisateur
     public function setType(?OrganisateurType $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getAvis(): ?Avis
-    {
-        return $this->avis;
-    }
-
-    public function setAvis(Avis $avis): self
-    {
-        $this->avis = $avis;
-
-        // set the owning side of the relation if necessary
-        if ($avis->getOrganisateur() !== $this) {
-            $avis->setOrganisateur($this);
-        }
 
         return $this;
     }

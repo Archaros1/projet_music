@@ -47,4 +47,16 @@ class AnnonceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllAnnonceByOrga($orga)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.organisateur = :val')
+            ->setParameter('val', $orga)
+            ->orderBy('a.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

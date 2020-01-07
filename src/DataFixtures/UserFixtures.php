@@ -32,7 +32,7 @@ class UserFixtures extends Fixture
         ->setRoles(['ROLE_ADMIN']);
         $manager->persist($adminAccount);
 
-
+        
 
 
         $manager->flush();
