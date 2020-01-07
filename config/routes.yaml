@@ -10,6 +10,10 @@ home:
   path: /
   controller: App\Controller\HomeController::home
 
+form_account:
+  path: /form-inscription
+  controller: App\Controller\FormController::createAccount
+
 form_orga:
   path: /form-organisateur
   controller: App\Controller\FormController::createOrga
@@ -18,6 +22,10 @@ form_groupe:
   path: /form-groupe
   controller: App\Controller\FormController::createGroupe
 
+user_home:
+  path: /home-user
+  controller: App\Controller\HomeController::index
+
 orga_home:
   path: /home-organisateur
   controller: App\Controller\OrgaController::index
@@ -25,6 +33,15 @@ orga_home:
 groupe_home:
   path: /home-groupe
   controller: App\Controller\GroupeController::index
+
+groupe_update:
+  path: /update_infos
+  controller: App\Controller\FormController::updateGroupe
+
+orga_update:
+  path: /update_infos
+  controller: App\Controller\FormController::updateOrga
+
 
 search_ann:
   path: /recherche-annonce
@@ -48,7 +65,7 @@ gestion_ann:
 
 vitrine_event:
   path: /vitrine-event
-  controller: App\Controller\HomeController::vit_event
+  controller: App\Controller\HomeController::vitrine_event
 
 vitrine_groupe:
   path: /vitrine-groupe
