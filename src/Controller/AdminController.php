@@ -8,6 +8,7 @@ use App\Form\Groupe;
 use App\Form\Musicien;
 use App\Form\Event;
 use App\Form\OrganisateurFormType;
+use App\Form\GroupeFormType;
 use App\Repository\OrganisateurRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\GroupeRepository;
@@ -36,10 +37,6 @@ class AdminController extends AbstractController
         $this->musicienRepo = $musicienRepository;
         $this->eventRepo = $eventRepository;
     }
-
-    public function admin_sous_form(){
-        return $this->render('admin/pages/sous_form.html.twig');
-    }
     
     
     public function admin_home(Request $request){
@@ -48,8 +45,9 @@ class AdminController extends AbstractController
         $groupe = $this->groupeRepo->findAll();
         $musicien = $this->musicienRepo->findAll();
         $event = $this->eventRepo->findAll();
-        return $this->render("admin/pages/home.html.twig", ["organisateurs" => $organisateur, "annonces" => $annonce, "groupes" => $groupe, "musiciens" => $musicien, "event" => $event]);
+        return $this->render("admin/pages/home.html.twig", ["organisateurs" => $organisateur, "annonces" => $annonce, "groupes" => $groupe, "musiciens" => $musicien, "events" => $event]);
     }
+
 
     public function updateOrganisateur(Request $request, Security $security, $id){
         $organisateur = $this->organisateurRepo->find($id);
@@ -123,4 +121,16 @@ class AdminController extends AbstractController
         return $this->render('admin/pages/update_event.html.twig', ["eventForm" => $form->createView()]);
     }
 
+    public function admin_agenda(Request $request){
+        $event = $this->eventRepo->findAll();
+        return $this->render("admin/pages/agenda.html.twig", ["events" => $event]);
+    }
+
+    public function eventAdd(){
+
+    }
+
+    public function evenDelete(){
+
+    }
 }

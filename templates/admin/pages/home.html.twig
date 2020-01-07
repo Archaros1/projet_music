@@ -10,12 +10,12 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Mail</th>
-                        <th scope="col">Password</th>
+                        <th scope="col">Nom</th>                        
                         <th scope="col">Contacts</th>
                         <th scope="col">Annonces</th>
-                        <th scope="col">Type</th>       
+                        <th scope="col">Type</th> 
+                        <th scope="col">Avis</th>
+                        <th scope="col">Compte</th>      
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -24,11 +24,11 @@
                         <tr>
                             <th scope="row">{{ organisateur.id }}</th>
                             <td>{{ organisateur.name }}</td>
-                            <td>{{ organisateur.mail }}</td>
-                            <td>{{ organisateur.pw }}</td>
-                            <td>{{ organisateur.contacts }}</td>
+                            <td>{{ organisateur.contacts.fb }}</td>
                             <td>{{ organisateur.annonces }}</td>
-                            <td>{{ organisateur.type }}</td>         
+                            <td>{{ organisateur.type.name }}</td> 
+                            <td>{{ organisateur.avis }}</td>
+                            <td>{{ organisateur.account }}</td> 
                             <td><a href="{{ path('admin_update_article', {id : organisateur.id}) }}">Update</a></td>
                         </tr>
                     {% endfor %}
@@ -61,17 +61,17 @@
                     {% for annonce in annonces %}
                         <tr>
                             <th scope="row">{{ annonce.id }}</th>
-                            <td>{{annonce.nom_event}}</td>
+                            <td>{{annonce.nomEvent}}</td>
                             <td>{{annonce.organisateur }}</td>
                             <td>{{annonce.offres }}</td>
-                            <td>{{annonce.genre_event }}</td>
-                            <td>{{annonce.type_event }}</td>
-                            <td>{{annonce.style_recherche }}</td>
-                            <td>{{annonce.date_begin | date("d/m/Y")}}</td>
-                            <td>{{annonce.date_end | date("d/m/Y")}}</td>
+                            <td>{{annonce.genreEvent }}</td>
+                            <td>{{annonce.typeEvent }}</td>
+                            <td>{{annonce.styleRecherche }}</td>
+                            <td>{{annonce.dateBegin | date("d/m/Y")}}</td>
+                            <td>{{annonce.dateEnd | date("d/m/Y")}}</td>
                             <td>{{annonce.lieu }}</td>
                             <td>{{annonce.description}}</td>
-                            <td>{{annonce.contacts }}</td> 
+                            <td>{{annonce.contacts.fb }}</td> 
                             <td><a href="{{ path('admin_update_article', {id : annonce.id}) }}">Update</a></td>
                         </tr>
                     {% endfor %}
@@ -106,11 +106,11 @@
                         <tr>
                             <th scope="row">{{ groupe.id }}</th>
                             <td>{{groupe.name}}</td>
-                            <td>{{groupe.nombre_membre}}</td>
+                            <td>{{groupe.nombreMembre}}</td>
                             <td>{{groupe.description}}</td>
-                            <td>{{groupe.a_domicile}}</td>
-                            <td>{{groupe.a_tout_son_materiel}}</td>
-                            <td>{{groupe.contacts}}</td>
+                            <td>{{groupe.aDomicile}}</td>
+                            <td>{{groupe.aToutSonMateriel}}</td>
+                            <td>{{groupe.contacts.fb}}</td>
                             <td>{{groupe.offres}}</td>
                             <td>{{groupe.events}}</td>
                             <td>{{groupe.musiciens}}</td>
@@ -176,20 +176,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for evenement in evenements %}
+                    {% for event in events %}
                         <tr>
-                            <th scope="row">{{ evenement.id }}</th>
-                            <td>{{evenement.name}}</td>
-                            <td>{{evenement.description}}</td>
-                            <td>{{evenements.date_begin | date("d/m/Y")}}</td>
-                            <td>{{evenements.date_end | date("d/m/Y")}}</td>
-                            <td>{{evenements.type}}</td>
-                            <td>{{evenements.lieu}}</td>
-                            <td>{{evenements.contacts}}</td>
-                            <td>{{evenements.groupes}}</td>
-                            <td>{{evenements.style}}</td>
-                            <td>{{evenements.photos}}</td>
-                            <td><a href="{{ path('admin_update_article', {id : evenement.id}) }}">Update</a></td>
+                            <th scope="row">{{ event.id }}</th>
+                            <td>{{event.name}}</td>
+                            <td>{{event.description}}</td>
+                            <td>{{event.dateBegin | date("d/m/Y")}}</td>
+                            <td>{{event.dateEnd | date("d/m/Y")}}</td>
+                            <td>{{event.type.name}}</td>
+                            <td>{{event.lieu}}</td>
+                            <td>{{event.contacts.fb}}</td>
+                            <td>{{event.groupes}}</td>
+                            <td>{{event.style}}</td>
+                            <td>{{event.photos}}</td>
+                            <td><a href="{{ path('admin_update_article', {id : event.id}) }}">Update</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -217,21 +217,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for evenement in evenements %}
+                    {% for event in events %}
                         <tr>
-                            <th scope="row">{{ evenement.id }}</th>
-                            <td>{{evenement.name}}</td>
-                            <td>{{evenement.description}}</td>
-                            <td>{{evenements.date | date("d/m/Y")}}</td>
-                            <td>{{evenements.date_begin | date("d/m/Y")}}</td>
-                            <td>{{evenements.date_end | date("d/m/Y")}}</td>
-                            <td>{{evenements.type}}</td>
-                            <td>{{evenements.lieu}}</td>
-                            <td>{{evenements.contacts}}</td>
-                            <td>{{evenements.groupes}}</td>
-                            <td>{{evenements.style}}</td>
-                            <td>{{evenements.photos}}</td>
-                            <td><a href="{{ path('admin_update_article', {id : evenement.id}) }}">Update</a></td>
+                            <th scope="row">{{ event.id }}</th>
+                            <td>{{event.name}}</td>
+                            <td>{{event.description}}</td>
+                            <td>{{event.dateBegin | date("d/m/Y")}}</td>
+                            <td>{{event.dateEnd | date("d/m/Y")}}</td>
+                            <td>{{event.type.name}}</td>
+                            <td>{{event.lieu}}</td>
+                            <td>{{event.contacts.fb}}</td>
+                            <td>{{event.groupes}}</td>
+                            <td>{{event.style}}</td>
+                            <td>{{event.photos}}</td>
+                            <td><a href="{{ path('admin_update_article', {id : event.id}) }}">Update</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -239,7 +238,6 @@
             </div>
         </div>
         
-
     </div>
 {% endblock %}
 

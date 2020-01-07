@@ -18,11 +18,11 @@
     </div>
   </div>
 
-  {% for evenement in evenements %}
+  {% for event in events %}
 
   <div class="row">
     <div class="col-8">
-        <p>La je choisis si ton annonce dégage ou pas</p>
+        <p>{{event.name}} : {{event.description}}</p>
     </div>
     <div class="col-4">
         <button type="button" class="btn btn-success" href="{{ path('admin_event_add', { 'id': evenement.id }) }}">Accepter</button>

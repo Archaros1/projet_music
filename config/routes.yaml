@@ -67,8 +67,8 @@ admin_home:
   controller: App\Controller\AdminController::admin_home
 
 admin_form:
-  path: /admin/sous-form
-  controller: App\Controller\AdminController::admin_sous_form
+  path: /admin/moderateur-agenda
+  controller: App\Controller\AdminController::admin_agenda
 
 admin_update_orga:
   path: /admin/organisateur/update/{id}
