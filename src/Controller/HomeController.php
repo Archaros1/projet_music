@@ -15,14 +15,19 @@ class HomeController extends AbstractController
         return $this->render('pages/home.html.twig');
     }
 
-    public function VitrineEvent()
+    public function annonce()
+    {
+        return $this->render('form/form_annonce.html.twig');
+    }
+
+    public function EventVitrine()
     {
         return $this->render('pages/vitrine_event.html.twig');
     }
-    
-    public function FormAnnonces()
+
+    public function agenda()
     {
-        return $this->render('pages/FormAnnonces.html.twig');
+        return $this->render('pages/agenda.html.twig');
     }
     
     
