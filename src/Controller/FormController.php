@@ -19,10 +19,6 @@ use App\Entity\Account;
 use App\Repository\AccountRepository;
 use App\Form\AccountFormType;
 
-use App\Entity\Contact;
-use App\Repository\ContactRepository;
-use App\Form\ContactFormType;
-
 
 class FormController extends AbstractController
 {
@@ -31,12 +27,10 @@ class FormController extends AbstractController
     private $security;
     private $groupeRepo;
     private $accountRepo;
-    private $contactRepo;
 
-    public function __construct(ContactRepository $contactRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security){
+    public function __construct(GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security){
         $this->groupeRepo = $groupeRepository;
         $this->accountRepo = $accountRepository;
-        $this->contactRepo = $contactRepository;
         $this->security = $security;
         $this->user = $security->getUser();
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
@@ -83,7 +77,6 @@ class FormController extends AbstractController
     public function createOrga(Request $request){
         $orga = new Organisateur();
         $account = new Account();
-        $contact = new Contact();
 
         $account = $this->accountRepo->findOneByIdAndEmail($_SESSION['idAccount'], $_SESSION['emailAccount']);
 
@@ -94,7 +87,6 @@ class FormController extends AbstractController
             $orga = $form->getData();
 
             $orga->setAccount($account);
-            $orga->setContacts($contact);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($orga);
@@ -150,7 +142,6 @@ class FormController extends AbstractController
         $formGroupe->handleRequest($request);
         if ($formGroupe->isSubmitted()) {
             $groupe = $formGroupe->getData();
-            $contact = $formContact->getData();
 
             $groupe->setAccount($account);
 

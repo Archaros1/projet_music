@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Account;
-use App\Entity\Contact;
 use App\Entity\Groupe;
 use App\Entity\GroupeType;
 use App\Entity\Organisateur;
@@ -39,14 +38,7 @@ class FakerFixtures extends Fixture
 
         for ($i=0; $i < 10; $i++) {
             $groupe = new Groupe();
-            $contact = new Contact();
             $account = new Account();
-            
-            $contact->setPhone($this->faker->phoneNumber)
-            ->setWebsite('https://www.google.com')
-            ->setTwitter('@ElsasZikos')
-            ->setFb(NULL)
-            ;
 
             $account->setEmail($this->faker->email)
             ->setRoles(['ROLE_USER', 'ROLE_GROUPE'])
@@ -58,12 +50,10 @@ class FakerFixtures extends Fixture
             ->setADomicile(rand(0,1) < 0.5) //bool random
             ->setAToutSonMateriel(rand(0,1) < 0.5)
             ->setType($groupeType)
-            ->setContacts($contact)
             ->setAccount($account)
             ;
 
             $manager->persist($groupe);
-            $manager->persist($contact);
             $manager->persist($account);
             // $manager->flush();
         }
@@ -74,38 +64,23 @@ class FakerFixtures extends Fixture
 
         for ($i=0; $i < 3; $i++) {
             $orga = new Organisateur();
-            $contact = new Contact();
             $account = new Account();
             
-            $contact->setPhone($this->faker->phoneNumber)
-            ->setWebsite('https://www.google.com')
-            ->setTwitter('@ElsasZikos')
-            ->setFb(NULL)
-            ;
-
             $account->setEmail($this->faker->email)
             ->setRoles(['ROLE_USER', 'ROLE_ORGA'])
             ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
 
             $orga->setName($this->faker->name)
             ->setType($orgaType)
-            ->setContacts($contact)
             ->setAccount($account)
             ;
 
             $manager->persist($orga);
-            $manager->persist($contact);
             $manager->persist($account);
 
         }
 
         // FAKE USER pour test
-        $contact = new Contact();
-        $contact->setPhone($this->faker->phoneNumber)
-            ->setWebsite('https://www.google.com')
-            ->setTwitter('@ElsasZikos')
-            ->setFb(NULL);
-
         $account = new Account();
         $account->setEmail("usertest@hotmail.fr")
             ->setPassword($this->passwordEncoder->encodePassword($account, "webforce"))
@@ -114,7 +89,6 @@ class FakerFixtures extends Fixture
         $orga = new Organisateur();
         $orga->setName($this->faker->name)
             ->setType($orgaType)
-            ->setContacts($contact)
             ->setAccount($account);
 
         $groupe = new Groupe();
@@ -124,11 +98,9 @@ class FakerFixtures extends Fixture
             ->setADomicile(rand(0,1) < 0.5) //bool random
             ->setAToutSonMateriel(rand(0,1) < 0.5)
             ->setType($groupeType)
-            ->setContacts($contact)
             ->setAccount($account);
 
         $manager->persist($orga);
-        $manager->persist($contact);
         $manager->persist($account);
 
 
