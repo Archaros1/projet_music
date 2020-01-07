@@ -14,30 +14,44 @@ class UtilityFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $lieu = new Lieu();
+        $lieux = [
+            [
+                'name' => 'Place Gutenberg',
+                'ville' => 'Strasbourg',
+                'departement' => 'Bas-Rhin'
+            ],
+            [
+                'name' => 'Place Kleber',
+                'ville' => 'Strasbourg',
+                'departement' => 'Bas-Rhin'
+            ],
+            [
+                'name' => 'Chateau des Rohans',
+                'ville' => 'Saverne',
+                'departement' => 'Bas-Rhin'
+            ],
+            [
+                'name' => "Place de l'Ancienne-Douane",
+                'ville' => 'Colmar',
+                'departement' => 'Haut-Rhin'
+            ]
+        ];
 
-        //LIEUX
-        $lieu->setName('Place Gutenberg')
-            ->setVille('Strasbourg')
-            ->setDepartement('Bas-Rhin');
-        $manager->persist($lieu);
+        foreach ($lieux as $lieu) {
+            $lieuObjet = new Lieu();
 
-        $lieu->setName('Palais Rohan')
-            ->setVille('Strasbourg')
-            ->setDepartement('Bas-Rhin');
-        $manager->persist($lieu);
+            $lieuObjet->setName($lieu['name'])
+                ->setVille($lieu['ville'])
+                ->setDepartement($lieu['departement']);
+            $manager->persist($lieuObjet);
+        }
 
-        $lieu->setName('Place Kleber')
-            ->setVille('Strasbourg')
-            ->setDepartement('Bas-Rhin');
-        $manager->persist($lieu);
-
-        $lieu->setName("Place de l'Ancienne-Douane")
-            ->setVille('Colmar')
-            ->setDepartement('Haut-Rhin');
-        $manager->persist($lieu);
-
-        //
+        $styles = ['Metal', 'Rock', 'Electro', 'Jazz'];
+        foreach ($styles as $style) {
+            $styleObjet = new Style();
+            $styleObjet->setName($style);
+            $manager->persist($styleObjet);
+        }
 
 
         $manager->flush();
