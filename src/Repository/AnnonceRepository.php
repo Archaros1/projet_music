@@ -64,8 +64,8 @@ class AnnonceRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
         ->andWhere('a.id = :id')
-        ->andWhere('a.organisateur = :orga')
-        ->setParameters(['id' => $id, 'orga' => $orga])
+        ->andWhere('a.organisateur = :organisateur')
+        ->setParameters(['id' => $id, 'organisateur' => $orga])
         ->orderBy('a.id', 'ASC')
         ->getQuery()
         ->getOneOrNullResult()

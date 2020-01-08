@@ -41,11 +41,17 @@ class AnnonceController extends AbstractController
     public function index()
     {
         $idAnnonce = $_GET['id'];
-        $idUser = $this->user->getId();
+        $idOrgaUser = $this->user->getOrganisateur()->getId();
 
         $annonce = new Annonce();
-        $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idUser);
+        $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idOrgaUser);
 
-        return $this->render('annonce/annonce_gestion.html.twig', ['annonce' => $annonce]);
+        if (is_null($annonce)) {
+            return $this->redirectToRoute("user_home");
+        } else {
+            $styles = $annonce->getStyleRecherche();
+            return $this->render('annonce/annonce_gestion.html.twig', ['annonce' => $annonce, 'styles' => $styles]);
+        }
+        
     }
 }

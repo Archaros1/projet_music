@@ -47,7 +47,7 @@ class OrgaController extends AbstractController
         $orga = $account->getOrganisateur();
         // echo '<pre>' . var_export($account, true) . '</pre>';
 
-        $annonces = $this->annonceRepo->findAllAnnonceByOrga($id);
+        $annonces = $this->annonceRepo->findAllAnnonceByOrga($orga->getId());
 
 
         return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga, "annonces"=>$annonces]);

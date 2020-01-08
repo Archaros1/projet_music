@@ -154,7 +154,7 @@ class FormController extends AbstractController
             $entityManager->persist($annonce);
             $entityManager->flush();
 
-            return $this->redirectToRoute("orga_home");
+            return $this->redirectToRoute("gestion_ann", ['id' => $annonce->getId()]);
 
         }
         return $this->render("forms/form_annonce.html.twig", [

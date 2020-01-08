@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ annonce.nomEvent }}</h1>
+        <h2>{{ annonce.genreEvent }}</h2>
+
+        <ul>
+            <li>Début : {{ annonce.dateBegin | date('d/m/Y') }}</li>
+            <li>Fin : {{ annonce.dateEnd | date('d/m/Y') }}</li>
+        </ul>
+
+        <pre>
+            {{ dump(styles) }}
+        </pre>
+        {% for style in styles %}
+            <p>{{ style }}</p>
+        {% endfor %}
+
+
+    </div>
+
+{% endblock %}
