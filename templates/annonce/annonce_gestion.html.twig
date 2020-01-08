@@ -11,12 +11,13 @@
             <li>Fin : {{ annonce.dateEnd | date('d/m/Y') }}</li>
         </ul>
 
-        <pre>
-            {{ dump(styles) }}
-        </pre>
-        {% for style in styles %}
-            <p>{{ style }}</p>
+        {# {{ dump(annonce.styleRecherche) }} #}
+        
+        <ul>
+        {% for style in annonce.styleRecherche %}
+            <li>{{ style }}</li>
         {% endfor %}
+        </ul>
 
 
     </div>
