@@ -128,7 +128,6 @@ class FormController extends AbstractController
             $entityManager->persist($groupe);
             $entityManager->flush();
             return $this->redirectToRoute("login");
-
         }
 
         return $this->render("forms/form_groupe.html.twig", [
@@ -148,9 +147,13 @@ class FormController extends AbstractController
         if ($formAnnonce->isSubmitted()) {
             $annonce = $formAnnonce->getData();
 
+            $userOrga = $this->user->getOrganisateur();
+            $annonce->setOrganisateur($userOrga);
+
             $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($annonce);
-                $entityManager->flush();
+            $entityManager->persist($annonce);
+            $entityManager->flush();
+
             return $this->redirectToRoute("orga_home");
 
         }
