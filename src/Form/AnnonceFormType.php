@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Annonce;
 use App\Entity\Lieu;
 use App\Entity\Style;
+use App\Form\StyleFormType;
 use App\Entity\EventType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +32,14 @@ class AnnonceFormType extends AbstractType
             ])
             ->add('style_recherche', EntityType::class, [
                 'class' => Style::class,
-                'choice_label' => 'name'
+                'mapped' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'choice_label' => 'name',
+                'label' => 'Style(s) recherché(s)',
+                'choice_attr' => function() {
+                    return ['class' => 'ml-2 mr-1'];
+                },
             ])
             ->add('type_event', EntityType::class, [
                 'class' => EventType::class,

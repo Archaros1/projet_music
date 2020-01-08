@@ -36,5 +36,5 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/home-user, roles: ROLE_USER }
         # - { path: ^/recherche-annonce, roles: ROLE_USER }
-        # - { path: ^/form-annonce, roles: ROLE_ORGA }
+        - { path: ^/form-annonce, roles: ROLE_ORGA }
         # - { path: ^/offre, roles: ROLE_USER }
