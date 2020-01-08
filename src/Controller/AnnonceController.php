@@ -34,12 +34,18 @@ class AnnonceController extends AbstractController
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
 
     }
-    
+
     /**
      * @Route("/annonce", name="annonce")
      */
     public function index()
     {
-        return $this->render('annonce/annonce_gestion.html.twig');
+        $idAnnonce = $_GET['id'];
+        $idUser = $this->user->getId();
+
+        $annonce = new Annonce();
+        $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idUser);
+
+        return $this->render('annonce/annonce_gestion.html.twig', ['annonce' => $annonce]);
     }
 }
