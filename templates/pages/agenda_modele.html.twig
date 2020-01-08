@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{asset('assets/css/agenda_style.css')}}"  >
+{% endblock %}
+
+{% block body %}
+{% include "site-parts/slider.html.twig" %}
+
+<div class="container">
+<h1>mon agenda</h1>
+
+
+<div class="card mb-3" style="max-width: auto;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{asset('assets/images/STPAT.jpg')}}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">Saint Patrick's Day</h2>
+        <h3 class="card-title">17 mars 2020 à partir de 21h</h3>
+        <h4 class="card-title">Le Molly Malone</h4>
+        <h4 class="card-title">Strasbourg</h4>
+        <p class="card-text">Alors, oui, dans l’idée il faut s’habiller en vert et aimer la bière Stout. Oui c’est la plus grosse opération de communication de l’année pour Guinness et Jameson car, oui, les bars irlandais sont encore plus animés que d’habitude. Oui, c’est aussi le dernier match du tournoi des 6 nations.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3" style="max-width: auto;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{asset('assets/images/St-Valentin.jpg')}}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">Saint Valentin</h2>
+        <h3 class="card-title">14 février 2020 à partir de 21h</h3>
+        <h4 class="card-title">Ô'VIP LOUNGE</h4>
+        <h4 class="card-title">Strasbourg</h4>
+        <p class="card-text">Dites lui "Ti Amo" en savourant un cocktail des Valentins et Valentines dans une ambiance cosie en semi-acoustique.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
