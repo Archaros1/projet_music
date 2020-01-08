@@ -3,8 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Account;
+use App\Entity\Event;
+use App\Entity\EventType;
 use App\Entity\Groupe;
 use App\Entity\GroupeType;
+use App\Entity\Lieu;
 use App\Entity\Organisateur;
 use App\Entity\OrganisateurType;
 
@@ -33,7 +36,7 @@ class FakerFixtures extends Fixture
     {
         // FAKE ACCOUNTS LAMBDA
         $groupeType = new GroupeType();
-        $groupeType->setName('groupe');
+        $groupeType->setName('fake');
         $manager->persist($groupeType);
 
         for ($i=0; $i < 10; $i++) {
@@ -59,7 +62,7 @@ class FakerFixtures extends Fixture
         }
 
         $orgaType = new OrganisateurType();
-        $orgaType->setName('entreprise');
+        $orgaType->setName('fake');
         $manager->persist($orgaType);
 
         for ($i=0; $i < 3; $i++) {
@@ -77,6 +80,33 @@ class FakerFixtures extends Fixture
 
             $manager->persist($orga);
             $manager->persist($account);
+
+        }
+
+        $eventType = new EventType();
+        $eventType->setName('fake');
+
+        $lieu = new Lieu();
+        $lieu->setName('fakePlace')
+            ->setVille('Saverne')
+            ->setDepartement('Bas-Rhin')
+        ;
+        $manager->persist($eventType);
+        $manager->persist($lieu);
+
+        for ($i=0; $i < 3; $i++) { 
+            $event = new Event();
+
+            $event->setName($this->faker->cityPrefix.$this->faker->lastName)
+            ->setDescription($this->faker->realText(200, 2))
+            ->setDateBegin(new \DateTime('1'.($i+2).' September 200'.$i))
+            ->setDateEnd(new \DateTime('1'.$i.' September 200'.($i+1)))
+            ->setType($eventType)
+            ->setLieu($lieu)
+            ;
+
+            $manager->persist($event);
+            
 
         }
 
