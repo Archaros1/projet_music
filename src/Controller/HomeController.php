@@ -36,6 +36,16 @@ class HomeController extends AbstractController
         return $this->render('pages/home.html.twig');
     }
 
+    public function annonce()
+    {
+        return $this->render('form/form_annonce.html.twig');
+    }
+
+    public function EventVitrine()
+    {
+        return $this->render('pages/vitrine_event.html.twig');
+    }
+
     public function agenda(Request $request, PaginatorInterface $paginator)
     {
         $donnees = $this->eventRepo->findAll();
@@ -59,10 +69,12 @@ class HomeController extends AbstractController
     public function index()
     {
         $roles = $this->user->getRoles();
-        if (in_array('ROLE_GROUPE', $roles)) {
+        /* if (in_array('ROLE_GROUPE', $roles)) {
             return $this->redirectToRoute("groupe_home");
-        } elseif (in_array('ROLE_ORGA', $roles)) {
+        } else */if (in_array('ROLE_ORGA', $roles)) {
             return $this->redirectToRoute("orga_home");
+        } elseif (in_array('ROLE_ADMIN', $roles)) {
+            return $this->redirectToRoute("admin_home");
         } else {
             return $this->redirectToRoute("login");
         }
