@@ -1,10 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/agenda_style.css')}}">
+{% endblock %}
+
 {% block body %}
+	{% include "site-parts/slider.html.twig" %}
+
+    
+
 
 	<div class="container mt-2">
 
-		<h2 class="mb-2">agenda</h2>
+		<h1 class="mb-6">mon agenda</h1>
 
 		{% for event in events %}
 			<div class="card mb-3" style="max-width: auto;">
@@ -14,19 +22,16 @@
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h2 class="card-title">Saint Patrick's Day</h2>
-							<h3 class="card-title">17 mars 2020 à partir de 21h</h3>
-							<h4 class="card-title">Le Molly Malone</h4>
-							<h4 class="card-title">Strasbourg</h4>
-							<p class="card-text">Alors, oui, dans l’idée il faut s’habiller en vert et aimer la bière Stout. Oui c’est la plus grosse opération de communication de l’année pour Guinness et Jameson car, oui, les bars irlandais sont encore plus animés que d’habitude. Oui, c’est aussi le dernier match du tournoi des 6 nations.</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
+							<h2 class="card-title">{{event.type.name}}</h2>
+							<h3 class="card-title">{{event.lieu.name}} à {{event.lieu.ville}}</h3>
+							<h4 class="card-title">{{event.name}}</h4>
+                            <h4 class="card-title">{{event.dateBegin | date("d/m/Y")}} au {{event.dateEnd | date("d/m/Y")}}</h4>
+                            <h5 class="card-text">{{event.description}}</h5>
 						</div>
 					</div>
 				</div>
 			</div>
 		{% endfor %}
-
+		{{ knp_pagination_render(events) }}
 
 	{% endblock %}
