@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
+
 use App\Entity\Organisateur;
 use App\Repository\OrganisateurRepository;
 
@@ -16,9 +17,7 @@ use App\Entity\Annonce;
 use App\Repository\AnnonceRepository;
 
 
-
-
-class OrgaController extends AbstractController
+class AnnonceController extends AbstractController
 {
     private $orgaRepo;
     private $accountRepo;
@@ -35,16 +34,12 @@ class OrgaController extends AbstractController
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
 
     }
-
+    
+    /**
+     * @Route("/annonce", name="annonce")
+     */
     public function index()
     {
-        $orga = new Organisateur();
-
-        $orga = $this->user->getOrganisateur();
-        $annonces = $this->annonceRepo->findAllAnnonceByOrga($orga->getId());
-
-
-        return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga, "annonces"=>$annonces]);
+        return $this->render('annonce/annonce_gestion.html.twig');
     }
-    
 }
