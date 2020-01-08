@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 
@@ -31,10 +30,16 @@ class AnnonceFormType extends AbstractType
                 'class' => Lieu::class,
                 'choice_label' => 'name'
             ])
-            ->add('style_recherche', CollectionType::class, [
-                'entry_type' => StyleFormType::class,
-                'allow_add' => true,
-                'label' => 'Style recherché'
+            ->add('style_recherche', EntityType::class, [
+                'class' => Style::class,
+                'mapped' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'choice_label' => 'name',
+                'label' => 'Style(s) recherché(s)',
+                'choice_attr' => function() {
+                    return ['class' => 'ml-2 mr-1'];
+                },
             ])
             ->add('type_event', EntityType::class, [
                 'class' => EventType::class,
