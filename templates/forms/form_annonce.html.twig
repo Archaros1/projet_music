@@ -2,7 +2,7 @@
 
 {% block body %}
 {% include "site-parts/slider.html.twig" %}
-
+<div class="container">
 {{ form_start(annonceForm) }}
 <div class="row mt-3">
    <div class="col">
@@ -30,10 +30,32 @@
        
 <div class="row mt-3">
    <div class="col">
-      {{ form_row(annonceForm.description, {'attr' : {placeholder : "Description de l'évenement", 'class': 'form-control'}, 'label' : false}) }}
+      {{ form_row(annonceForm.description, {'attr' : {placeholder : "Description de l'évènement", 'class': 'form-control'}, 'label' : false}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.lieu, {'attr' : {'class': ''}}) }}
+   </div>
+   <div class="col">
+      {{ form_row(annonceForm.type_event, {'attr' : {'class': ''}}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.style_recherche, {'attr' : {'class': ''}}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.submit, {'attr' : {'class': ''}}) }}
    </div>
 </div>
             
-        {{ form_end(annonceForm) }}
-        {% endblock %}
+{{ form_end(annonceForm) }}
+</div>
+{% endblock %}
     
