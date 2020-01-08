@@ -9,6 +9,8 @@ use Faker\Factory;
 
 use App\Entity\Lieu;
 use App\Entity\Style;
+use App\Entity\OrganisateurType;
+use App\Entity\GroupeType;
 
 class UtilityFixtures extends Fixture
 {
@@ -36,6 +38,10 @@ class UtilityFixtures extends Fixture
                 'departement' => 'Haut-Rhin'
             ]
         ];
+        $styles = ['De tout','Metal', 'Rock', 'Electro', 'Jazz'];
+        $tabGroupeType = ['Groupe', 'Orchestre', 'Boys band', 'Ensemble vocal‎', 'Cover band', 'Chorale'];
+        $tabOrgaType = ['Entreprise', 'Association', 'Amicale', 'Institution gouvernemental'];
+
 
         foreach ($lieux as $lieu) {
             $lieuObjet = new Lieu();
@@ -46,11 +52,22 @@ class UtilityFixtures extends Fixture
             $manager->persist($lieuObjet);
         }
 
-        $styles = ['Metal', 'Rock', 'Electro', 'Jazz'];
         foreach ($styles as $style) {
             $styleObjet = new Style();
             $styleObjet->setName($style);
             $manager->persist($styleObjet);
+        }
+
+        foreach ($tabGroupeType as $type) {
+            $typeObjet = new GroupeType();
+            $typeObjet->setName($type);
+            $manager->persist($typeObjet);
+        }
+
+        foreach ($tabOrgaType as $type) {
+            $typeObjet = new OrganisateurType();
+            $typeObjet->setName($type);
+            $manager->persist($typeObjet);
         }
 
 
