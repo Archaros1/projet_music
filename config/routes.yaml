@@ -68,8 +68,8 @@ vitrine_event:
   controller: App\Controller\HomeController::vitrine_event
 
 vitrine_groupe:
-  path: /vitrine-groupe
-  controller: App\Controller\HomeController::vitrine_groupe
+  path: /vitrine-groupe/{id}
+  controller: App\Controller\HomeController::vitrineGroupe
 
 avis:
   path: /avis

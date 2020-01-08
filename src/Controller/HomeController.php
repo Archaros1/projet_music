@@ -7,18 +7,28 @@ use Symfony\Component\Security\Core\Security;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use App\Entity\Groupe;
+use App\Entity\Event;
+use App\Repository\GroupeRepository;
+use App\Repository\EventRepository;
+
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
 
 
 class HomeController extends AbstractController
 {
+    private $groupeRepo;
     private $user;
     private $security;
+    private $eventRepo;
 
-    public function __construct(Security $security){
-        $this->security = $security;
-        $this->user = $security->getUser();
-        // echo '<pre>' . var_export($this->user, true) . '</pre>';
-
+    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository){
+        
+    $this->groupeRepo = $groupeRepository;
+    $this->security = $security;
+    $this->user = $security->getUser();
+    $this->eventRepo = $eventRepository;
     }
 
     public function home()
@@ -36,10 +46,25 @@ class HomeController extends AbstractController
         return $this->render('pages/vitrine_event.html.twig');
     }
 
-    public function agenda()
+    public function agenda(Request $request, PaginatorInterface $paginator)
     {
-        return $this->render('pages/agenda.html.twig');
+        $donnees = $this->eventRepo->findAll();
+
+        $events = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
+        );
+
+        return $this->render('pages/agenda.html.twig', ["events" => $events]);
     }
+
+
+    public function vitrineGroupe($id){
+        $groupe = $this->groupeRepo->find($id);
+        return $this->render("groupe/vitrine_groupe.html.twig", ["groupe" => $groupe]);
+    }
+
 
     public function index()
     {
