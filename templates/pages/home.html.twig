@@ -1,33 +1,35 @@
 {% extends "base.html.twig" %}
 
-{% block style %}
-  <link rel="stylesheet" href="{{asset('css/custom_style.css')}}">
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/home_style.css')}}">
 {% endblock %}
 
 {% block body %}
 {% include "site-parts/slider.html.twig" %}
+<br>
+<br>
 <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        ELSASS ZIKOS est un site gratuit de mise en relation entre musiciens de tous styles, mettant leurs CV en ligne, et les coordonnées d’organisateurs d'évènements professionnels comme particuliers, ayant des besoins ponctuels ou réguliers et aussi de diffusez les événements musicaux dans la région.
+        <p><span>ELSASS ZIKOS</span> est un site gratuit de mise en relation entre musiciens de tous styles, mettant leurs CV en ligne, et les coordonnées d’organisateurs d'évènements professionnels comme particuliers, ayant des besoins ponctuels ou réguliers et aussi de diffusez les événements musicaux dans la région.</p>
       </div>
       <div class="col-sm">
-        ELSASS ZIKOS c'est pour qui ?Pour vous musiciens, du DJ au groupe de rock en passant par la chorale gospel, qui cherchez à vous produire sur scène ou devant des professionnels ou particuliers
+        <p><span>ELSASS ZIKOS</span> c'est pour qui? Pour vous musiciens, du DJ au groupe de rock en passant par la chorale gospel, qui cherchez à vous produire sur scène ou devant des professionnels ou particuliers.</p>
       </div>
       <div class="col-sm">
-        Pour vous professionnels ou particuliers, qui cherchez le partenaire musical idéal, pour votre événement. Que ce soit dans votre restaurant, bar, association ou chez vous, ELSASS ZIKOS vous permet de sélectionner le prestataire qui correspond à vos attentes.
+        <p><span>ELSASS ZIKOS</span> pour vous professionnels ou particuliers,qui cherchez le partenaire musical idéal, pour votre événement. Que ce soit dans votre restaurant, bar, association ou chez vous, qui vous permet de sélectionner le prestataire qui correspond à vos attentes.</p>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm">
-        <a class="btn btn-primary" href="{{ path("agenda") }}">Agenda</a>
+        <a class="btn btn-warning", href="{{ path("agenda") }}">Agenda</a>
       </div>
       <div class="col-sm">
-        <a class="btn btn-primary" href="{{ path('form_account', {typeUser : 'orga'}) }}">S'inscrire</a>
+        <a class="btn btn-warning" href="{{ path('form_account', {typeUser : 'orga'}) }}">S'inscrire</a>
       </div>
       <div class="col-sm">
-        <a class="btn btn-primary" href="{{ path('form_account', {typeUser : 'groupe'}) }}">S'inscrire</a>
+        <a class="btn btn-warning", href="{{ path('form_account', {typeUser : 'groupe'}) }}">S'inscrire</a>
       </div>
     </div>
   </div>
