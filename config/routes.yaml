@@ -107,6 +107,11 @@ admin_update_offre:
   path: /admin/offre/update/{id}
   controller: App\Controller\AdminController::updateOffre
 
+admin_delete_event:
+  path: /admin/event/delete/{id}
+  controller: App\Controller\AdminController::deleteEvent
+
+
 
 
 

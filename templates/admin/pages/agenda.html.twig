@@ -22,11 +22,17 @@
 
   <div class="row">
     <div class="col-8">
-        <p>{{event.name}} : {{event.description}}</p>
-    </div>
-    <div class="col-4">
-        <button type="button" class="btn btn-success" href="{{ path('admin_event_add', { 'id': evenement.id }) }}">Accepter</button>
-        <button type="button" class="btn btn-danger" href="{{ path('admin_event_delete', { 'id': evenement.id }) }}">Refuser</button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="row">{{ event.id }}</th>
+            <td>{{event.name}}</td>    
+            <td>{{event.description}}</td>
+            <a href="{path ()}><button type="button" class="btn btn-success">Accepter</button></td>
+            <td><button type="button" class="btn btn-danger">Refuser</button></td>
+          </tr>
+        </thead>
+      </table>
     </div>
   </div>
 

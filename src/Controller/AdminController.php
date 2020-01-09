@@ -92,7 +92,7 @@ class AdminController extends AbstractController
 
     public function updateOffre(Request $request, Security $security, $id){
         $offre = $this->offreRepo->find($id);
-        $form = $this->createForm(OffreFormType::class, $offre);
+        $form = $this->createForm($offre);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $offre = $form->getData();
@@ -106,7 +106,7 @@ class AdminController extends AbstractController
 
     public function updateAnnonce(Request $request, Security $security, $id){
         $annonce = $this->annonceRepo->find($id);
-        $form = $this->createForm(AnnonceFormType::class, $annonce);
+        $form = $this->createForm($annonce);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $annonce = $form->getData();
@@ -121,7 +121,7 @@ class AdminController extends AbstractController
 
     public function updateEvent(Request $request, Security $security, $id){
         $event = $this->eventRepo->find($id);
-        $form = $this->createForm(EventFormType::class, $event);
+        $form = $this->createForm($event);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $event = $form->getData();
@@ -138,4 +138,20 @@ class AdminController extends AbstractController
         $event = $this->eventRepo->findAll();
         return $this->render("admin/pages/agenda.html.twig", ["events" => $event]);
     }
+
+
+    public function removeEvent(Event $event): self
+    {
+        $event = $this->eventRepo->find($id);
+
+        if($form->isSubmitted()){
+            $event = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($event);
+            $entityManager->flush();
+        }
+        return $this;
+    }
+
+    
 }
