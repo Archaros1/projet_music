@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\Security;
 use App\Entity\Organisateur;
 use App\Repository\OrganisateurRepository;
 
+// use App\Entity\Groupe;
+use App\Repository\GroupeRepository;
+
 use App\Entity\Account;
 use App\Repository\AccountRepository;
 
@@ -20,13 +23,15 @@ use App\Repository\AnnonceRepository;
 class AnnonceController extends AbstractController
 {
     private $orgaRepo;
+    private $groupeRepo;
     private $accountRepo;
     private $annonceRepo;
     private $user;
     private $security;
 
-    public function __construct(OrganisateurRepository $orgaRepository, AccountRepository $accountRepository, AnnonceRepository $annonceRepository, Security $security){
+    public function __construct(GroupeRepository $groupeRepository, OrganisateurRepository $orgaRepository, AccountRepository $accountRepository, AnnonceRepository $annonceRepository, Security $security){
         $this->orgaRepo = $orgaRepository;
+        $this->groupeRepo = $groupeRepository;
         $this->annonceRepo = $annonceRepository;
         $this->accountRepo = $accountRepository;
         $this->security = $security;
@@ -52,5 +57,27 @@ class AnnonceController extends AbstractController
             return $this->render('annonce/annonce_gestion.html.twig', ['annonce' => $annonce]);
         }
         
+    }
+
+    public function chercheGroupe()
+    {
+        $idAnnonce = $_GET['id'];
+        $idOrgaUser = $this->user->getOrganisateur()->getId();
+
+        $annonce = new Annonce();
+        $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idOrgaUser);
+
+        if (is_null($annonce)) {
+            return $this->redirectToRoute("user_home");
+        } else {
+            $orga = $this->user->getOrganisateur();
+            $departement = $annonce->getLieu()->getDepartement();
+
+            $groupes = $this->groupeRepo->findAll();
+
+            return $this->render('annonce/search_groupe.html.twig', [
+                'groupes' => $groupes
+            ]);
+        }
     }
 }

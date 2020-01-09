@@ -17,7 +17,7 @@
 
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{annonce.id}} - {{annonce.nomEvent}}</h5>
+                <h5 class="card-title">{{annonce.nomEvent}}</h5>
                 <p class="card-text">{{annonce.dateBegin | date("d/m/Y")}} - {{annonce.dateEnd | date("d/m/Y")}}</p>
                 <a href="{{ path('gestion_ann', {id : annonce.id}) }}" class="btn btn-primary">Détails</a>
             </div>

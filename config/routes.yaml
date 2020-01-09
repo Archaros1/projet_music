@@ -63,13 +63,18 @@ gestion_ann:
   path: /gestion-annonce
   controller: App\Controller\AnnonceController::index
 
+search_groupe:
+  path: /gestion-annonce/search-groupe
+  controller: App\Controller\AnnonceController::chercheGroupe
+
+
 vitrine_event:
   path: /vitrine-event
-  controller: App\Controller\HomeController::vitrine_event
+  controller: App\Controller\HomeController::eventVitrine
 
 vitrine_groupe:
   path: /vitrine-groupe
-  controller: App\Controller\HomeController::vitrine_groupe
+  controller: App\Controller\HomeController::groupeVitrine
 
 avis:
   path: /avis
