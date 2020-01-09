@@ -32,10 +32,10 @@ class AnnonceFormType extends AbstractType
             ])
             ->add('style_recherche', EntityType::class, [
                 'class' => Style::class,
-                'mapped' => false,
-                'expanded' => true,
-                'multiple' => true,
                 'choice_label' => 'name',
+                'multiple' => true,
+                // 'mapped' => false,
+                'expanded' => true,
                 'label' => 'Style(s) recherché(s)',
                 'choice_attr' => function() {
                     return ['class' => 'ml-2 mr-1'];

@@ -4,8 +4,11 @@
 
     <div class="container">
         <h1>{{ annonce.nomEvent }}</h1>
-        <h2>{{ annonce.genreEvent }}</h2>
+        <h2>Genre : {{ annonce.genreEvent }}</h2>
+        <h2>Type : {{ annonce.typeEvent.name }}</h2>
 
+        <p>Localisation : {{ annonce.lieu.name }} à {{ annonce.lieu.ville }}</p>
+        <p>Département : {{ annonce.lieu.departement }}</p>
         <ul>
             <li>Début : {{ annonce.dateBegin | date('d/m/Y') }}</li>
             <li>Fin : {{ annonce.dateEnd | date('d/m/Y') }}</li>
@@ -13,6 +16,7 @@
 
         {# {{ dump(annonce.styleRecherche) }} #}
         
+        <p>Style(s) recherché(s)</p>
         <ul>
         {% for style in annonce.styleRecherche %}
             <li>{{ style }}</li>

@@ -49,7 +49,6 @@ class AnnonceController extends AbstractController
         if (is_null($annonce)) {
             return $this->redirectToRoute("user_home");
         } else {
-            // $styles = $annonce->getStyleRecherche();
             return $this->render('annonce/annonce_gestion.html.twig', ['annonce' => $annonce]);
         }
         
