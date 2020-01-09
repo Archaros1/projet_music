@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="row">
+{% for groupe in groupes %}
+    <div class="card" style="width: 18rem;">
+        {# <img src="..." class="card-img-top" alt="..."> #}
+        <div class="card-body">
+        <h5 class="card-title">{{ groupe.name }}</h5>
+        <p class="card-text">{{ groupe.description|length > 50 ? groupe.description|slice(0, 120) ~ '...' : groupe.description.text }}</p>
+        <a href="{{ path('vitrine_groupe', {id : groupe.id })}}" class="btn btn-primary">Voir la vitrine</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+
+{% endblock %}

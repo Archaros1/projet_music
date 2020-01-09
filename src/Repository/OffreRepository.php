@@ -47,4 +47,14 @@ class OffreRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOneById($id)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

@@ -35,14 +35,15 @@ class GroupeController extends AbstractController
         $groupe = new Groupe();
 
         $id = $this->user->getId();
+        $email = $this->user->getEmail();
         // echo $id;
-        $account = $this->accountRepo->findOneById($id);
+        $account = $this->accountRepo->findOneByIdAndEmail($id, $email);
         $groupe = $account->getGroupe();
+        $offres = $groupe->getOffres();
         // echo '<pre>' . var_export($account, true) . '</pre>';
 
-
-
-        return $this->render('groupe/groupe_home.html.twig', ["groupe"=>$groupe]);
+        return $this->render('groupe/groupe_home.html.twig', ["groupe"=>$groupe, 'offres' => $offres]);
     }
     
+
 }

@@ -47,4 +47,15 @@ class GroupeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // public function findAllByDepartement($departement): ?Groupe
+    // {
+    //     return $this->createQueryBuilder('g')
+    //         ->andWhere('g.lieu.departement = :departement')
+    //         ->setParameter('departement', $departement)
+    //         ->innerJoin()
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
 }
