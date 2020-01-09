@@ -127,7 +127,7 @@ admin_delete_event:
   path: /admin/event/delete/{idEvent}
   controller: App\Controller\AdminController::deleteEvent
 
-admin_add_event:
+admin_accept_event:
   path: /admin/event/add/{idEvent}
   controller: App\Controller\AdminController::addEvent
 

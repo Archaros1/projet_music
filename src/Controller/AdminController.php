@@ -139,7 +139,7 @@ class AdminController extends AbstractController
         return $this->render("admin/pages/agenda.html.twig", ["events" => $event]);
     }
 
-    
+
     public function deleteEvent($idEvent)
     {
         $event = $this->eventRepo->findOneById($idEvent);
@@ -147,6 +147,11 @@ class AdminController extends AbstractController
             $entityManager->remove($event);
             $entityManager->flush();
         return $this->redirectToRoute("admin_agenda");
+    }
+
+    public function acceptEvent($idEvent)
+    {
+        return 1;
     }
     
 }
