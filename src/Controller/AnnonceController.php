@@ -61,7 +61,11 @@ class AnnonceController extends AbstractController
             return $this->redirectToRoute("user_home");
         } else {
             $_SESSION['annonceCourante'] = $idAnnonce;
-            return $this->render('annonce/annonce_gestion.html.twig', ['annonce' => $annonce]);
+            $offres = $annonce->getOffres();
+            return $this->render('annonce/annonce_gestion.html.twig', [
+                'annonce' => $annonce, 
+                'offres' => $offres
+            ]);
         }
         
     }
@@ -111,8 +115,6 @@ class AnnonceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offre);
             $entityManager->flush();
-        } else {
-            return $this->redirectToRoute("home");
         }
         return $this->redirectToRoute("user_home");
     }
