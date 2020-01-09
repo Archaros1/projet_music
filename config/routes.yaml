@@ -120,8 +120,12 @@ admin_update_offre:
   controller: App\Controller\AdminController::updateOffre
 
 admin_delete_event:
-  path: /admin/event/delete/{id}
+  path: /admin/event/delete/{idEvent}
   controller: App\Controller\AdminController::deleteEvent
+
+admin_add_event:
+  path: /admin/event/add/{idEvent}
+  controller: App\Controller\AdminController::addEvent
 
 
 

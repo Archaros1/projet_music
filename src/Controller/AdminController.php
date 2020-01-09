@@ -92,7 +92,7 @@ class AdminController extends AbstractController
 
     public function updateOffre(Request $request, Security $security, $id){
         $offre = $this->offreRepo->find($id);
-        $form = $this->createForm($offre);
+        $form = $this->createForm(OffreFormType::class, $offre);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $offre = $form->getData();
@@ -106,7 +106,7 @@ class AdminController extends AbstractController
 
     public function updateAnnonce(Request $request, Security $security, $id){
         $annonce = $this->annonceRepo->find($id);
-        $form = $this->createForm($annonce);
+        $form = $this->createForm(AnnonceFormType::class, $annonce);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $annonce = $form->getData();
@@ -121,7 +121,7 @@ class AdminController extends AbstractController
 
     public function updateEvent(Request $request, Security $security, $id){
         $event = $this->eventRepo->find($id);
-        $form = $this->createForm($event);
+        $form = $this->createForm(EventFormType::class, $event);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $event = $form->getData();
@@ -140,18 +140,30 @@ class AdminController extends AbstractController
     }
 
 
-    public function removeEvent(Event $event): self
+    public function deleteEvent($idEvent)
     {
-        $event = $this->eventRepo->find($id);
+        $event = $this->eventRepo->findOneById($idEvent);
+        if ($event->getAnnonce()->getOrganisateur()->getAccount()->getId() == $this->user->getId() ||
+            $event->getGroupe()->getAccount()->getId() == $this->user->getId())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($event);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("admin_agenda");
+    }
 
-        if($form->isSubmitted()){
-            $event = $form->getData();
+    public function addEvent($idEvent)
+    {
+        $event = $this->eventRepo->findOneById($idEvent);
+        if ($event->getAnnonce()->getOrganisateur()->getAccount()->getId() == $this->user->getId() ||
+            $event->getGroupe()->getAccount()->getId() == $this->user->getId())
+        {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
         }
-        return $this;
+        return $this->redirectToRoute("admin_agenda");
     }
-
     
 }
