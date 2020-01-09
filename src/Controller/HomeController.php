@@ -64,7 +64,14 @@ class HomeController extends AbstractController
             2 // Nombre de résultats par page
         );
 
-        return $this->render('pages/agenda.html.twig', ["events" => $events]);
+        $page=1;
+
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        }
+        
+
+        return $this->render('pages/agenda.html.twig', ["events" => $events, "pageCourante" => $page]);
     }
 
 

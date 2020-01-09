@@ -33,5 +33,10 @@
 			</div>
 		{% endfor %}
 		{{ knp_pagination_render(events) }}
+		<div class="row">
+			<a class="btn btn-primary", href="{{ path('agenda', {page : pageCourante-1}) }}">Précédent</a>
+			<a class="btn btn-primary", href="{{ path('agenda', {page : pageCourante+1}) }}">Suivant</a>
+
+		</div>
 
 	{% endblock %}
