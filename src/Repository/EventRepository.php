@@ -19,6 +19,28 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+
+    // public function findPaginatedArticles($from){
+    //     $query = $this->createQueryBuilder('p')
+    //     ->orderBy('p.created_at', 'DESC')
+    //     ->getQuery();
+
+    // $pages = $this->paginate($query, $from);
+    // return $pages;
+    // }
+
+
+    // private function pagination($dql, $page = 10, $limit = 8)
+    // {
+    //     $paginator = new paginator($dql);
+    //     $paginator -> getQuery()
+    //         ->setFirstResult($limit * ($page - 1))
+    //         ->setMaxResults($limit);
+
+    //     return $paginator;
+
+    // }
+
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */

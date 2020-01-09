@@ -19,6 +19,13 @@ class OrganisateurRepository extends ServiceEntityRepository
         parent::__construct($registry, Organisateur::class);
     }
 
+    public function findAllOrganisateur(){
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Organisateur[] Returns an array of Organisateur objects
     //  */
