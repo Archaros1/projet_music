@@ -56,7 +56,9 @@
                         <tr>
                             <th scope="row">{{ annonce.id }}</th>
                             <td>{{annonce.nomEvent}}</td>
-                            <td>{{annonce.organisateur }}</td>
+                            td>{% for organisateur in organisateurs %}
+                                {{organisateur.organisateurs}}
+                            {% endfor %}</td>
                             <td>{{annonce.genreEvent }}</td>
                             <td>{{annonce.typeEvent }}</td>
                             <td>{{annonce.styleRecherche }}</td>
