@@ -1,4 +1,4 @@
-{% extends 'admin_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <h1>Update</h1>
@@ -13,31 +13,25 @@
                 {{ form_row(annonceForm.organisateur, {'attr': {class : "form-control"}}) }}
             </div>
             <div class="col-12">
-                {{ form_row(annonceForm.offres, {'attr': {class : "form-control"}}) }}
-            </div>
-            <div class="col-12">
-                {{ form_row(annonceForm.genre_event, {'attr': {class : "form-control"}}) }}
+                {{ form_row(annonceForm.genreEvent, {'attr': {class : "form-control"}}) }}
             </div>
             <div class="col-2">
-                {{ form_row(annonceForm.type_event, {'attr': {class : "form-control"}}) }}
+                {{ form_row(annonceForm.typeEvent, {'attr': {class : "form-control"}}) }}
             </div>
              <div class="col-2">
-                {{ form_row(annonceForm.style_recherche, {'attr': {class : "form-control"}}) }}
+                {{ form_row(annonceForm.styleRecherche, {'attr': {class : "form-control"}}) }}
             </div>
              <div class="col-2">
-                {{ form_row(annonceForm.date_begin, {'attr': {class : "form-control"}}) }}
+                {{ form_row(annonceForm.dateBegin, {'attr': {class : "form-control"}}) }}
             </div>
              <div class="col-2">
-                {{ form_row(annonceForm.date_end, {'attr': {class : "form-control"}}) }}
+                {{ form_row(annonceForm.dateEnd, {'attr': {class : "form-control"}}) }}
             </div>
              <div class="col-2">
                 {{ form_row(annonceForm.lieu, {'attr': {class : "form-control"}}) }}
             </div>
              <div class="col-2">
                 {{ form_row(annonceForm.description, {'attr': {class : "form-control"}}) }}
-            </div>
-            <div class="col-2">
-                {{ form_row(annonceForm.contacts, {'attr': {class : "form-control"}}) }}
             </div>
             <div class="col-4 mt-5">
                 {{ form_row(annonceForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}

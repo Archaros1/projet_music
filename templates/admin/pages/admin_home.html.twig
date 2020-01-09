@@ -132,9 +132,11 @@
                             <td>{{offre.message}}</td>
                             <td>{{offre.caller}}</td>
                             <td>{{offre.validated}}</td>
-                            <td>{{offre.groupe}}</td>
+                            <td>{% for groupe in groupes %}
+                                {{groupe.name}}
+                            {% endfor %}</td>
                             <td>{% for annonce in annonces %}
-                                {{groupe.annonce}}
+                                {{annonce.nomEvent}}
                             {% endfor %}</td>
                             <td><a href="{{ path('admin_update_offre', {id : offre.id}) }}">Update</a></td>
                         </tr>
@@ -199,7 +201,6 @@
                         <th scope="col">Lieu</th>
                         <th scope="col">Groupes</th>
                         <th scope="col">Style</th>
-                        <th scope="col">Modif</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -219,7 +220,6 @@
                             <td>{% for style in styles %}
                                 {{style.name}}
                             {% endfor %}</td>
-                            <td><a href="{{ path('admin_update_event', {id : event.id}) }}">Update</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
