@@ -59,4 +59,16 @@ class AnnonceRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findAnnonceByIdAndOrga($id, $orga)
+    {
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.id = :id')
+        ->andWhere('a.organisateur = :organisateur')
+        ->setParameters(['id' => $id, 'organisateur' => $orga])
+        ->orderBy('a.id', 'ASC')
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
 }

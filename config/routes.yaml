@@ -60,12 +60,17 @@ form_event:
   controller: App\Controller\HomeController::form_event
 
 gestion_ann:
-  path: /annonce-gestion
-  controller: App\Controller\HomeController::gestion_ann
+  path: /gestion-annonce
+  controller: App\Controller\AnnonceController::index
+
+search_groupe:
+  path: /gestion-annonce/search-groupe
+  controller: App\Controller\AnnonceController::chercheGroupe
+
 
 vitrine_event:
   path: /vitrine-event
-  controller: App\Controller\HomeController::vitrine_event
+  controller: App\Controller\HomeController::eventVitrine
 
 vitrine_groupe:
   path: /vitrine-groupe/{id}
