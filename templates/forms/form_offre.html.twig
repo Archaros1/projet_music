@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container">
+{{ form_start(offreForm) }}
+
+    <h1>Offre</h1>
+    {{ form_row(offreForm.message, {'attr' : {placeholder : "Envoyer votre message à ce groupe, en vous présentant, vous et votre évènement.", 'class': 'form-control mt-2'}, 'label' : false}) }}
+    {{ form_row(offreForm.submit, {'attr' : {placeholder : "", 'class': 'mt-2'}, 'label' : "Envoyer"}) }}
+
+{{ form_end(offreForm) }}
+</div>
+
+{% endblock %}
