@@ -138,4 +138,32 @@ class AdminController extends AbstractController
         $event = $this->eventRepo->findAll();
         return $this->render("admin/pages/agenda.html.twig", ["events" => $event]);
     }
+
+
+    public function deleteEvent($idEvent)
+    {
+        $event = $this->eventRepo->findOneById($idEvent);
+        if ($event->getAnnonce()->getOrganisateur()->getAccount()->getId() == $this->user->getId() ||
+            $event->getGroupe()->getAccount()->getId() == $this->user->getId())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($event);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("admin_agenda");
+    }
+
+    public function addEvent($idEvent)
+    {
+        $event = $this->eventRepo->findOneById($idEvent);
+        if ($event->getAnnonce()->getOrganisateur()->getAccount()->getId() == $this->user->getId() ||
+            $event->getGroupe()->getAccount()->getId() == $this->user->getId())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($event);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("admin_agenda");
+    }
+    
 }

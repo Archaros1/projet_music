@@ -6,25 +6,25 @@
     {{ form_start(evenementForm) }}
     <div class="form-group mt-5">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2 mb-4">
                 {{ form_row(evenementForm.name, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-4">
+            <div class="col-4 mb-4">
                 {{ form_row(evenementForm.description, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 {{ form_row(evenementForm.dateBegin, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 {{ form_row(evenementForm.dateEnd, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-2">
+            <div class="col-2 mb-4">
                 {{ form_row(evenementForm.type.name, {'attr': {class : "form-control"}}) }}
             </div>
-             <div class="col-2">
+             <div class="col-2 mb-4">
                 {{ form_row(evenementForm.lieu, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-4 mt-5">
+            <div class="col-12">
                 {{ form_row(evenementForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}
             </div>
             
