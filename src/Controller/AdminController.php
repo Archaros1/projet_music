@@ -2,6 +2,8 @@
 
 
 namespace App\Controller;
+use App\Entity\Style;
+use App\Entity\Offre;
 use App\Entity\Organisateur;
 use App\Entity\Annonce;
 use App\Form\Groupe;
@@ -10,6 +12,8 @@ use App\Form\Event;
 use App\Form\OrganisateurFormType;
 use App\Form\GroupeFormType;
 use App\Repository\OrganisateurRepository;
+use App\Repository\StyleRepository;
+use App\Repository\OffreRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\MusicienRepository;
@@ -28,24 +32,38 @@ class AdminController extends AbstractController
     private $groupeRepo;
     private $musicienRepo;
     private $eventRepo;
+    private $offreRepo;
+    private $styleRepo;
 
-    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, MusicienRepository $musicienRepository, EventRepository $eventRepository)
+    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, MusicienRepository $musicienRepository, EventRepository $eventRepository, OffreRepository $offreRepository, StyleRepository $styleRepository)
     {
         $this->organisateurRepo = $organisateurRepository;
         $this->annonceRepo = $annonceRepository;
         $this->groupeRepo = $groupeRepository;
         $this->musicienRepo = $musicienRepository;
         $this->eventRepo = $eventRepository;
+        $this->offreRepo = $offreRepository;
+        $this->styleRepo = $styleRepository;
     }
     
     
-    public function admin_home(Request $request){
+    public function admin_Home(Request $request){
         $organisateur = $this->organisateurRepo->findAll();
         $annonce = $this->annonceRepo->findAll();
         $groupe = $this->groupeRepo->findAll();
         $musicien = $this->musicienRepo->findAll();
         $event = $this->eventRepo->findAll();
-        return $this->render("admin/pages/home.html.twig", ["organisateurs" => $organisateur, "annonces" => $annonce, "groupes" => $groupe, "musiciens" => $musicien, "events" => $event]);
+        $offre = $this->offreRepo->findAll();
+        $style = $this->styleRepo->findAll();
+         return $this->render("admin/pages/home.html.twig", [
+            "organisateurs" => $organisateur, 
+            "annonces" => $annonce, 
+            "groupes" => $groupe, 
+            "musiciens" => $musicien, 
+            "events" => $event,
+            "offres" => $offre,
+            "styles" =>$style
+            ]);
     }
 
 
@@ -60,7 +78,8 @@ class AdminController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute("home");
         }
-        return $this->render('admin/pages/update_orga.html.twig', ["organisateurForm" => $form->createView()]);
+        return $this->render('admin/pages/update_orga.html.twig', [
+            "organisateurForm" => $form->createView()]);
     }
 
     public function updateGroupe(Request $request, Security $security, $id){
@@ -79,7 +98,7 @@ class AdminController extends AbstractController
 
     public function updateAnnonce(Request $request, Security $security, $id){
         $annonce = $this->annonceRepo->find($id);
-        $form = $this->createForm(AnnonceFormType::class, $groupe);
+        $form = $this->createForm(AnnonceFormType::class, $annonce);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $annonce = $form->getData();
@@ -91,21 +110,6 @@ class AdminController extends AbstractController
         return $this->render('admin/pages/update_annonce.html.twig', ["annonceForm" => $form->createView()]);
     }
 
-
-    public function updateMusicien(Request $request, Security $security, $id){
-        $musicien = $this->groupeRepo->find($id);
-        $form = $this->createForm(MusicienFormType::class, $musicien);
-        $form->handleRequest($request);
-        if($form->isSubmitted()){
-            $musicien = $form->getData();
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($musicien);
-            $entityManager->flush();
-            return $this->redirectToRoute("home");
-        }
-        return $this->render('admin/pages/update_musicien.html.twig', ["musicienForm" => $form->createView()]);
-    }
-    
 
     public function updateEvent(Request $request, Security $security, $id){
         $event = $this->eventRepo->find($id);
@@ -121,16 +125,9 @@ class AdminController extends AbstractController
         return $this->render('admin/pages/update_event.html.twig', ["eventForm" => $form->createView()]);
     }
 
+    
     public function admin_agenda(Request $request){
         $event = $this->eventRepo->findAll();
         return $this->render("admin/pages/agenda.html.twig", ["events" => $event]);
-    }
-
-    public function eventAdd(){
-
-    }
-
-    public function evenDelete(){
-
     }
 }

@@ -72,24 +72,23 @@ admin_form:
 
 admin_update_orga:
   path: /admin/organisateur/update/{id}
-  controller: App\Controller\AdminController::updateOrganisateur
+  controller: App\Controller\AdminController::admin_update_orga
 
 admin_update_groupe:
   path: /admin/groupe/update/{id}
-  controller: App\Controller\AdminController::updateGroupe
+  controller: App\Controller\AdminController::admin_update_groupe
 
 admin_update_annonce:
   path: /admin/annonce/update/{id}
-  controller: App\Controller\AdminController::updateAnnonce
+  controller: App\Controller\AdminController::admin_update_annonce
 
 admin_update_musicien:
   path: /admin/musicien/update/{id}
-  controller: App\Controller\AdminController::updateMusicien
+  controller: App\Controller\AdminController::admin_update_musicien
 
 admin_update_event:
   path: /admin/event/update/{id}
-  controller: App\Controller\AdminController::updateEvent
-
+  controller: App\Controller\AdminController::admin_update_event
 
 
 
