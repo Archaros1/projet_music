@@ -81,11 +81,31 @@ agenda:
 
 admin_home:
   path: /admin/home
-  controller: App\Controller\HomeController::admin_home
+  controller: App\Controller\AdminController::admin_home
 
-admin_form:
-  path: /admin/sous-form
-  controller: App\Controller\HomeController::admin_form
+admin_agenda:
+  path: /admin/moderateur-agenda
+  controller: App\Controller\AdminController::admin_agenda
+
+admin_update_orga:
+  path: /admin/organisateur/update/{id}
+  controller: App\Controller\AdminController::updateOrganisateur
+
+admin_update_groupe:
+  path: /admin/groupe/update/{id}
+  controller: App\Controller\AdminController::updateGroupe
+
+admin_update_annonce:
+  path: /admin/annonce/update/{id}
+  controller: App\Controller\AdminController::updateAnnonce
+
+admin_update_event:
+  path: /admin/event/update/{id}
+  controller: App\Controller\AdminController::updateEvent
+
+admin_update_offre:
+  path: /admin/offre/update/{id}
+  controller: App\Controller\AdminController::updateOffre
 
 
 

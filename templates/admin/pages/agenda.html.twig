@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('assets/css/sous_form.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+  <h1>Modération de l'agenda</h1>
+  <div class="row">
+    <div class="col-8">
+        <h3>Liste de tous les events en attente de validation</h3>
+    </div>
+    <div class="col-4">
+        <h3>Non-modéré</h3>
+    </div>
+  </div>
+
+  {% for event in events %}
+
+  <div class="row">
+    <div class="col-8">
+        <p>{{event.name}} : {{event.description}}</p>
+    </div>
+    <div class="col-4">
+        <button type="button" class="btn btn-success" href="{{ path('admin_event_add', { 'id': evenement.id }) }}">Accepter</button>
+        <button type="button" class="btn btn-danger" href="{{ path('admin_event_delete', { 'id': evenement.id }) }}">Refuser</button>
+    </div>
+  </div>
+
+  {% endfor %}
+  
+</div>
+
+{% endblock %}
+
