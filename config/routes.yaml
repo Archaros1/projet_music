@@ -55,6 +55,10 @@ delete_offre:
   path: /offre/delete/{idOffre}
   controller: App\Controller\AnnonceController::deleteOffre
 
+delete_annonce:
+  path: /annonce/delete/{idAnnonce}
+  controller: App\Controller\AnnonceController::deleteAnnonce
+
 validate_offre:
   path: /offre/validate/{idOffre}
   controller: App\Controller\AnnonceController::validateOffre

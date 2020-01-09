@@ -119,4 +119,15 @@ class AnnonceController extends AbstractController
         return $this->redirectToRoute("user_home");
     }
     
+    public function deleteAnnonce($idAnnonce)
+    {
+        $annonce = $this->annonceRepo->findOneById($idAnnonce);
+        if ($annonce->getOrganisateur()->getAccount()->getId() == $this->user->getId())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($annonce);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute("user_home");
+    }
 }

@@ -57,6 +57,8 @@
         {% endfor %}
     </div>
 
+
+    <a href="{{ path("delete_annonce", {idAnnonce : annonce.id}) }}" class="btn btn-danger mt-5">Supprimer l'annonce</a>
     </div>
 
 {% endblock %}
