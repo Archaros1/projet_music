@@ -1,4 +1,4 @@
-p{
+.container-fluid p{
     text-align: justify;
     color: whitesmoke;
 
@@ -12,13 +12,13 @@ p{
     background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
 }
 
-span{
+.container-fluid span{
     color: rgb(207, 5, 5);
     font-weight: bold;
     font-size: 20px;
 }
 
-a {
+.container-fluid a {
     padding-left : 50px;
 }
 
