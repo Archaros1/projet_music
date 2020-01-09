@@ -26,6 +26,10 @@ use App\Entity\Annonce;
 use App\Repository\AnnonceRepository;
 use App\Form\AnnonceFormType;
 
+use App\Entity\Offre;
+use App\Repository\OffreRepository;
+use App\Form\OffreFormType;
+
 
 class FormController extends AbstractController
 {
@@ -34,10 +38,13 @@ class FormController extends AbstractController
     private $security;
     private $groupeRepo;
     private $accountRepo;
+    private $annonceRepo;
 
-    public function __construct(GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security){
+    public function __construct(AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security){
         $this->groupeRepo = $groupeRepository;
         $this->accountRepo = $accountRepository;
+        $this->offreRepo = $offreRepository;
+        $this->annonceRepo = $annonceRepository;
         $this->security = $security;
         $this->user = $security->getUser();
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
@@ -188,5 +195,39 @@ class FormController extends AbstractController
             "groupeForm" => $formGroupe->createView()
         ]);
 
+    }
+
+    public function createOffre($idGroupe, Request $request)
+    {
+        $offre = new Offre();
+        $formOffre = $this->createForm(OffreFormType::class, $offre);
+
+        $formOffre->handleRequest($request);
+
+        if ($formOffre->isSubmitted()) {
+            $offre = $formOffre->getData();
+
+            $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($_SESSION['annonceCourante'], $this->user->getOrganisateur()->getId());
+            $groupe = $this->groupeRepo->findOneById($idGroupe);
+
+            $offre->setCaller('organisateur')
+            ->setValidated(false)
+            ->setAnnonce($annonce)
+            ->setGroupe($groupe)
+            ;
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offre);
+            $entityManager->flush();
+
+            // return $this->redirectToRoute("gestion_ann", ['id' => $annonce->getId()]);
+            return $this->redirectToRoute("search_groupe");
+            // search_groupe
+            // return $this->redirectToRoute("orga_home");
+
+        }
+        return $this->render('forms/form_offre.html.twig', [
+            "offreForm" => $formOffre->createView()
+        ]);
     }
 }

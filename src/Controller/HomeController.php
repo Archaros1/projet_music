@@ -46,9 +46,12 @@ class HomeController extends AbstractController
         return $this->render('pages/vitrine_event.html.twig');
     }
 
-    public function groupeVitrine()
+    public function groupeVitrine($id)
     {
-        return $this->render('pages/vitrine_groupe.html.twig');
+        $groupe = $this->groupeRepo->findOneBy(['id' => $id]);
+        return $this->render('groupe/vitrine_groupe.html.twig', [
+            'groupe' => $groupe
+        ]);
     }
 
     public function agenda(Request $request, PaginatorInterface $paginator)
