@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include "site-parts/slider.html.twig" %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{ asset('assets/images/photo.jpeg') }}" class="mr-3" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ event.name }}</h5>
+          <p class="card-text">{{ event.description }}</p>
+          <p class="card-text">{{ event.date_begin }}</p>
+          <p class="card-text">{{ event.date_end }}</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

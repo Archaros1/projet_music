@@ -3,9 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Account;
-use App\Entity\Contact;
+use App\Entity\Event;
+use App\Entity\EventType;
 use App\Entity\Groupe;
 use App\Entity\GroupeType;
+use App\Entity\Lieu;
 use App\Entity\Organisateur;
 use App\Entity\OrganisateurType;
 
@@ -34,19 +36,12 @@ class FakerFixtures extends Fixture
     {
         // FAKE ACCOUNTS LAMBDA
         $groupeType = new GroupeType();
-        $groupeType->setName('groupe');
+        $groupeType->setName('fake');
         $manager->persist($groupeType);
 
         for ($i=0; $i < 10; $i++) {
             $groupe = new Groupe();
-            $contact = new Contact();
             $account = new Account();
-            
-            $contact->setPhone($this->faker->phoneNumber)
-            ->setWebsite('https://www.google.com')
-            ->setTwitter('@ElsasZikos')
-            ->setFb(NULL)
-            ;
 
             $account->setEmail($this->faker->email)
             ->setRoles(['ROLE_USER', 'ROLE_GROUPE'])
@@ -58,67 +53,84 @@ class FakerFixtures extends Fixture
             ->setADomicile(rand(0,1) < 0.5) //bool random
             ->setAToutSonMateriel(rand(0,1) < 0.5)
             ->setType($groupeType)
-            ->setContacts($contact)
             ->setAccount($account)
             ;
 
             $manager->persist($groupe);
-            $manager->persist($contact);
             $manager->persist($account);
             // $manager->flush();
         }
 
         $orgaType = new OrganisateurType();
-        $orgaType->setName('entreprise');
+        $orgaType->setName('fake');
         $manager->persist($orgaType);
 
         for ($i=0; $i < 3; $i++) {
             $orga = new Organisateur();
-            $contact = new Contact();
             $account = new Account();
             
-            $contact->setPhone($this->faker->phoneNumber)
-            ->setWebsite('https://www.google.com')
-            ->setTwitter('@ElsasZikos')
-            ->setFb(NULL)
-            ;
-
             $account->setEmail($this->faker->email)
             ->setRoles(['ROLE_USER', 'ROLE_ORGA'])
             ->setPassword($this->passwordEncoder->encodePassword($account, $this->faker->text(10)));
 
             $orga->setName($this->faker->name)
             ->setType($orgaType)
-            ->setContacts($contact)
             ->setAccount($account)
             ;
 
             $manager->persist($orga);
-            $manager->persist($contact);
             $manager->persist($account);
 
         }
 
-        // FAKE USER ORGA pour test
-        $contact = new Contact();
-        $contact->setPhone($this->faker->phoneNumber)
-            ->setWebsite('https://www.google.com')
-            ->setTwitter('@ElsasZikos')
-            ->setFb(NULL);
+        $eventType = new EventType();
+        $eventType->setName('fake');
 
+        $lieu = new Lieu();
+        $lieu->setName('fakePlace')
+            ->setVille('Saverne')
+            ->setDepartement('Bas-Rhin')
+        ;
+        $manager->persist($eventType);
+        $manager->persist($lieu);
+
+        for ($i=0; $i < 3; $i++) { 
+            $event = new Event();
+
+            $event->setName($this->faker->cityPrefix.$this->faker->lastName)
+            ->setDescription($this->faker->realText(200, 2))
+            ->setDateBegin(new \DateTime('1'.($i+2).' September 200'.$i))
+            ->setDateEnd(new \DateTime('1'.$i.' September 200'.($i+1)))
+            ->setType($eventType)
+            ->setLieu($lieu)
+            ;
+
+            $manager->persist($event);
+            
+
+        }
+
+        // FAKE USER pour test
         $account = new Account();
         $account->setEmail("usertest@hotmail.fr")
             ->setPassword($this->passwordEncoder->encodePassword($account, "webforce"))
-            ->setRoles(['ROLE_USER', 'ROLE_ORGA']);
+            ->setRoles(['ROLE_USER', 'ROLE_ORGA', 'ROLE_GROUPE']);
 
         $orga = new Organisateur();
         $orga->setName($this->faker->name)
             ->setType($orgaType)
-            ->setContacts($contact)
+            ->setAccount($account);
+
+        $groupe = new Groupe();
+        $groupe->setName($this->faker->name)
+            ->setNombreMembre(rand(0, 5))
+            ->setDescription($this->faker->realText(200, 2))
+            ->setADomicile(rand(0,1) < 0.5) //bool random
+            ->setAToutSonMateriel(rand(0,1) < 0.5)
+            ->setType($groupeType)
             ->setAccount($account);
 
         $manager->persist($orga);
-        $manager->persist($contact);
         $manager->persist($account);
 
 

@@ -34,6 +34,10 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        # PROTECTION DES HOMES
+        - { path: ^/home-user, roles: ROLE_USER }
+        - { path: ^/home-groupe, roles: ROLE_GROUPE }
+        - { path: ^/home-organisateur, roles: ROLE_ORGA }
         # - { path: ^/recherche-annonce, roles: ROLE_USER }
-        # - { path: ^/form-annonce, roles: ROLE_ORGA }
+        - { path: ^/form-annonce, roles: ROLE_ORGA }
         # - { path: ^/offre, roles: ROLE_USER }

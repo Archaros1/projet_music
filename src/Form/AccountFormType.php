@@ -6,6 +6,8 @@ use App\Entity\Account;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class AccountFormType extends AbstractType
 {
@@ -16,6 +18,8 @@ class AccountFormType extends AbstractType
             ->add('password')
             // ->add('organisateur')
             // ->add('groupe')
+            // SUBMIT
+            ->add('submit', SubmitType::class)
         ;
     }
 

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% include "site-parts/slider.html.twig" %}
+<div class="container">
+{{ form_start(annonceForm) }}
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.nom_event, {'attr' : {placeholder : "Nom de l'évenement", 'class': 'form-control'}, 'label' : false}) }}
+   </div>
+</div>
+       
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.genre_event, {'attr' : {placeholder : "Genre de l'évenement", 'class': 'form-control'}, 'label' : false}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.date_begin, {'attr' : {'class': ''}, 'label' : 'Date de début'}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.date_end, {'attr' : {'class': ''}, 'label' : "Date de fin"}) }}
+   </div>
+</div>
+       
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.description, {'attr' : {placeholder : "Description de l'évènement", 'class': 'form-control'}, 'label' : false}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+      {{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
+      {{ form_row(annonceForm.type_event, {'attr' : {'class': ''}}) }}
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.style_recherche, {'attr' : {'class': ''}}) }}
+   </div>
+</div>
+
+<div class="row mt-3">
+   <div class="col">
+      {{ form_row(annonceForm.submit, {'attr' : {'class': ''}}) }}
+   </div>
+</div>
+            
+{{ form_end(annonceForm) }}
+</div>
+{% endblock %}
+    

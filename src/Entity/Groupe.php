@@ -44,12 +44,6 @@ class Groupe
     private $a_tout_son_materiel;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contact", inversedBy="groupe", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $contacts;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Offre", mappedBy="groupe")
      */
     private $offres;
@@ -58,11 +52,6 @@ class Groupe
      * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="groupes")
      */
     private $events;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Musicien", mappedBy="groupes")
-     */
-    private $musiciens;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="groupes")
@@ -81,11 +70,6 @@ class Groupe
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Avis", mappedBy="groupe", cascade={"persist", "remove"})
-     */
-    private $avis;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Account", mappedBy="groupe", cascade={"persist", "remove"})
      */
     private $account;
@@ -94,7 +78,6 @@ class Groupe
     {
         $this->offres = new ArrayCollection();
         $this->events = new ArrayCollection();
-        $this->musiciens = new ArrayCollection();
         $this->style = new ArrayCollection();
         $this->photos = new ArrayCollection();
     }
@@ -164,18 +147,6 @@ class Groupe
         return $this;
     }
 
-    public function getContacts(): ?Contact
-    {
-        return $this->contacts;
-    }
-
-    public function setContacts(Contact $contacts): self
-    {
-        $this->contacts = $contacts;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Offre[]
      */
@@ -230,34 +201,6 @@ class Groupe
         if ($this->events->contains($event)) {
             $this->events->removeElement($event);
             $event->removeGroupe($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Musicien[]
-     */
-    public function getMusiciens(): Collection
-    {
-        return $this->musiciens;
-    }
-
-    public function addMusicien(Musicien $musicien): self
-    {
-        if (!$this->musiciens->contains($musicien)) {
-            $this->musiciens[] = $musicien;
-            $musicien->addGroupe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMusicien(Musicien $musicien): self
-    {
-        if ($this->musiciens->contains($musicien)) {
-            $this->musiciens->removeElement($musicien);
-            $musicien->removeGroupe($this);
         }
 
         return $this;
@@ -328,23 +271,6 @@ class Groupe
     public function setType(?GroupeType $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getAvis(): ?Avis
-    {
-        return $this->avis;
-    }
-
-    public function setAvis(Avis $avis): self
-    {
-        $this->avis = $avis;
-
-        // set the owning side of the relation if necessary
-        if ($avis->getGroupe() !== $this) {
-            $avis->setGroupe($this);
-        }
 
         return $this;
     }

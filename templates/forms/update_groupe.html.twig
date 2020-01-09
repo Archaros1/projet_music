@@ -2,7 +2,6 @@
 
 {% block body %}
 	<div class="container">
-
 	{{ form_start(groupeForm) }}
 		<div class="row">
 			<div class="col-9">
@@ -32,10 +31,10 @@
 				{{ form_row(groupeForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
 			</div>
 		</div>
-
+		
 		<div class="row">
 			<div class="col">
-				{{ form_row(groupeForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }}
+				{{ form_row(groupeForm.submit, {'attr' : {'class': ''}, 'label' : "Update"}) }}
 			</div>
 		</div>
 
