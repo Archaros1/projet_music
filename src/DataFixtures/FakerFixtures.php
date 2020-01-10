@@ -140,7 +140,7 @@ class FakerFixtures extends Fixture
             
         $accountOrga->setEmail("orgatest@hotmail.fr")
         ->setRoles(['ROLE_USER', 'ROLE_ORGA'])
-        ->setPassword($this->passwordEncoder->encodePassword($accountOrga, $this->faker->text(10)));
+        ->setPassword($this->passwordEncoder->encodePassword($accountOrga, 'webforce'));
 
         $orga->setName($this->faker->name)
         ->setType($orgaType)
