@@ -51,6 +51,10 @@ offre:
   path: /offre/{idGroupe}
   controller: App\Controller\FormController::createOffre
 
+blacklist:
+  path: /blacklist/{idGroupe}
+  controller: App\Controller\OrgaController::blacklist
+
 delete_offre:
   path: /offre/delete/{idOffre}
   controller: App\Controller\AnnonceController::deleteOffre
