@@ -67,6 +67,11 @@ form_ann:
   path: /form-annonce
   controller: App\Controller\FormController::createAnnonce
 
+
+create_event:
+  path: /event/create
+  controller: App\Controller\AnnonceController::createEvent
+
 form_event:
   path: /form-evenements
   controller: App\Controller\HomeController::form_event

@@ -130,4 +130,9 @@ class AnnonceController extends AbstractController
         }
         return $this->redirectToRoute("user_home");
     }
+
+    public function createEvent($idAnnonce)
+    {
+        
+    }
 }
