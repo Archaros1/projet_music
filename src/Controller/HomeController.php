@@ -41,9 +41,10 @@ class HomeController extends AbstractController
         return $this->render('form/form_annonce.html.twig');
     }
 
-    public function eventVitrine()
+    public function eventVitrine($idEvent)
     {
-        return $this->render('pages/vitrine_event.html.twig');
+        $event = $this->eventRepo->findOneById($idEvent);
+        return $this->render('pages/vitrine_event.html.twig', ['event' => $event]);
     }
 
     public function groupeVitrine($id)

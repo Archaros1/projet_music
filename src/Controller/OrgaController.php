@@ -15,7 +15,8 @@ use App\Repository\AccountRepository;
 use App\Entity\Annonce;
 use App\Repository\AnnonceRepository;
 
-
+use App\Entity\Event;
+use App\Repository\EventRepository;
 
 
 class OrgaController extends AbstractController
@@ -26,10 +27,11 @@ class OrgaController extends AbstractController
     private $user;
     private $security;
 
-    public function __construct(OrganisateurRepository $orgaRepository, AccountRepository $accountRepository, AnnonceRepository $annonceRepository, Security $security){
+    public function __construct(OrganisateurRepository $orgaRepository, AccountRepository $accountRepository, AnnonceRepository $annonceRepository, Security $security, EventRepository $eventRepository){
         $this->orgaRepo = $orgaRepository;
         $this->annonceRepo = $annonceRepository;
         $this->accountRepo = $accountRepository;
+        $this->eventRepo = $eventRepository;
         $this->security = $security;
         $this->user = $security->getUser();
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
@@ -47,10 +49,11 @@ class OrgaController extends AbstractController
         $orga = $account->getOrganisateur();
         // echo '<pre>' . var_export($account, true) . '</pre>';
 
-        $annonces = $this->annonceRepo->findAllAnnonceByOrga($orga->getId());
+        $annonces = $this->annonceRepo->findByOrganisateur($orga->getId());
+        $events = $this->eventRepo->findByOrganisateur($orga->getId());
 
 
-        return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga, "annonces"=>$annonces]);
+        return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga, "annonces"=>$annonces, "events"=>$events]);
     }
     
 }

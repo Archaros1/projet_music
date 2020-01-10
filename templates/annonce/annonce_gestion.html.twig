@@ -5,7 +5,7 @@
     <div class="container">
         <h1>{{ annonce.nomEvent }}</h1>
         <h2>Genre : {{ annonce.genreEvent }}</h2>
-        <h2>Type : {{ annonce.typeEvent.name }}</h2>
+        {# <h2>Type : {{ annonce.typeEvent.name }}</h2> #}
 
         <p>Localisation : {{ annonce.lieu.name }} à {{ annonce.lieu.ville }}</p>
         <p>Département : {{ annonce.lieu.departement }}</p>
@@ -58,6 +58,7 @@
     </div>
 
 
+    <a href="{{ path("create_event", {idAnnonce : annonce.id}) }}" class="btn btn-success mt-5">Officialiser l'évènement</a>
     <a href="{{ path("delete_annonce", {idAnnonce : annonce.id}) }}" class="btn btn-danger mt-5">Supprimer l'annonce</a>
     </div>
 
