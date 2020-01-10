@@ -29,7 +29,7 @@
     <h2>Vos évènements</h2>
     <div class="row">
     {% for event in events %}
-
+    {% if date(event.dateEnd) < date() %}
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{event.name}}</h5>
@@ -37,7 +37,8 @@
                 <a href="{{ path('vitrine_event', {idEvent : event.id}) }}" class="btn btn-primary">Détails</a>
             </div>
         </div>
-        
+    {% endif %}
+    
     {% endfor %}
     </div>
 </div>
