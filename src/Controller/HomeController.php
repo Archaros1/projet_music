@@ -57,7 +57,7 @@ class HomeController extends AbstractController
 
     public function agenda(Request $request, PaginatorInterface $paginator)
     {
-        $donnees = $this->eventRepo->findAll();
+        $donnees = $this->eventRepo->findAllOrderByDate();
 
         $events = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
