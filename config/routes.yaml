@@ -69,7 +69,7 @@ form_ann:
 
 
 create_event:
-  path: /event/create
+  path: /event/create/{idAnnonce}
   controller: App\Controller\AnnonceController::createEvent
 
 form_event:
@@ -85,7 +85,7 @@ search_groupe:
   controller: App\Controller\AnnonceController::chercheGroupe
 
 vitrine_event:
-  path: /vitrine-event
+  path: /vitrine-event/{idEvent}
   controller: App\Controller\HomeController::eventVitrine
 
 vitrine_groupe:

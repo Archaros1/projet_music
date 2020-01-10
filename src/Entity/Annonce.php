@@ -61,7 +61,7 @@ class Annonce
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\EventType", inversedBy="annonces")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $type_event;
 
