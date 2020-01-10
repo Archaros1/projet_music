@@ -21,12 +21,18 @@
   {% for event in events %}
 
   <div class="row">
-    <div class="col-8">
-        <p>{{event.name}} : {{event.description}}</p>
-    </div>
-    <div class="col-4">
-        <button type="button" class="btn btn-success" href="{{ path('admin_event_add', { 'id': evenement.id }) }}">Accepter</button>
-        <button type="button" class="btn btn-danger" href="{{ path('admin_event_delete', { 'id': evenement.id }) }}">Refuser</button>
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="row">{{ event.id }}</th>
+            <td>{{event.name}}</td>    
+            <td>{{event.description}}</td>
+            <a href="{{ path('admin_add_event', {idEvent : event.id}) }}" class="btn btn-success">Accepter</a>
+            <a href="{{ path('admin_delete_event', {idEvent : event.id}) }}" class="btn btn-danger">Refuser</a>
+          </tr>
+        </thead>
+      </table>
     </div>
   </div>
 
