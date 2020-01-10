@@ -44,10 +44,16 @@ class Organisateur
      */
     private $events;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Groupe", inversedBy="blacklisteurs")
+     */
+    private $blacklist;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->blacklist = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +160,32 @@ class Organisateur
             if ($event->getOrganisateur() === $this) {
                 $event->setOrganisateur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Groupe[]
+     */
+    public function getBlacklist(): Collection
+    {
+        return $this->blacklist;
+    }
+
+    public function addBlacklist(Groupe $blacklist): self
+    {
+        if (!$this->blacklist->contains($blacklist)) {
+            $this->blacklist[] = $blacklist;
+        }
+
+        return $this;
+    }
+
+    public function removeBlacklist(Groupe $blacklist): self
+    {
+        if ($this->blacklist->contains($blacklist)) {
+            $this->blacklist->removeElement($blacklist);
         }
 
         return $this;

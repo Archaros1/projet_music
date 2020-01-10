@@ -74,12 +74,18 @@ class Groupe
      */
     private $account;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Organisateur", mappedBy="blacklist", fetch="EAGER")
+     */
+    private $blacklisteurs;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->style = new ArrayCollection();
         $this->photos = new ArrayCollection();
+        $this->blacklisteurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -288,6 +294,34 @@ class Groupe
         $newGroupe = null === $account ? null : $this;
         if ($account->getGroupe() !== $newGroupe) {
             $account->setGroupe($newGroupe);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Organisateur[]
+     */
+    public function getBlacklisteurs(): Collection
+    {
+        return $this->blacklisteurs;
+    }
+
+    public function addBlacklisteur(Organisateur $blacklisteur): self
+    {
+        if (!$this->blacklisteurs->contains($blacklisteur)) {
+            $this->blacklisteurs[] = $blacklisteur;
+            $blacklisteur->addBlacklist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlacklisteur(Organisateur $blacklisteur): self
+    {
+        if ($this->blacklisteurs->contains($blacklisteur)) {
+            $this->blacklisteurs->removeElement($blacklisteur);
+            $blacklisteur->removeBlacklist($this);
         }
 
         return $this;

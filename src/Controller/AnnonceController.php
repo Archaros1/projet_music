@@ -73,6 +73,7 @@ class AnnonceController extends AbstractController
         
     }
 
+    
     public function chercheGroupe()
     {
         $idAnnonce = $_SESSION['annonceCourante'];
@@ -89,11 +90,29 @@ class AnnonceController extends AbstractController
 
             $groupes = $this->groupeRepo->findAll();
 
-            return $this->render('annonce/search_groupe.html.twig', [
-                'groupes' => $groupes
-            ]);
+            $blacklist = $orga->getBlacklist();
+            $groupesNotBlacklisted = [];
+            $ban = false;
+            
+            foreach ($groupes as $groupe) {
+                foreach ($blacklist as $blacklisted) {
+                    if ($groupe == $blacklisted) {
+                        $ban = true;
+                    }
+                }
+                if ($ban == false) {
+                    array_push($groupesNotBlacklisted, $groupe);
+                }
+                $ban = false;
+                
+            }
         }
+
+        return $this->render('annonce/search_groupe.html.twig', [
+            'groupes' => $groupesNotBlacklisted
+        ]);
     }
+
 
     public function deleteOffre($idOffre)
     {
@@ -107,6 +126,7 @@ class AnnonceController extends AbstractController
         }
         return $this->redirectToRoute("user_home");
     }
+
 
     public function validateOffre($idOffre)
     {
@@ -122,6 +142,7 @@ class AnnonceController extends AbstractController
         return $this->redirectToRoute("user_home");
     }
     
+
     public function deleteAnnonce($idAnnonce)
     {
         $annonce = $this->annonceRepo->findOneById($idAnnonce);
@@ -133,6 +154,7 @@ class AnnonceController extends AbstractController
         }
         return $this->redirectToRoute("user_home");
     }
+
 
     public function createEvent($idAnnonce)
     {
