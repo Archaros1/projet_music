@@ -41,10 +41,10 @@ class AnnonceFormType extends AbstractType
                     return ['class' => 'ml-2 mr-1'];
                 },
             ])
-            ->add('type_event', EntityType::class, [
-                'class' => EventType::class,
-                'choice_label' => 'name'
-            ])
+            // ->add('type_event', EntityType::class, [
+            //     'class' => EventType::class,
+            //     'choice_label' => 'name'
+            // ])
             // SUBMIT
             ->add('submit', SubmitType::class)
         ;

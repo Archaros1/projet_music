@@ -11,6 +11,7 @@
     <a href="{{ path('form_ann') }}" class="btn btn-primary">Créer une annonce</a>
     <a href="#" class="btn btn-primary">Modifier mes informations</a>
 
+    <h2>Vos annonces</h2>
     <div class="row">
     {% for annonce in annonces %}
 
@@ -22,6 +23,22 @@
             </div>
         </div>
         
+    {% endfor %}
+    </div>
+
+    <h2>Vos évènements</h2>
+    <div class="row">
+    {% for event in events %}
+    {% if date(event.dateEnd) < date() %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{event.name}}</h5>
+                <p class="card-text">{{event.dateBegin | date("d/m/Y")}} - {{event.dateEnd | date("d/m/Y")}}</p>
+                <a href="{{ path('vitrine_event', {idEvent : event.id}) }}" class="btn btn-primary">Détails</a>
+            </div>
+        </div>
+    {% endif %}
+    
     {% endfor %}
     </div>
 </div>

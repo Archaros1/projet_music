@@ -6,6 +6,10 @@ login:
   path: /login
   controller: App\Controller\SecurityController::login
 
+logout:
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+
 home:
   path: /
   controller: App\Controller\HomeController::home
@@ -51,9 +55,17 @@ offre:
   path: /offre/{idGroupe}
   controller: App\Controller\FormController::createOffre
 
+blacklist:
+  path: /blacklist/{idGroupe}
+  controller: App\Controller\OrgaController::blacklist
+
 delete_offre:
   path: /offre/delete/{idOffre}
   controller: App\Controller\AnnonceController::deleteOffre
+
+delete_annonce:
+  path: /annonce/delete/{idAnnonce}
+  controller: App\Controller\AnnonceController::deleteAnnonce
 
 validate_offre:
   path: /offre/validate/{idOffre}
@@ -62,6 +74,11 @@ validate_offre:
 form_ann:
   path: /form-annonce
   controller: App\Controller\FormController::createAnnonce
+
+
+create_event:
+  path: /event/create/{idAnnonce}
+  controller: App\Controller\AnnonceController::createEvent
 
 form_event:
   path: /form-evenements
@@ -76,7 +93,7 @@ search_groupe:
   controller: App\Controller\AnnonceController::chercheGroupe
 
 vitrine_event:
-  path: /vitrine-event
+  path: /vitrine-event/{idEvent}
   controller: App\Controller\HomeController::eventVitrine
 
 vitrine_groupe:
@@ -123,7 +140,7 @@ admin_delete_event:
   path: /admin/event/delete/{idEvent}
   controller: App\Controller\AdminController::deleteEvent
 
-admin_add_event:
+admin_accept_event:
   path: /admin/event/add/{idEvent}
   controller: App\Controller\AdminController::addEvent
 

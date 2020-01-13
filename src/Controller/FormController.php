@@ -119,13 +119,14 @@ class FormController extends AbstractController
     public function createGroupe(Request $request){
         $groupe = new Groupe();
         $account = new Account();
+        $account = $this->accountRepo->findOneByIdAndEmail($_SESSION['idAccount'], $_SESSION['emailAccount']);
+
         $formGroupe = $this->createForm(GroupeFormType::class, $groupe);
 
         $formGroupe->handleRequest($request);
         
-        if ($formGroupe->isSubmitted() && $formAccount->isSubmitted()) {
+        if ($formGroupe->isSubmitted()) {
             $groupe = $formGroupe->getData();
-            $account = $formAccount->getData();
 
             $account->setRoles = ['ROLE_USER', 'ROLE_GROUPE'];
 
@@ -138,8 +139,7 @@ class FormController extends AbstractController
         }
 
         return $this->render("forms/form_groupe.html.twig", [
-            "groupeForm" => $formGroupe->createView(),
-            "accountForm" => $formAccount->createView()
+            "groupeForm" => $formGroupe->createView()
         ]);
 
 

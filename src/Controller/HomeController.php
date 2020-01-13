@@ -57,9 +57,10 @@ class HomeController extends AbstractController
         return $this->render('form/form_annonce.html.twig');
     }
 
-    public function eventVitrine()
+    public function eventVitrine($idEvent)
     {
-        return $this->render('pages/vitrine_event.html.twig');
+        $event = $this->eventRepo->findOneById($idEvent);
+        return $this->render('pages/vitrine_event.html.twig', ['event' => $event]);
     }
 
     public function groupeVitrine($id)
@@ -72,7 +73,7 @@ class HomeController extends AbstractController
 
     public function agenda(Request $request, PaginatorInterface $paginator)
     {
-        $donnees = $this->eventRepo->findAll();
+        $donnees = $this->eventRepo->findAllOrderByDate();
 
         $events = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)

@@ -25,7 +25,14 @@ class GroupeFormType extends AbstractType
             ->add('a_tout_son_materiel')
             ->add('style', EntityType::class, [
                 'class' => Style::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'multiple' => true,
+                // 'mapped' => false,
+                'expanded' => true,
+                'label' => 'Style(s)',
+                'choice_attr' => function() {
+                    return ['class' => 'ml-2 mr-1'];
+                },
             ])
             ->add('type', EntityType::class, [
                 'class' => GroupeType::class,

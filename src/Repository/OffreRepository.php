@@ -57,4 +57,16 @@ class OffreRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findAllInCommon($idAnnonce, $idGroupe)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.annonce = :idAnnonce')
+            ->andWhere('o.groupe = :idGroupe')
+            ->setParameters(['idAnnonce' => $idAnnonce, 'idGroupe' => $idGroupe])
+            ->orderBy('o.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
