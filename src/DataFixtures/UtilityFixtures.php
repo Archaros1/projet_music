@@ -38,7 +38,7 @@ class UtilityFixtures extends Fixture
                 'departement' => 'Haut-Rhin'
             ]
         ];
-        $styles = ['De tout','Metal', 'Rock', 'Electro', 'Jazz'];
+        $styles = ['Metal', 'Rock', 'Electro', 'Jazz'];
         $tabGroupeType = ['Groupe', 'Orchestre', 'Boys band', 'Ensemble vocal‎', 'Cover band', 'Chorale'];
         $tabOrgaType = ['Entreprise', 'Association', 'Amicale', 'Institution gouvernemental'];
 

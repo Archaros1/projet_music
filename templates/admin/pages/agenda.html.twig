@@ -1,41 +1,127 @@
 {% extends "base.html.twig" %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{asset('assets/css/sous_form.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/sous_form.css')}}">
 {% endblock %}
 
 {% block body %}
 
-<div class="container">
+	<div class="container">
 
-  <h1>Modération de l'agenda</h1>
-  <div class="row">
-    <div class="col-8 mb-4">
-        <h3>Liste de tous les events en attente de validation</h3>
-    </div>
-    <div class="col-4 mb-4">
-        <h3>Validation</h3>
-    </div>
-  </div>
+		<h1>Modération de l'agenda</h1>
+		<div class="row">
+			<div class="col-8 mb-4">
+				<h3>Liste de tous les events en attente de validation</h3>
+			</div>
+		</div>
 
-  {% for event in events %}
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Description</th>
+						<th scope="col">Date-début</th>
+						<th scope="col">Date-fin</th>
+						{# <th scope="col">Type</th> #}
+						<th scope="col">Lieu</th>
+						<th scope="col">Groupes</th>
+						<th scope="col">Style</th>
+						<th scope="col">Modif</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for event in events %}
+						{% if event.validated != true %}
+							{#  date(event.dateEnd) > date() and #}
+							<tr>
+								<th scope="row">{{ event.id }}</th>
+								<td><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.name}}</a></td>
+								<td>{{event.description}}</td>
+								<td>{{event.dateBegin | date("d/m/Y")}}</td>
+								<td>{{event.dateEnd | date("d/m/Y")}}</td>
+								{# <td>{{event.type.name}}</td> #}
+								<td>
+									{{event.lieu.ville}}
+								</td>
+								<td>
+									{% for groupe in event.groupes %}
+										{{groupe.name}}
+									{% endfor %}
+								</td>
+								<td>
+									{% for style in event.style %}
+										{{style.name}}
+									{% endfor %}
+								</td>
+								<td>
+									<a href="{{ path('admin_accept_event', {idEvent : event.id}) }}" class="btn btn-success">Accepter</a>
+									<a href="{{ path('admin_delete_event', {idEvent : event.id}) }}" class="btn btn-danger">Refuser</a>
+								</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
 
-  <div class="row">
-    <div class="col-2 mb-3">
-        <h5>{{event.id}}{{event.name}}</h5>  
-    </div>
-    <div class="col-6 mb-3">
-        <p>{{event.description}}</p>
-    </div>
-     <div class="col-4 mb-3">
-        <a href="{{ path('admin_add_event', {idEvent : event.id}) }}" class="btn btn-success">Accepter</a>
-        <a href="{{ path('admin_delete_event', {idEvent : event.id}) }}" class="btn btn-danger">Refuser</a>
-    </div>
-  </div>
+		</div>
 
-  {% endfor %}
-  
-</div>
+		<div class="row">
+			<div class="col-8 mb-4">
+				<h3>Liste de tous les events validés</h3>
+			</div>
+		</div>
 
-{% endblock %}
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Description</th>
+						<th scope="col">Date-début</th>
+						<th scope="col">Date-fin</th>
+						{# <th scope="col">Type</th> #}
+						<th scope="col">Lieu</th>
+						<th scope="col">Groupes</th>
+						<th scope="col">Style</th>
+						<th scope="col">Modif</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for event in events %}
+						{% if event.validated == true %}
+							{#  date(event.dateEnd) > date() and #}
+							<tr>
+								<th scope="row">{{ event.id }}</th>
+								<td><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.name}}</a></td>
+								<td>{{event.description}}</td>
+								<td>{{event.dateBegin | date("d/m/Y")}}</td>
+								<td>{{event.dateEnd | date("d/m/Y")}}</td>
+								{# <td>{{event.type.name}}</td> #}
+								<td>
+									{{event.lieu.ville}}
+								</td>
+								<td>
+									{% for groupe in event.groupes %}
+										{{groupe.name}}
+									{% endfor %}
+								</td>
+								<td>
+									{% for style in event.style %}
+										{{style.name}}
+									{% endfor %}
+								</td>
+								<td>
+									<a href="{{ path('admin_delete_event', {idEvent : event.id}) }}" class="btn btn-danger">Supprimer</a>
+								</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
 
+		</div>
+
+	{% endblock %}

@@ -104,11 +104,26 @@ class FakerFixtures extends Fixture
             ->setType($eventType)
             ->setLieu($lieu)
             ->setOrganisateur($orga)
+            ->setValidated(true)
             ;
 
             $manager->persist($event);
-            
+        }
 
+        for ($i=0; $i < 3; $i++) { 
+            $event = new Event();
+
+            $event->setName($this->faker->cityPrefix.$this->faker->lastName)
+            ->setDescription($this->faker->realText(200, 2))
+            ->setDateBegin(new \DateTime('1'.($i+4).' October 200'.($i+1)))
+            ->setDateEnd(new \DateTime('1'.$i.' October 200'.($i+2)))
+            ->setType($eventType)
+            ->setLieu($lieu)
+            ->setOrganisateur($orga)
+            ->setValidated(false)
+            ;
+
+            $manager->persist($event);
         }
 
         // FAKE USER pour test
