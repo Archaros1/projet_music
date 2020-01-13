@@ -11,11 +11,14 @@ use App\Entity\Groupe;
 use App\Entity\Event;
 use App\Entity\Style;
 use App\Entity\Lieu;
+use App\Entity\Organisateur;
+use App\Entity\Annonce;
 use App\Repository\GroupeRepository;
 use App\Repository\EventRepository;
 use App\Repository\StyleRepository;
 use App\Repository\LieuRepository;
 use App\Repository\OrganisateurRepository;
+use App\Repository\AnnonceRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
@@ -30,8 +33,9 @@ class HomeController extends AbstractController
     private $styleRepo;
     private $lieuRepo;
     private $organisateurRepo;
+    private $annonceRepo;
 
-    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository, StyleRepository $styleRepository, LieuRepository $lieuRepository, OrganisateurRepository $organisateurRepository){
+    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository, StyleRepository $styleRepository, LieuRepository $lieuRepository, OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository){
         
     $this->groupeRepo = $groupeRepository;
     $this->security = $security;
@@ -40,6 +44,7 @@ class HomeController extends AbstractController
     $this->styleRepo = $styleRepository;
     $this->lieuRepo = $lieuRepository;
     $this->organisateurRepo = $organisateurRepository;
+    $this->annonceRepo = $annonceRepository;
     }
 
     public function home()
@@ -104,7 +109,8 @@ class HomeController extends AbstractController
         $style = $this->styleRepo->findAll();
         $lieu = $this->lieuRepo->findAll();
         $organisateur = $this->organisateurRepo->findAll();
-        return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur]);
+        $annonce = $this->annonceRepo->findAll();
+        return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur, "annonces" => $annonce]);
     }
 
     

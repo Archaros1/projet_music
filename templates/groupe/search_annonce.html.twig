@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('assets/css/search_annonce.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/search_annonce_style.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -9,8 +9,9 @@
 {% include "site-parts/slider.html.twig" %}
 
 <div class="container">
+    <div class="form">
     <div class="row">
-        <div class="col-4 mb-4">
+        <div class="col-4 mb-4 ">
             <label for="style-select">Choisissez un style de musique:</label>
             <select name="style" id="style-select">
                 <option value="">--Choisissez votre style de musique--</option>
@@ -20,7 +21,7 @@
             </select>
         </div>
 
-         <div class="col-4 mb-4">
+         <div class="col-4 mb-4 ">
             <label for="genre-select">Choisissez le genre de l'event:</label>
             <select name="genre" id="genre-select">
                 <option value="">--Choisissez votre genre d'event--</option>
@@ -38,14 +39,39 @@
             <input type="date" id="end" name="trip-end">
         </div>
 
-         <div class="col-12 ">
+         <div class="col-6 ">
             <label for="lieu-select">Choisissez le lieu:</label>
             <select name="lieu" id="lieu-select">
                 <option value="">--Choisissez votre lieu--</option>
                 {% for lieu in lieux %}
-                    <option value="lieu">{{style.name}}</option>
+                    <option value="lieu">{{lieu.name}}</option>
                 {% endfor %}
             </select>
         </div>
+    </div>
+    </div>
+<div>
+
+<h1>Liste des annonces</h1>
+
+<div class="container">
+    
+    {% for annonce in annonces %}
+    <div class="row">
+        <div class="col-6">
+            <div class="card border-success mb-3" style="width: 35rem; height: 20rem">
+                <div class="card-header bg-transparent border-secondary">{{annonce.nomEvent}}</div>
+                <div class="card-body text-secondary">
+                    <h5 class="card-title">{{annonce.lieu}}</h5>
+                    <h5 class="card-title">{{annonce.typeEvent}}</h5>
+                    <p class="card-text">{{annonce.description}}.</p>
+            </div>
+                <div class="card-footer bg-transparent border-success">Du {{annonce.dateBegin}} au {{annonce.dateEnd}}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
 
 {% endblock %}
