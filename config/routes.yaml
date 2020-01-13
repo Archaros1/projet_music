@@ -49,7 +49,7 @@ orga_update:
 
 search_ann:
   path: /recherche-annonce
-  controller: App\Controller\HomeController::search_ann
+  controller: App\Controller\HomeController::searchAnnonce
 
 offre:
   path: /offre/{idGroupe}
@@ -136,13 +136,17 @@ admin_update_offre:
   path: /admin/offre/update/{id}
   controller: App\Controller\AdminController::updateOffre
 
+admin_delete_offre:
+  path: /admin/offre/delete/{idOffre}
+  controller: App\Controller\AdminController::deleteOffre
+
 admin_delete_event:
   path: /admin/event/delete/{idEvent}
   controller: App\Controller\AdminController::deleteEvent
 
 admin_accept_event:
-  path: /admin/event/add/{idEvent}
-  controller: App\Controller\AdminController::addEvent
+  path: /admin/event/accept/{idEvent}
+  controller: App\Controller\AdminController::acceptEvent
 
 
 

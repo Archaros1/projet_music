@@ -9,8 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use App\Entity\Groupe;
 use App\Entity\Event;
+use App\Entity\Style;
+use App\Entity\Lieu;
+use App\Entity\Organisateur;
+use App\Entity\Annonce;
 use App\Repository\GroupeRepository;
 use App\Repository\EventRepository;
+use App\Repository\StyleRepository;
+use App\Repository\LieuRepository;
+use App\Repository\OrganisateurRepository;
+use App\Repository\AnnonceRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
@@ -22,13 +30,21 @@ class HomeController extends AbstractController
     private $user;
     private $security;
     private $eventRepo;
+    private $styleRepo;
+    private $lieuRepo;
+    private $organisateurRepo;
+    private $annonceRepo;
 
-    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository){
+    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository, StyleRepository $styleRepository, LieuRepository $lieuRepository, OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository){
         
     $this->groupeRepo = $groupeRepository;
     $this->security = $security;
     $this->user = $security->getUser();
     $this->eventRepo = $eventRepository;
+    $this->styleRepo = $styleRepository;
+    $this->lieuRepo = $lieuRepository;
+    $this->organisateurRepo = $organisateurRepository;
+    $this->annonceRepo = $annonceRepository;
     }
 
     public function home()
@@ -89,7 +105,14 @@ class HomeController extends AbstractController
         }
     }
 
-    
+    public function searchAnnonce(){
+        $event = $this->eventRepo->findAll();
+        $style = $this->styleRepo->findAll();
+        $lieu = $this->lieuRepo->findAll();
+        $organisateur = $this->organisateurRepo->findAll();
+        $annonce = $this->annonceRepo->findAll();
+        return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur, "annonces" => $annonce]);
+    }
 
     
 

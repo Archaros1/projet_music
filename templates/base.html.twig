@@ -15,7 +15,7 @@
 {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
 	<div class="row">
 	    {% include "site-parts/admin-sidebar.html.twig" %}
-	    <div class="col-10" style="padding-right: 0px;">
+	    <div class="col-10 pl-0" style="padding-right: 0px;">
 {% endif %}
 {% include "site-parts/navbar.html.twig" %}
 

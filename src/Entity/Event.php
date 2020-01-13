@@ -71,6 +71,11 @@ class Event
      */
     private $organisateur;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validated;
+
     public function __construct()
     {
         $this->groupes = new ArrayCollection();
@@ -260,6 +265,18 @@ class Event
     public function setOrganisateur(?Organisateur $organisateur): self
     {
         $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    public function getValidated(): ?bool
+    {
+        return $this->validated;
+    }
+
+    public function setValidated(bool $validated): self
+    {
+        $this->validated = $validated;
 
         return $this;
     }
