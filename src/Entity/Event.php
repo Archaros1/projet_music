@@ -40,7 +40,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\EventType", inversedBy="events")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $type;
 
@@ -64,6 +64,12 @@ class Event
      * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="event")
      */
     private $photos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organisateur", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organisateur;
 
     public function __construct()
     {
@@ -157,6 +163,13 @@ class Event
         return $this->groupes;
     }
 
+    public function setGroupes(?array $tab): self
+    {
+        $this->groupes = $tab;
+
+        return $this;
+    }
+
     public function addGroupe(Groupe $groupe): self
     {
         if (!$this->groupes->contains($groupe)) {
@@ -181,6 +194,13 @@ class Event
     public function getStyle(): Collection
     {
         return $this->style;
+    }
+
+    public function setStyle(?array $tab): self
+    {
+        $this->style = $tab;
+
+        return $this;
     }
 
     public function addStyle(Style $style): self
@@ -228,6 +248,18 @@ class Event
                 $photo->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?Organisateur
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?Organisateur $organisateur): self
+    {
+        $this->organisateur = $organisateur;
 
         return $this;
     }

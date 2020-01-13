@@ -103,6 +103,7 @@ class FakerFixtures extends Fixture
             ->setDateEnd(new \DateTime('1'.$i.' September 200'.($i+1)))
             ->setType($eventType)
             ->setLieu($lieu)
+            ->setOrganisateur($orga)
             ;
 
             $manager->persist($event);
@@ -145,6 +146,7 @@ class FakerFixtures extends Fixture
         $orga->setName($this->faker->name)
         ->setType($orgaType)
         ->setAccount($accountOrga)
+        ->addBlacklist($groupe)
         ;
 
         $manager->persist($orga);

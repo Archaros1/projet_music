@@ -39,9 +39,21 @@ class Organisateur
      */
     private $account;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="organisateur", orphanRemoval=false)
+     */
+    private $events;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Groupe", inversedBy="blacklisteurs")
+     */
+    private $blacklist;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->blacklist = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,6 +129,63 @@ class Organisateur
         $newOrganisateur = null === $account ? null : $this;
         if ($account->getOrganisateur() !== $newOrganisateur) {
             $account->setOrganisateur($newOrganisateur);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            // set the owning side to null (unless already changed)
+            if ($event->getOrganisateur() === $this) {
+                $event->setOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Groupe[]
+     */
+    public function getBlacklist(): Collection
+    {
+        return $this->blacklist;
+    }
+
+    public function addBlacklist(Groupe $blacklist): self
+    {
+        if (!$this->blacklist->contains($blacklist)) {
+            $this->blacklist[] = $blacklist;
+        }
+
+        return $this;
+    }
+
+    public function removeBlacklist(Groupe $blacklist): self
+    {
+        if ($this->blacklist->contains($blacklist)) {
+            $this->blacklist->removeElement($blacklist);
         }
 
         return $this;
