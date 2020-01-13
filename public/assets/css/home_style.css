@@ -18,9 +18,13 @@
     font-size: 20px;
 }
 
-.col-sm {
-text-align: center;
+.container-fluid a {
+        margin-right: 20px;
+        width: 10px;
+        height: 10px;
 }
 
-
+.col-sm{
+    text-align: center;
+}
 
