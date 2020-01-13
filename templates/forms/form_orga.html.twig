@@ -2,34 +2,39 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/formorga_style.css')}}">
+	<style>
+		body {
+			background-image: url("{{asset('assets/images/fformorga.jpg')}}");
+			background-size: 100% 100vh;
+		}
+	</style>
 {% endblock %}
 
-<div class="container mt-2">
-
-		<h1 class="mb-6">mon agenda</h1>
-
 {% block body %}
-<div class="container">
-	<div class="container">
+<br>
+<br>
+<br>
+	<div class="container form">
 	{{ form_start(orgaForm) }}
 		<div class="row">
 			<div class="col-6">
-				{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur (nom de l'association, entreprise, etc)", 'class': 'form-control'}, 'label' : false}) }}
+			<br>
+			{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur (nom de l'association, entreprise, etc)", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-6">
-				{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
+			<div class="col-3">
+			<br>
+			{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : false}) }}
+			<br>
+			{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }}
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-6">
-				{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }}
-			</div>
+	
+	<div class="row">
+		<div class="col-3">
+		{# {{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }} #}
 		</div>
-
-	{{ form_end(orgaForm) }}
 	</div>
-</div>	
+</div>
 {% endblock %}
