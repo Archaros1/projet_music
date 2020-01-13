@@ -11,23 +11,18 @@
 {% endblock %}
 
 {% block body %}
-<br>
-<br>
-<br>
-	<div class="container form">
+
+	<div class="container form mt-3">
 	{{ form_start(orgaForm) }}
 		<div class="row">
 			<div class="col-6">
-			<br>
-			{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur (nom de l'association, entreprise, etc)", 'class': 'form-control'}, 'label' : false}) }}
+			{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur (nom de l'association, entreprise, etc)", 'class': 'form-control mt-1'}, 'label' : false}) }}
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-3">
-			<br>
-			{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : false}) }}
-			<br>
-			{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }}
+			{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1 mt-1'}, 'label' : false}) }}
+			{{ form_row(orgaForm.submit, {'attr' : {'class': 'mt-1'}, 'label' : "S'inscrire"}) }}
 			</div>
 		</div>
 	
