@@ -12,25 +12,12 @@
 		<div class="form">
 			<div class="row">
 				<div class="col-12 mb-4 ">
-					<label for="style-select">Choisissez un style de musique:</label>
-					<select name="style" id="style-select">
-						<option value="">--Choisissez votre style de musique--</option>
-						{% for style in styles %}
-							<option value="style">{{style.name}}</option>
-						{% endfor %}
-					</select>
-				</div>
 
-				<div class="col-12 mb-4 ">
-					<label for="lieu-select">Choisissez le lieu:</label>
-					<select name="lieu" id="lieu-select">
-						<option value="">--Choisissez votre lieu--</option>
-						{% for lieu in lieux %}
-							<option value="lieu">{{lieu.name}}</option>
-						{% endfor %}
-					</select>
+                    {{ form_start(annonceForm) }}
+                        {{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
+                    {{ form_end(annonceForm) }}
+
 				</div>
-                <input type="submit" value="rechercher">
 			</div>
 		</div>
 		<div>
@@ -41,6 +28,7 @@
 
 				<div class="row">
 					{% for annonce in annonces %}
+                        {% if infoTriAnnonce ==}
 						<div class="col-6">
 							<div class="card border-success mb-3" style="border-radius: 20px">
 								<div class="card-header bg-light border-secondary">

@@ -20,6 +20,8 @@ use App\Repository\LieuRepository;
 use App\Repository\OrganisateurRepository;
 use App\Repository\AnnonceRepository;
 
+use App\Form\RechercheAnnonceType;
+
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
 
@@ -105,28 +107,30 @@ class HomeController extends AbstractController
         }
     }
 
-    public function searchAnnonce(){
-        $event = $this->eventRepo->findAll();
-        $style = $this->styleRepo->findAll();
-        $lieu = $this->lieuRepo->findAll();
-        $organisateur = $this->organisateurRepo->findAll();
-        $annonce = $this->annonceRepo->findAll();
-        return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur, "annonces" => $annonce]);
-    }
+    public function searchAnnonce(Request $request, Security $security){
+        $events = $this->eventRepo->findAll();
+        $styles = $this->styleRepo->findAll();
+        $lieux = $this->lieuRepo->findAll();
+        $organisateurs = $this->organisateurRepo->findAll();
+        $annonces = $this->annonceRepo->findAll();
 
-    public function triAnnonce(Request $request, Security $security){
-        $annonce = $this->annonceRepo->findAll();
-        $form = $this->createForm(RechercheAnnonceType::class, $annonce);
+        $infoTriAnnonce = new Annonce();
+
+        $form = $this->createForm(RechercheAnnonceType::class, $infoTriAnnonce);
         $form->handleRequest($request);
         if($form->isSubmitted()){
-            $annonce = $form->getData();
+            $infoTriAnnonce = $form->getData();
             
-            return $this->redirectToRoute("search");
+            return $this->redirectToRoute("search_ann");
         }
-        return $this->render('admin/pages/update_annonce.html.twig', ["annonceForm" => $form->createView()]);
+
+        return $this->render("groupe/search_annonce.html.twig", [
+            "events" => $events, 
+            "styles" => $styles, 
+            "lieux" => $lieux, 
+            "annonces" => $annonces, 
+            "infoTriAnnonce" => $infoTriAnnonce,
+            "annonceForm" => $form->createView()]);
     }
-
-
     
-
 }
