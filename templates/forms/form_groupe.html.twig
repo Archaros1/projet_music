@@ -1,27 +1,35 @@
 {% extends "base.html.twig" %}
 
-
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/formgroupe_style.css')}}">
+	<style>
+		body {
+			background-image: url("{{asset('assets/images/formusic.jpg')}}");
+			background-size: 100% 100vh;
+		}
+	</style>
+{% endblock %}
 
 {% block body %}
-	<div class="container">
 
+<div class="container form mt-3">
 	{{ form_start(groupeForm) }}
 		<div class="row">
-			<div class="col-9">
-				{{ form_row(groupeForm.name, {'attr' : {placeholder : "Nom du groupe", 'class': 'form-control'}, 'label' : false}) }}
+			<div class="col-6">
+				{{ form_row(groupeForm.name, {'attr' : {placeholder : "Nom du groupe", 'class': 'mt-1 form-control'}, 'label' : false}) }}
 			</div>
 			<div class="col-3">
-				{{ form_row(groupeForm.nombre_membre, {'attr' : {placeholder : "Nombre de membre", 'class': 'form-control'}, 'label' : false}) }}
+				{{ form_row(groupeForm.nombre_membre, {'attr' : {placeholder : "Nombre de membre", 'class': 'mt-1 form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 		<div class="row mt-2">
 			<div class="col">
-				{{ form_row(groupeForm.description, {'attr' : {placeholder : "Descrivez votre groupe en quelques mots", 'class': 'form-control'}, 'label' : false}) }}
+				{{ form_row(groupeForm.description, {'attr' : {placeholder : "Descrivez votre groupe en quelques mots", 'class': 'mt-1 form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 		<div class="row">
 			<div class="col">
-				{{ form_row(groupeForm.a_domicile, {'attr' : {'class': 'ml-1'}, 'label' : "Joue à domicile"}) }}
+				{{ form_row(groupeForm.a_domicile, {'attr' : {'class': 'ml-1 mt-1'}, 'label' : "Joue à domicile"}) }}
 			</div>
 			<div class="col">
 				{{ form_row(groupeForm.a_tout_son_materiel, {'attr' : {'class': 'ml-1'}}) }}
@@ -30,13 +38,13 @@
 				{{ form_row(groupeForm.style, {'attr' : {'class': 'ml-1'}, 'label' : "Style : "}) }}
 			</div>
 			<div class="col">
-				{{ form_row(groupeForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
+				{{ form_row(groupeForm.type, {'attr' : {'class': 'ml-1 mt-1'}, 'label' : "Type : "}) }}
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col">
-				{{ form_row(groupeForm.submit, {'attr' : {'class': ''}, 'label' : "S'inscrire"}) }}
+				{{ form_row(groupeForm.submit, {'attr' : {'class': 'mt-1'}, 'label' : "S'inscrire"}) }}
 			</div>
 		</div>
 

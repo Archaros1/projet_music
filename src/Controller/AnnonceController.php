@@ -184,6 +184,7 @@ class AnnonceController extends AbstractController
         ->setType($annonce->getTypeEvent())
         ->setLieu($annonce->getLieu())
         ->setOrganisateur($annonce->getOrganisateur())
+        ->setValidated(true)
         // ->setStyle($annonce->getStyleRecherche())
         ;
 
