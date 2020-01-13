@@ -6,72 +6,61 @@
 
 {% block body %}
 
-{% include "site-parts/slider.html.twig" %}
+	{% include "site-parts/slider.html.twig" %}
 
-<div class="container">
-    <div class="form">
-    <div class="row">
-        <div class="col-4 mb-4 ">
-            <label for="style-select">Choisissez un style de musique:</label>
-            <select name="style" id="style-select">
-                <option value="">--Choisissez votre style de musique--</option>
-                {% for style in styles %}
-                    <option value="style">{{style.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
+	<div class="container">
+		<div class="form">
+			<div class="row">
+				<div class="col-12 mb-4 ">
+					<label for="style-select">Choisissez un style de musique:</label>
+					<select name="style" id="style-select">
+						<option value="">--Choisissez votre style de musique--</option>
+						{% for style in styles %}
+							<option value="style">{{style.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-         <div class="col-4 mb-4 ">
-            <label for="genre-select">Choisissez le genre de l'event:</label>
-            <select name="genre" id="genre-select">
-                <option value="">--Choisissez votre genre d'event--</option>
-                {% for event in events %}
-                    <option value="genre">{{event.type}}</option>
-                {% endfor %}
-            </select>
-        </div>
+				<div class="col-12 mb-4 ">
+					<label for="lieu-select">Choisissez le lieu:</label>
+					<select name="lieu" id="lieu-select">
+						<option value="">--Choisissez votre lieu--</option>
+						{% for lieu in lieux %}
+							<option value="lieu">{{lieu.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+                <input type="submit" value="rechercher">
+			</div>
+		</div>
+		<div>
 
-        <div class="col-6 mb-4">
-            <label for="start">date de début:</label>
-            <input type="date" id="start" name="trip-start">
+			<h1>Liste des annonces</h1>
 
-            <label for="end">Date de fin:</label>
-            <input type="date" id="end" name="trip-end">
-        </div>
+			<div class="container">
 
-         <div class="col-6 ">
-            <label for="lieu-select">Choisissez le lieu:</label>
-            <select name="lieu" id="lieu-select">
-                <option value="">--Choisissez votre lieu--</option>
-                {% for lieu in lieux %}
-                    <option value="lieu">{{lieu.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-    </div>
-<div>
+				<div class="row">
+					{% for annonce in annonces %}
+						<div class="col-6">
+							<div class="card border-success mb-3" style="border-radius: 20px">
+								<div class="card-header bg-light border-secondary">
+									<h2>{{annonce.nomEvent}}</h2>
+								</div>
+								<div class="card-body text-secondary">
+									<h3 class="card-title">{{annonce.lieu.name}}</h5>
+									<h4 class="card-title">{{annonce.genreEvent}}</h4>
+									<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+								</div>
+								<div class="card-footer bg-transparent border-success">Du
+									{{annonce.dateBegin | date('d/m/Y')}}
+									au
+									{{annonce.dateEnd | date('d/m/Y')}}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
 
-<h1>Liste des annonces</h1>
+			</div>
 
-<div class="container">
-    
-    {% for annonce in annonces %}
-    <div class="row">
-        <div class="col-6">
-            <div class="card border-success mb-3" style="width: 35rem; height: 20rem">
-                <div class="card-header bg-transparent border-secondary">{{annonce.nomEvent}}</div>
-                <div class="card-body text-secondary">
-                    <h5 class="card-title">{{annonce.lieu}}</h5>
-                    <h5 class="card-title">{{annonce.typeEvent}}</h5>
-                    <p class="card-text">{{annonce.description}}.</p>
-            </div>
-                <div class="card-footer bg-transparent border-success">Du {{annonce.dateBegin}} au {{annonce.dateEnd}}</div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
-</div>
-
-{% endblock %}
+		{% endblock %}

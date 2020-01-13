@@ -114,6 +114,19 @@ class HomeController extends AbstractController
         return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur, "annonces" => $annonce]);
     }
 
+    public function triAnnonce(Request $request, Security $security){
+        $annonce = $this->annonceRepo->findAll();
+        $form = $this->createForm(RechercheAnnonceType::class, $annonce);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $annonce = $form->getData();
+            
+            return $this->redirectToRoute("search");
+        }
+        return $this->render('admin/pages/update_annonce.html.twig', ["annonceForm" => $form->createView()]);
+    }
+
+
     
 
 }
