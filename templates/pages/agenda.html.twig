@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h2 class="card-title">{{event.type.name}}</h2>
+							<h2 class="card-title"><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.type.name}}</a></h2>
 							<h3 class="card-title">{{event.lieu.name}} à {{event.lieu.ville}}</h3>
 							<h4 class="card-title">{{event.name}}</h4>
                             <h4 class="card-title">{{event.dateBegin | date("d/m/Y")}} au {{event.dateEnd | date("d/m/Y")}}</h4>
