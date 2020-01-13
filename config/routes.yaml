@@ -45,7 +45,7 @@ orga_update:
 
 search_ann:
   path: /recherche-annonce
-  controller: App\Controller\HomeController::search_ann
+  controller: App\Controller\HomeController::searchAnnonce
 
 offre:
   path: /offre/{idGroupe}

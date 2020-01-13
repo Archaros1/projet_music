@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/search_annonce.css')}}">
+{% endblock %}
+
+{% block body %}
+
+{% include "site-parts/slider.html.twig" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4 mb-4">
+            <label for="style-select">Choisissez un style de musique:</label>
+            <select name="style" id="style-select">
+                <option value="">--Choisissez votre style de musique--</option>
+                {% for style in styles %}
+                    <option value="style">{{style.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+         <div class="col-4 mb-4">
+            <label for="genre-select">Choisissez le genre de l'event:</label>
+            <select name="genre" id="genre-select">
+                <option value="">--Choisissez votre genre d'event--</option>
+                {% for event in events %}
+                    <option value="genre">{{event.type}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-6 mb-4">
+            <label for="start">date de début:</label>
+            <input type="date" id="start" name="trip-start">
+
+            <label for="end">Date de fin:</label>
+            <input type="date" id="end" name="trip-end">
+        </div>
+
+         <div class="col-12 ">
+            <label for="lieu-select">Choisissez le lieu:</label>
+            <select name="lieu" id="lieu-select">
+                <option value="">--Choisissez votre lieu--</option>
+                {% for lieu in lieux %}
+                    <option value="lieu">{{style.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+{% endblock %}
