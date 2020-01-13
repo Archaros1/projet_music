@@ -7,10 +7,12 @@ use App\Entity\Offre;
 use App\Entity\Organisateur;
 use App\Entity\Annonce;
 use App\Form\Groupe;
+use App\Entity\Lieu;
 use App\Form\Event;
 use App\Form\OrganisateurFormType;
 use App\Form\GroupeFormType;
 use App\Repository\OrganisateurRepository;
+use App\Repository\LieuRepository;
 use App\Repository\StyleRepository;
 use App\Repository\OffreRepository;
 use App\Repository\AnnonceRepository;
@@ -32,8 +34,9 @@ class AdminController extends AbstractController
     private $eventRepo;
     private $offreRepo;
     private $styleRepo;
+    private $lieuRepo;
 
-    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, EventRepository $eventRepository, OffreRepository $offreRepository, StyleRepository $styleRepository)
+    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, EventRepository $eventRepository, OffreRepository $offreRepository, StyleRepository $styleRepository, LieuRepository $lieuRepository)
     {
         $this->organisateurRepo = $organisateurRepository;
         $this->annonceRepo = $annonceRepository;
@@ -41,6 +44,7 @@ class AdminController extends AbstractController
         $this->eventRepo = $eventRepository;
         $this->offreRepo = $offreRepository;
         $this->styleRepo = $styleRepository;
+        $this->lieuRepo = $lieuRepository;
     }
     
     
@@ -51,13 +55,15 @@ class AdminController extends AbstractController
         $event = $this->eventRepo->findAll();
         $offre = $this->offreRepo->findAll();
         $style = $this->styleRepo->findAll();
+        $lieu = $this->lieuRepo->findAll();
          return $this->render("admin/pages/admin_home.html.twig", [
             "organisateurs" => $organisateur, 
             "annonces" => $annonce, 
             "groupes" => $groupe,  
             "events" => $event,
             "offres" => $offre,
-            "styles" =>$style
+            "styles" => $style,
+            "lieux" => $lieu
             ]);
     }
 
@@ -143,9 +149,9 @@ class AdminController extends AbstractController
     public function deleteEvent($idEvent)
     {
         $event = $this->eventRepo->findOneById($idEvent);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($event);
+        $entityManager->flush();
         return $this->redirectToRoute("admin_agenda");
     }
 

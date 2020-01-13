@@ -64,7 +64,9 @@
                             <td>{{annonce.styleRecherche }}</td>
                             <td>{{annonce.dateBegin | date("d/m/Y")}}</td>
                             <td>{{annonce.dateEnd | date("d/m/Y")}}</td>
-                            <td>{{annonce.lieu }}</td>
+                             <td>{% for lieu in lieux %}
+                                {{lieu.ville}}
+                            {% endfor %}</td>
                             <td>{{annonce.description}}</td>
                             <td><a href="{{ path('admin_update_annonce', {id : annonce.id}) }}">Update</a></td>
                         </tr>
@@ -100,10 +102,10 @@
                             <td>{{groupe.aDomicile}}</td>
                             <td>{{groupe.aToutSonMateriel}}</td>
                             <td>{% for event in events %}
-                                {{groupe.event.description}}
+                                {{event.description}}
                             {% endfor %}</td>
                             <td>{% for style in styles %}
-                                {{groupe.style.name}}
+                                {{style.name}}
                             {% endfor %}</td>
                             <td><a href="{{ path('admin_update_groupe', {id : groupe.id}) }}">Update</a></td>
                         </tr>
@@ -174,7 +176,9 @@
                             <td>{{event.dateBegin | date("d/m/Y")}}</td>
                             <td>{{event.dateEnd | date("d/m/Y")}}</td>
                             <td>{{event.type.name}}</td>
-                            <td>{{event.lieu}}</td>
+                            <td>{% for lieu in lieux %}
+                                {{lieu.ville}}
+                            {% endfor %}</td>
                             <td>{% for groupe in groupes %}
                                 {{groupe.name}}
                             {% endfor %}</td>
@@ -214,8 +218,9 @@
                             <td>{{event.dateBegin | date("d/m/Y")}}</td>
                             <td>{{event.dateEnd | date("d/m/Y")}}</td>
                             <td>{{event.type.name}}</td>
-                            <td>{{event.lieu}}</td>
-                            <td>{{event.contacts.fb}}</td>
+                            <td>{% for lieu in lieux %}
+                                {{lieu.ville}}
+                            {% endfor %}</td>
                             <td>{% for groupe in groupes %}
                                 {{groupe.name}}
                             {% endfor %}</td>
