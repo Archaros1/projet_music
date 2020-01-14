@@ -38,6 +38,6 @@ security:
         - { path: ^/home-user, roles: ROLE_USER }
         - { path: ^/home-groupe, roles: ROLE_GROUPE }
         - { path: ^/home-organisateur, roles: ROLE_ORGA }
-        # - { path: ^/recherche-annonce, roles: ROLE_USER }
+        - { path: ^/recherche-annonce, roles: ROLE_GROUPE }
         - { path: ^/form-annonce, roles: ROLE_ORGA }
-        # - { path: ^/offre, roles: ROLE_USER }
+        - { path: ^/offre, roles: ROLE_USER }

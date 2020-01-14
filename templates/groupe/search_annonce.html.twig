@@ -90,9 +90,11 @@
 				{% endif %}
 			</div>
 			<div class="col-3">
+				{% if not pageFuture is empty %}
 				<a class="btn btn-warning" style="text-align: end" href="{{ path('search_ann', {from : from + 1}) }}">
 					<h3>Suivant</h3>
 				</a class="btn btn-warning">
+				{% endif %}
 			</div>
 		</div>
 	</div>

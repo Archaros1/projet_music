@@ -75,15 +75,30 @@ class HomeController extends AbstractController
 
     public function agenda(Request $request, PaginatorInterface $paginator)
     {
-        $donnees = $this->eventRepo->findAllOrderByDate();
+     $page =1;
+     if(isset($_GET['page'])) {
+        $page = $_GET['page'];
+        
+     }
+        $from = $request->query->get("from");
+        $donnees = $this->eventRepo->findAll();
 
-        $events = $paginator->paginate(
+        $pageFuture = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            ($page+1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             2 // Nombre de résultats par page
         );
 
-        return $this->render('pages/agenda.html.twig', ["events" => $events]);
+        $events = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $page, // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
+        );
+        
+        return $this->render('pages/agenda.html.twig', [
+            "events" => $events, 
+            "from" => $page, 
+            "pageFuture" => $pageFuture]);
     }
 
 
@@ -107,14 +122,21 @@ class HomeController extends AbstractController
         }
     }
 
-    public function searchAnnonce(Request $request, Security $security){
+    public function searchAnnonce(Request $request, Security $security, PaginatorInterface $paginator){
         $from = $request->query->get("from");
         if ($from == 0) {
             $from++;
         }
 
         $annonces = $this->annonceRepo->findAll();
-        $annonces = $this->annonceRepo->findPaginatedAnnonces($from);
+
+        $pageFuture = $paginator->paginate(
+            $annonces,
+            ($request->query->getInt('from', 1)+1),
+            6
+        );
+
+        $annonces = $this->annonceRepo->findPaginatedAnnonces($from);   
 
         $infoTriAnnonce = new Annonce();
 
@@ -146,6 +168,7 @@ class HomeController extends AbstractController
             "annonces" => $annonces, 
             "infoTriAnnonces" => $infoTriAnnonce,
             "from" => $from,
+            "pageFuture" => $pageFuture,
             "annonceForm" => $form->createView()]);
     }
     
