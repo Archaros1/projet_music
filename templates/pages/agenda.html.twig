@@ -33,10 +33,15 @@
 			</div>
 		{% endfor %}
 		{{ knp_pagination_render(events) }}
+		
 		<div class="row">
-			<a class="btn btn-primary", href="{{ path('agenda', {page : pageCourante-1}) }}">Précédent</a>
-			<a class="btn btn-primary", href="{{ path('agenda', {page : pageCourante+1}) }}">Suivant</a>
+			{% if from >1 %}
+			<a class="btn btn-primary", href="{{ path('agenda', {page : from -1}) }}">Précédent</a>
+			{% endif %}
 
+			{% if from < 2 %}
+			<a class="btn btn-primary", href="{{ path('agenda', {page : from +1}) }}">Suivant</a>
+			{% endif %}
 		</div>
-
+		
 	{% endblock %}

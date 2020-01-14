@@ -30,16 +30,16 @@ class EventRepository extends ServiceEntityRepository
     // }
 
 
-    // private function pagination($dql, $page = 10, $limit = 8)
-    // {
-    //     $paginator = new paginator($dql);
-    //     $paginator -> getQuery()
-    //         ->setFirstResult($limit * ($page - 1))
-    //         ->setMaxResults($limit);
+     //private function pagination($dql, $page = 1, $limit = 5)
+     //{
+         //$paginator = new paginator($dql);
+         //$paginator -> getQuery()
+             //->setFirstResult($limit * ($page - 1))
+             //->setMaxResults($limit);
 
-    //     return $paginator;
+         //return $paginator;
 
-    // }
+     //}
 
     // /**
     //  * @return Event[] Returns an array of Event objects
