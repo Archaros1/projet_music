@@ -76,16 +76,27 @@ class HomeController extends AbstractController
      $page =1;
      if(isset($_GET['page'])) {
         $page = $_GET['page'];
+        
      }
         $from = $request->query->get("from");
         $donnees = $this->eventRepo->findAll();
+
+        $pageFuture = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            ($page+1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
+        );
 
         $events = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $page, // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             2 // Nombre de résultats par page
         );
-        return $this->render('pages/agenda.html.twig', ["events" => $events, "from" => $page]);
+        
+        return $this->render('pages/agenda.html.twig', [
+            "events" => $events, 
+            "from" => $page, 
+            "pageFuture" => $pageFuture]);
     }
 
 
