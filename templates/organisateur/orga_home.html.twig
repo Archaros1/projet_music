@@ -1,8 +1,12 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/orga_home_style.css')}}">
+{% endblock %}
+
 {% block body %}
     {# {{ dump(app.user) }} #}
-<div class="container">
+<div class="container ">
     <h1>Vous êtes sur la page utilisateur de {{orga.name}}</h1>
     <p>Vous êtes un <strong>organisateur</strong> catégorisé en tant que <strong>{{orga.type.name}}</strong>.</p>
 
@@ -12,10 +16,10 @@
     <a href="#" class="btn btn-primary">Modifier mes informations</a>
 
     <h2>Vos annonces</h2>
-    <div class="row">
+    <div class="row form">
     {% for annonce in annonces %}
 
-        <div class="card" style="width: 18rem;">
+        <div class="card mr-2 mb-2" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{annonce.nomEvent}}</h5>
                 <p class="card-text">{{annonce.dateBegin | date("d/m/Y")}} - {{annonce.dateEnd | date("d/m/Y")}}</p>
@@ -27,7 +31,7 @@
     </div>
 
     <h2>Vos évènements</h2>
-    <div class="row">
+    <div class="row form">
     {% for event in events %}
     {% if date(event.dateEnd) < date() %}
         <div class="card" style="width: 18rem;">

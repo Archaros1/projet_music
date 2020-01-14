@@ -7,7 +7,17 @@ h1{
     font-family: 'Pacifico', Arial, Helvetica, sans-serif;
     color: white;
     margin-top: 30px;
-    margin-bottom: 30px;;
+    margin-bottom: 30px;
+}
+
+h2{
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 body{
@@ -17,13 +27,7 @@ body{
     background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
 }
 
-.form{
-    margin: auto;
-    margin-top: 30px;
-    width: 65%;
-    background-color: rgba(240, 255, 240, 0.671);
-    padding: 20px;
-    border: 2px solid rgb(2, 0, 0);
-    border-radius: 10px;  
-} 
 
+.form{
+   margin-left: 200px;
+} 

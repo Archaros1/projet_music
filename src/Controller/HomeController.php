@@ -122,14 +122,21 @@ class HomeController extends AbstractController
         }
     }
 
-    public function searchAnnonce(Request $request, Security $security){
+    public function searchAnnonce(Request $request, Security $security, PaginatorInterface $paginator){
         $from = $request->query->get("from");
         if ($from == 0) {
             $from++;
         }
 
         $annonces = $this->annonceRepo->findAll();
-        $annonces = $this->annonceRepo->findPaginatedAnnonces($from);
+
+        $pageFuture = $paginator->paginate(
+            $annonces,
+            ($request->query->getInt('from', 1)+1),
+            6
+        );
+
+        $annonces = $this->annonceRepo->findPaginatedAnnonces($from);   
 
         $infoTriAnnonce = new Annonce();
 
@@ -161,6 +168,7 @@ class HomeController extends AbstractController
             "annonces" => $annonces, 
             "infoTriAnnonces" => $infoTriAnnonce,
             "from" => $from,
+            "pageFuture" => $pageFuture,
             "annonceForm" => $form->createView()]);
     }
     
