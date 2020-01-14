@@ -20,6 +20,8 @@ use App\Repository\LieuRepository;
 use App\Repository\OrganisateurRepository;
 use App\Repository\AnnonceRepository;
 
+use App\Form\RechercheAnnonceType;
+
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
 
@@ -105,15 +107,46 @@ class HomeController extends AbstractController
         }
     }
 
-    public function searchAnnonce(){
-        $event = $this->eventRepo->findAll();
-        $style = $this->styleRepo->findAll();
-        $lieu = $this->lieuRepo->findAll();
-        $organisateur = $this->organisateurRepo->findAll();
-        $annonce = $this->annonceRepo->findAll();
-        return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur, "annonces" => $annonce]);
+    public function searchAnnonce(Request $request, Security $security){
+        $from = $request->query->get("from");
+        if ($from == 0) {
+            $from++;
+        }
+
+        $annonces = $this->annonceRepo->findAll();
+        $annonces = $this->annonceRepo->findPaginatedAnnonces($from);
+
+        $infoTriAnnonce = new Annonce();
+
+        $form = $this->createForm(RechercheAnnonceType::class, $infoTriAnnonce);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $annoncesTries = [];
+            $infoTriAnnonce = $form->getData();
+
+            foreach ($annonces as $annonce) {
+                $isOk = true;
+                $styles = $annonce->getStyleRecherche()->getValues();
+
+
+                foreach ($infoTriAnnonce->getStyleRecherche() as $styleTrieur) {
+                    if (! in_array($styleTrieur, $styles)) {
+                        $isOk = false;
+                    }
+                }
+                if ($isOk == true) {
+                    array_push($annoncesTries, $annonce);
+                }
+                $isOk = true;
+            }
+            $annonces = $annoncesTries;
+        }
+
+        return $this->render("groupe/search_annonce.html.twig", [
+            "annonces" => $annonces, 
+            "infoTriAnnonces" => $infoTriAnnonce,
+            "from" => $from,
+            "annonceForm" => $form->createView()]);
     }
-
     
-
 }

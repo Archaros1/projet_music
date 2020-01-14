@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Annonce;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Annonce|null find($id, $lockMode = null, $lockVersion = null)
@@ -70,5 +71,27 @@ class AnnonceRepository extends ServiceEntityRepository
         ->getQuery()
         ->getOneOrNullResult()
         ;
+    }
+
+    public function findPaginatedAnnonces($from){
+        // Create our query
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.date_begin', 'DESC')
+            ->getQuery();
+
+        // No need to manually get get the result ($query->getResult())
+        $pages = $this->paginate($query, $from);
+        return $pages;
+
+    }
+
+    private function paginate($dql, $page = 1, $limit = 6)
+    {
+        $paginator = new Paginator($dql);
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)) // Offset
+            ->setMaxResults($limit); // Limit
+
+        return $paginator;
     }
 }
