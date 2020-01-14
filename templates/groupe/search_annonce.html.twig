@@ -6,72 +6,91 @@
 
 {% block body %}
 
-{% include "site-parts/slider.html.twig" %}
+	<div class="container">
+		<div class="form">
+			<div class="row">
+				<div class="col-12">
 
-<div class="container">
-    <div class="form">
-    <div class="row">
-        <div class="col-4 mb-4 ">
-            <label for="style-select">Choisissez un style de musique:</label>
-            <select name="style" id="style-select">
-                <option value="">--Choisissez votre style de musique--</option>
-                {% for style in styles %}
-                    <option value="style">{{style.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
+					{{ form_start(annonceForm) }}
+					{{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
+					{{ form_row(annonceForm.style_recherche, {'attr' : {'class': 'mr-4'}}) }}
+					<div class="row ml-2">
+						{{ form_row(annonceForm.submit, {'attr' : {'class': 'mr-4 btn btn-success'}}) }}
+						<a class="btn btn-warning" href="{{ path('search_ann') }}">Reset</a>
+					</div>
+					{{ form_end(annonceForm) }}
 
-         <div class="col-4 mb-4 ">
-            <label for="genre-select">Choisissez le genre de l'event:</label>
-            <select name="genre" id="genre-select">
-                <option value="">--Choisissez votre genre d'event--</option>
-                {% for event in events %}
-                    <option value="genre">{{event.type}}</option>
-                {% endfor %}
-            </select>
-        </div>
+				</div>
+			</div>
+		</div>
+		<div>
 
-        <div class="col-6 mb-4">
-            <label for="start">date de début:</label>
-            <input type="date" id="start" name="trip-start">
+			<h1>Liste des annonces</h1>
+			{# {{ dump(annonces) }} #}
+			{# {{ dump(infoTriAnnonces) }} #}
+			{# {{ dump(styles) }} #}
 
-            <label for="end">Date de fin:</label>
-            <input type="date" id="end" name="trip-end">
-        </div>
+				<div class="container"> <div class="row">
+					{% for annonce in annonces %}
+						{% if infoTriAnnonces.lieu != NULL %}
+							{% if infoTriAnnonces.lieu.name in annonce.lieu.name %}
+								<div class="col-6">
+									<div class="card border-success mb-3" style="border-radius: 20px">
+										<div class="card-header bg-light border-secondary">
+											<h2>{{annonce.nomEvent}}</h2>
+										</div>
+										<div class="card-body text-secondary">
+											<h3 class="card-title">{{infoTriAnnonces.lieu.name}}</h5>
+											<h4 class="card-title">{{infoTriAnnonces.genreEvent}}</h4>
+											<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+										</div>
+										<div class="card-footer bg-transparent border-success">Du
+											{{annonce.dateBegin | date('d/m/Y')}}
+											au
+											{{annonce.dateEnd | date('d/m/Y')}}
+										</div>
+									</div>
+								</div>
+							{% endif %}
+						{% else %}
+							<div class="col-6">
+								<div class="card border-success mb-3" style="border-radius: 20px">
+									<div class="card-header bg-light border-secondary">
+										<h2>{{annonce.nomEvent}}</h2>
+									</div>
+									<div class="card-body text-secondary">
+										<h3 class="card-title">{{annonce.lieu.name}}</h5>
+										<h4 class="card-title">{{annonce.genreEvent}}</h4>
+										<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+									</div>
+									<div class="card-footer bg-transparent border-success">Du
+										{{annonce.dateBegin | date('d/m/Y')}}
+										au
+										{{annonce.dateEnd | date('d/m/Y')}}
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
 
-         <div class="col-6 ">
-            <label for="lieu-select">Choisissez le lieu:</label>
-            <select name="lieu" id="lieu-select">
-                <option value="">--Choisissez votre lieu--</option>
-                {% for lieu in lieux %}
-                    <option value="lieu">{{lieu.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-    </div>
-<div>
+				<div class="row justify-content-around">
+					<div class="col-3">
+						{% if from > 1 %}
+							<a class="btn btn-warning" href="{{path('search_ann', {from : from - 1}) }}">
+								<h3>Précédent</h3>
+							</a>
+						{% endif %}
+					</div>
+					<div class="col-3">
+						<a class="btn btn-warning" style="text-align: end" href="{{ path('search_ann', {from : from + 1}) }}">
+							<h3>Suivant</h3>
+						</a class="btn btn-warning">
+					</div>
+				</div>
+				
+			</div>
 
-<h1>Liste des annonces</h1>
+			
 
-<div class="container">
-    
-    {% for annonce in annonces %}
-    <div class="row">
-        <div class="col-6">
-            <div class="card border-success mb-3" style="width: 35rem; height: 20rem">
-                <div class="card-header bg-transparent border-secondary">{{annonce.nomEvent}}</div>
-                <div class="card-body text-secondary">
-                    <h5 class="card-title">{{annonce.lieu}}</h5>
-                    <h5 class="card-title">{{annonce.typeEvent}}</h5>
-                    <p class="card-text">{{annonce.description}}.</p>
-            </div>
-                <div class="card-footer bg-transparent border-success">Du {{annonce.dateBegin}} au {{annonce.dateEnd}}</div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
-</div>
-
-{% endblock %}
+		{% endblock %}

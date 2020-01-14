@@ -14,15 +14,18 @@ body{
     background: #1C6EA4;
     background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
     background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
+    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
 }
 
 .form{
-    margin-top: 60px;
+    margin: auto;
+    margin-top: 30px;
+    width: 65%;
     background-color: rgba(240, 255, 240, 0.671);
     padding: 20px;
     border: 2px solid rgb(2, 0, 0);
     border-radius: 10px;
+    
     
 } 
 
