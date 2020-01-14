@@ -9,8 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use App\Entity\Groupe;
 use App\Entity\Event;
+use App\Entity\Style;
+use App\Entity\Lieu;
+use App\Entity\Organisateur;
+use App\Entity\Annonce;
 use App\Repository\GroupeRepository;
 use App\Repository\EventRepository;
+use App\Repository\StyleRepository;
+use App\Repository\LieuRepository;
+use App\Repository\OrganisateurRepository;
+use App\Repository\AnnonceRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
@@ -22,13 +30,21 @@ class HomeController extends AbstractController
     private $user;
     private $security;
     private $eventRepo;
+    private $styleRepo;
+    private $lieuRepo;
+    private $organisateurRepo;
+    private $annonceRepo;
 
-    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository){
+    public function __construct(GroupeRepository $groupeRepository, Security $security, EventRepository $eventRepository, StyleRepository $styleRepository, LieuRepository $lieuRepository, OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository){
         
     $this->groupeRepo = $groupeRepository;
     $this->security = $security;
     $this->user = $security->getUser();
     $this->eventRepo = $eventRepository;
+    $this->styleRepo = $styleRepository;
+    $this->lieuRepo = $lieuRepository;
+    $this->organisateurRepo = $organisateurRepository;
+    $this->annonceRepo = $annonceRepository;
     }
 
     public function home()
@@ -41,9 +57,10 @@ class HomeController extends AbstractController
         return $this->render('form/form_annonce.html.twig');
     }
 
-    public function eventVitrine()
+    public function eventVitrine($idEvent)
     {
-        return $this->render('pages/vitrine_event.html.twig');
+        $event = $this->eventRepo->findOneById($idEvent);
+        return $this->render('pages/vitrine_event.html.twig', ['event' => $event]);
     }
 
     public function groupeVitrine($id)
@@ -56,23 +73,16 @@ class HomeController extends AbstractController
 
     public function agenda(Request $request, PaginatorInterface $paginator)
     {
+
+        $from = $request->query->get("page");
         $donnees = $this->eventRepo->findAll();
 
         $events = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
+            $from, // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            2 // Nombre de résultats par page
         );
-
-        $page=1;
-        $pageCount=1;
-
-        if (isset($_GET['page'])) {
-            $page = $_GET['page'];
-        }
-        
-
-        return $this->render('pages/agenda.html.twig', ["events" => $events, "from" => $page]);
+        return $this->render('pages/agenda.html.twig', ["events" => $events, "from" => $from]);
     }
 
 
@@ -96,7 +106,14 @@ class HomeController extends AbstractController
         }
     }
 
-    
+    public function searchAnnonce(){
+        $event = $this->eventRepo->findAll();
+        $style = $this->styleRepo->findAll();
+        $lieu = $this->lieuRepo->findAll();
+        $organisateur = $this->organisateurRepo->findAll();
+        $annonce = $this->annonceRepo->findAll();
+        return $this->render("groupe/search_annonce.html.twig", ["events" => $event, "styles" => $style, "lieux" => $lieu, "organisateurs" => $organisateur, "annonces" => $annonce]);
+    }
 
     
 
