@@ -12,7 +12,7 @@
 
 	<div class="container mt-2">
 
-		<h1 class="mb-6">mon agenda</h1>
+		<h1 class="mb-6">l'agenda</h1>
 
 		{% for event in events %}
 			<div class="card mb-3" style="max-width: auto;">
@@ -25,7 +25,7 @@
 							<h2 class="card-title"><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.type.name}}</a></h2>
 							<h3 class="card-title">{{event.lieu.name}} à {{event.lieu.ville}}</h3>
 							<h4 class="card-title">{{event.name}}</h4>
-                            <h4 class="card-title">{{event.dateBegin | date("d/m/Y")}} au {{event.dateEnd | date("d/m/Y")}}</h4>
+                            <h4 class="card-title">Du {{event.dateBegin | date("d/m/Y")}} au {{event.dateEnd | date("d/m/Y")}}</h4>
                             <h5 class="card-text">{{event.description}}</h5>
 						</div>
 					</div>

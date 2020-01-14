@@ -4,7 +4,7 @@
     <title>{% block title %}Bienvenue sur Elsas Zikos{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('assets/css/nav_style.css')}}">
-	  <link rel="stylesheet" href="{{asset('assets/css/footer_style.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/footer_style.css')}}">
 
 
 	{% block stylesheets %}{% endblock %}
@@ -15,7 +15,7 @@
 {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
 	<div class="row">
 	    {% include "site-parts/admin-sidebar.html.twig" %}
-	    <div class="col-10" style="padding-right: 0px;">
+	    <div class="col-10 pl-0" style="padding-right: 0px;">
 {% endif %}
 {% include "site-parts/navbar.html.twig" %}
 

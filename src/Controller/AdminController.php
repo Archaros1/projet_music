@@ -7,19 +7,26 @@ use App\Entity\Offre;
 use App\Entity\Organisateur;
 use App\Entity\Annonce;
 use App\Form\Groupe;
+use App\Entity\Lieu;
 use App\Form\Event;
+
 use App\Form\OrganisateurFormType;
 use App\Form\GroupeFormType;
+use App\Form\EventFormType;
+
 use App\Repository\OrganisateurRepository;
+use App\Repository\LieuRepository;
 use App\Repository\StyleRepository;
 use App\Repository\OffreRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\GroupeRepository;
 use App\Repository\EventRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Knp\Component\Pager\PaginatorInterface;
+
 
 
 
@@ -32,8 +39,9 @@ class AdminController extends AbstractController
     private $eventRepo;
     private $offreRepo;
     private $styleRepo;
+    private $lieuRepo;
 
-    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, EventRepository $eventRepository, OffreRepository $offreRepository, StyleRepository $styleRepository)
+    public function __construct(OrganisateurRepository $organisateurRepository, AnnonceRepository $annonceRepository, GroupeRepository $groupeRepository, EventRepository $eventRepository, OffreRepository $offreRepository, StyleRepository $styleRepository, LieuRepository $lieuRepository)
     {
         $this->organisateurRepo = $organisateurRepository;
         $this->annonceRepo = $annonceRepository;
@@ -41,23 +49,26 @@ class AdminController extends AbstractController
         $this->eventRepo = $eventRepository;
         $this->offreRepo = $offreRepository;
         $this->styleRepo = $styleRepository;
+        $this->lieuRepo = $lieuRepository;
     }
     
     
     public function admin_Home(Request $request){
-        $organisateur = $this->organisateurRepo->findAll();
-        $annonce = $this->annonceRepo->findAll();
-        $groupe = $this->groupeRepo->findAll();
-        $event = $this->eventRepo->findAll();
-        $offre = $this->offreRepo->findAll();
-        $style = $this->styleRepo->findAll();
+        $organisateurs = $this->organisateurRepo->findAll();
+        $annonces = $this->annonceRepo->findAll();
+        $groupes = $this->groupeRepo->findAll();
+        $events = $this->eventRepo->findAll();
+        $offres = $this->offreRepo->findAll();
+        $styles = $this->styleRepo->findAll();
+        $lieux = $this->lieuRepo->findAll();
          return $this->render("admin/pages/admin_home.html.twig", [
-            "organisateurs" => $organisateur, 
-            "annonces" => $annonce, 
-            "groupes" => $groupe,  
-            "events" => $event,
-            "offres" => $offre,
-            "styles" =>$style
+            "organisateurs" => $organisateurs,
+            "annonces" => $annonces, 
+            "groupes" => $groupes,  
+            "events" => $events,
+            "offres" => $offres,
+            "styles" => $styles,
+            "lieux" => $lieux
             ]);
     }
 
@@ -139,19 +150,32 @@ class AdminController extends AbstractController
         return $this->render("admin/pages/agenda.html.twig", ["events" => $event]);
     }
 
+    public function deleteOffre($idOffre)
+    {
+        $offre = $this->offreRepo->findOneById($idOffre);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($offre);
+        $entityManager->flush();
+        return $this->redirectToRoute("admin_agenda");
+    }
 
     public function deleteEvent($idEvent)
     {
         $event = $this->eventRepo->findOneById($idEvent);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($event);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($event);
+        $entityManager->flush();
         return $this->redirectToRoute("admin_agenda");
     }
 
     public function acceptEvent($idEvent)
     {
-        return 1;
+        $event = $this->eventRepo->findOneById($idEvent);
+        $event->setValidated(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($event);
+        $entityManager->flush();
+        return $this->redirectToRoute("admin_agenda");
     }
     
 }
