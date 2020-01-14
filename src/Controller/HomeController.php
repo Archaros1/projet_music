@@ -108,10 +108,6 @@ class HomeController extends AbstractController
     }
 
     public function searchAnnonce(Request $request, Security $security){
-        $events = $this->eventRepo->findAll();
-        $styles = $this->styleRepo->findAll();
-        $lieux = $this->lieuRepo->findAll();
-        $organisateurs = $this->organisateurRepo->findAll();
         $annonces = $this->annonceRepo->findAll();
 
         $infoTriAnnonce = new Annonce();
@@ -119,17 +115,30 @@ class HomeController extends AbstractController
         $form = $this->createForm(RechercheAnnonceType::class, $infoTriAnnonce);
         $form->handleRequest($request);
         if($form->isSubmitted()){
+            $annoncesTries = [];
             $infoTriAnnonce = $form->getData();
-            
-            return $this->redirectToRoute("search_ann");
+
+            foreach ($annonces as $annonce) {
+                $isOk = true;
+                $styles = $annonce->getStyleRecherche()->getValues();
+
+
+                foreach ($infoTriAnnonce->getStyleRecherche() as $styleTrieur) {
+                    if (! in_array($styleTrieur, $styles)) {
+                        $isOk = false;
+                    }
+                }
+                if ($isOk == true) {
+                    array_push($annoncesTries, $annonce);
+                }
+                $isOk = true;
+            }
+            $annonces = $annoncesTries;
         }
 
         return $this->render("groupe/search_annonce.html.twig", [
-            "events" => $events, 
-            "styles" => $styles, 
-            "lieux" => $lieux, 
             "annonces" => $annonces, 
-            "infoTriAnnonce" => $infoTriAnnonce,
+            "infoTriAnnonces" => $infoTriAnnonce,
             "annonceForm" => $form->createView()]);
     }
     

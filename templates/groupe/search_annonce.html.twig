@@ -11,11 +11,16 @@
 	<div class="container">
 		<div class="form">
 			<div class="row">
-				<div class="col-12 mb-4 ">
+				<div class="col-12">
 
-                    {{ form_start(annonceForm) }}
-                        {{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
-                    {{ form_end(annonceForm) }}
+					{{ form_start(annonceForm) }}
+						{{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
+						{{ form_row(annonceForm.style_recherche, {'attr' : {'class': 'mr-4'}}) }}
+						<div class="row ml-2">
+							{{ form_row(annonceForm.submit, {'attr' : {'class': 'mr-4 btn btn-success'}}) }}
+							<a class="btn btn-warning" href="{{ path('search_ann') }}">Reset</a>
+						</div>
+					{{ form_end(annonceForm) }}
 
 				</div>
 			</div>
@@ -23,29 +28,53 @@
 		<div>
 
 			<h1>Liste des annonces</h1>
+				{# {{ dump(annonces) }} #}
+				{# {{ dump(infoTriAnnonces) }} #}
+				{# {{ dump(styles) }} #}
 
 			<div class="container">
 
 				<div class="row">
 					{% for annonce in annonces %}
-                        {% if infoTriAnnonce ==}
-						<div class="col-6">
-							<div class="card border-success mb-3" style="border-radius: 20px">
-								<div class="card-header bg-light border-secondary">
-									<h2>{{annonce.nomEvent}}</h2>
+						{% if infoTriAnnonces.lieu != NULL %}
+							{% if infoTriAnnonces.lieu.name in annonce.lieu.name %}
+								<div class="col-6">
+									<div class="card border-success mb-3" style="border-radius: 20px">
+										<div class="card-header bg-light border-secondary">
+											<h2>{{annonce.nomEvent}}</h2>
+										</div>
+										<div class="card-body text-secondary">
+											<h3 class="card-title">{{infoTriAnnonces.lieu.name}}</h5>
+											<h4 class="card-title">{{infoTriAnnonces.genreEvent}}</h4>
+											<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+										</div>
+										<div class="card-footer bg-transparent border-success">Du
+											{{annonce.dateBegin | date('d/m/Y')}}
+											au
+											{{annonce.dateEnd | date('d/m/Y')}}
+										</div>
+									</div>
 								</div>
-								<div class="card-body text-secondary">
-									<h3 class="card-title">{{annonce.lieu.name}}</h5>
-									<h4 class="card-title">{{annonce.genreEvent}}</h4>
-									<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
-								</div>
-								<div class="card-footer bg-transparent border-success">Du
-									{{annonce.dateBegin | date('d/m/Y')}}
-									au
-									{{annonce.dateEnd | date('d/m/Y')}}
+							{% endif %}
+						{% else %}
+							<div class="col-6">
+								<div class="card border-success mb-3" style="border-radius: 20px">
+									<div class="card-header bg-light border-secondary">
+										<h2>{{annonce.nomEvent}}</h2>
+									</div>
+									<div class="card-body text-secondary">
+										<h3 class="card-title">{{annonce.lieu.name}}</h5>
+										<h4 class="card-title">{{annonce.genreEvent}}</h4>
+										<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+									</div>
+									<div class="card-footer bg-transparent border-success">Du
+										{{annonce.dateBegin | date('d/m/Y')}}
+										au
+										{{annonce.dateEnd | date('d/m/Y')}}
+									</div>
 								</div>
 							</div>
-						</div>
+						{% endif %}
 					{% endfor %}
 				</div>
 
