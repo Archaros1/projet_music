@@ -32,7 +32,17 @@
 				</div>
 			</div>
 {% endfor %}
-		{{ knp_pagination_render(events) }}
-</div>
 
+		<div class="row justify-content-around">
+            <div class="col-3">
+                {% if from > 1 %}
+                    <a  style="color:red" href="{{path('agenda', {page : from - 1}) }}"><h3>Précédent</h3></a>
+                {% endif %}
+            </div>
+            <div class="col-3">
+				{% if not pageFuture is empty %}
+				<a style="text-align: end;color:red" href="{{ path('agenda', {page : from + 1}) }}"><h3>Suivant</h3></a>
+				{% endif %}
+            </div>
+        </div>
 	{% endblock %}
