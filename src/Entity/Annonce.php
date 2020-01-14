@@ -55,7 +55,7 @@ class Annonce
     private $lieu;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="annonces")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Style", inversedBy="annonces", fetch="EAGER")
      */
     private $style_recherche;
 
