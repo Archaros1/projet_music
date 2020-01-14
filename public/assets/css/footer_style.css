@@ -23,6 +23,10 @@ footer div a img:not(.carre) {
     border-radius: 50%;
 }
 
+p{
+    color: black;
+}
+
 #footer-espace-blanc {
     height: 80px;
     width: 100%;
