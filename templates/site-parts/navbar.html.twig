@@ -7,9 +7,11 @@
       <li class="nav-item">
         <a class="navbar-brand" href="{{ path('user_home') }}">Ma page</a>
       </li>
+      {% if app.user and app.user.roles[0] == "ROLE_GROUPE" %}
       <li class="nav-item">
         <a class="navbar-brand" href="{{ path('search_ann') }}">Annonces</a>
       </li>
+      {% endif %}
       <li class="nav-item">
         <a class="navbar-brand" href="{{ path('agenda' , {from : 1})  }}" >Agenda</a>
       </li>
