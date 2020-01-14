@@ -8,38 +8,6 @@
 
 <div class="container">
 
-  <h1>Modération de l'agenda</h1>
-  <div class="row">
-    <div class="col-8 mb-4">
-        <h3>Liste de tous les events en attente de validation</h3>
-    </div>
-    <div class="col-4 mb-4">
-        <h3>Validation</h3>
-    </div>
-  </div>
-
-  {% for event in events %}
-
-  <div class="row">
-    <div class="col-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="row">{{ event.id }}</th>
-            <td>{{event.name}}</td>    
-            <td>{{event.description}}</td>
-            <a href="{{ path('admin_accept_event', {idEvent : event.id}) }}" class="btn btn-success">Accepter</a>
-            <a href="{{ path('admin_delete_event', {idEvent : event.id}) }}" class="btn btn-danger">Refuser</a>
-          </tr>
-        </thead>
-      </table>
-    </div>
-  </div>
-
-  {% endfor %}
-  
-</div>
-
 		<h1>Modération de l'agenda</h1>
 		<div class="row">
 			<div class="col-8 mb-4">

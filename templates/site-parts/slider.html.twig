@@ -1,14 +1,15 @@
-<div class="row">
-	<div class="col-sm">
-		<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="{{asset('assets/images/bande7.jpg') }}" class="mt-0 d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="{{asset('assets/images/bande7.jpg') }}" class="mt-0 d-block w-100" alt="...">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+{% block stylesheets %}
+    <style>
+        .slide{
+            background-image: url("{{asset('assets/images/bande7.jpg')}}");
+            width: 100%;
+            height: 350px;
+            background-size: cover;
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
+<div class="slide"></div>
+
+
