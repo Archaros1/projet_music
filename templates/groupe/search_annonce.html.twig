@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-
 	<div class="container">
 		<div class="form">
 			<div class="row">
@@ -23,74 +22,68 @@
 				</div>
 			</div>
 		</div>
-		<div>
+	</div>
 
-			<h1>Liste des annonces</h1>
-			{# {{ dump(annonces) }} #}
-			{# {{ dump(infoTriAnnonces) }} #}
-			{# {{ dump(styles) }} #}
+	<h1>Liste des annonces</h1>
+	{# {{ dump(annonces) }} #}
+	{# {{ dump(infoTriAnnonces) }} #}
+	{# {{ dump(styles) }} #}
 
-				<div class="container"> <div class="row">
-					{% for annonce in annonces %}
-						{% if infoTriAnnonces.lieu != NULL %}
-							{% if infoTriAnnonces.lieu.name in annonce.lieu.name %}
-								<div class="col-6">
-									<div class="card border-success mb-3" style="border-radius: 20px">
-										<div class="card-header bg-light border-secondary">
-											<h2>{{annonce.nomEvent}}</h2>
-										</div>
-										<div class="card-body text-secondary">
-											<h3 class="card-title">{{infoTriAnnonces.lieu.name}}</h5>
-											<h4 class="card-title">{{infoTriAnnonces.genreEvent}}</h4>
-											<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
-										</div>
-										<div class="card-footer bg-transparent border-success">Du
-											{{annonce.dateBegin | date('d/m/Y')}}
-											au
-											{{annonce.dateEnd | date('d/m/Y')}}
-										</div>
-									</div>
-								</div>
-							{% endif %}
-						{% else %}
-							<div class="col-6">
-								<div class="card border-success mb-3" style="border-radius: 20px">
-									<div class="card-header bg-light border-secondary">
-										<h2>{{annonce.nomEvent}}</h2>
-									</div>
-									<div class="card-body text-secondary">
-										<h3 class="card-title">{{annonce.lieu.name}}</h5>
-										<h4 class="card-title">{{annonce.genreEvent}}</h4>
-										<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
-									</div>
-									<div class="card-footer bg-transparent border-success">Du
-										{{annonce.dateBegin | date('d/m/Y')}}
-										au
-										{{annonce.dateEnd | date('d/m/Y')}}
-									</div>
-								</div>
+	<div class="container"> <div class="row">
+		{% for annonce in annonces %}
+			{% if infoTriAnnonces.lieu != NULL %}
+				{% if infoTriAnnonces.lieu.name in annonce.lieu.name %}
+					<div class="col-6">
+						<div class="card border-success mb-3" style="border-radius: 20px">								<div class="card-header bg-light border-secondary">
+							<h2>{{annonce.nomEvent}}</h2>
+						</div>
+						<div class="card-body text-secondary">
+							<h3 class="card-title">{{infoTriAnnonces.lieu.name}}</h5>
+							<h4 class="card-title">{{infoTriAnnonces.genreEvent}}</h4>
+							<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+						</div>
+						<div class="card-footer bg-transparent border-success">Du
+							{{annonce.dateBegin | date('d/m/Y')}}
+							au
+							{{annonce.dateEnd | date('d/m/Y')}}										</div>
+						</div>
+					</div>
+				{% endif %}
+			{% else %}
+				<div class="col-6">
+					<div class="card border-success mb-3" style="border-radius: 20px">
+						<div class="card-header bg-light border-secondary">
+							<h2>{{annonce.nomEvent}}</h2>
+						</div>
+						<div class="card-body text-secondary">
+							<h3 class="card-title">{{annonce.lieu.name}}</h5>
+							<h4 class="card-title">{{annonce.genreEvent}}</h4>
+							<p class="card-text">{{ annonce.description|length > 100 ? annonce.description|slice(0, 120) ~ '...' : annonce.description }}.</p>
+						</div>
+						<div class="card-footer bg-transparent border-success">Du
+							{{annonce.dateBegin | date('d/m/Y')}}
+							au
+							{{annonce.dateEnd | date('d/m/Y')}}
 							</div>
-						{% endif %}
-					{% endfor %}
-				</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
 
-				<div class="row justify-content-around">
-					<div class="col-3">
-						{% if from > 1 %}
-							<a class="btn btn-warning" href="{{path('search_ann', {from : from - 1}) }}">
-								<h3>Précédent</h3>
-							</a>
-						{% endif %}
-					</div>
-					<div class="col-3">
-						<a class="btn btn-warning" style="text-align: end" href="{{ path('search_ann', {from : from + 1}) }}">
-							<h3>Suivant</h3>
-						</a class="btn btn-warning">
-					</div>
-				</div>
-				
+		<div class="row justify-content-around">
+			<div class="col-3">
+				{% if from > 1 %}
+					<a class="btn btn-warning" href="{{path('search_ann', {from : from - 1}) }}">
+						<h3>Précédent</h3>
+					</a>
+				{% endif %}
 			</div>
-
-			
-
-		{% endblock %}
+			<div class="col-3">
+				<a class="btn btn-warning" style="text-align: end" href="{{ path('search_ann', {from : from + 1}) }}">
+					<h3>Suivant</h3>
+				</a class="btn btn-warning">
+			</div>
+		</div>
+	</div>
+{% endblock %}
