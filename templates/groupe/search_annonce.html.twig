@@ -12,12 +12,12 @@
 				<div class="col-12">
 
 					{{ form_start(annonceForm) }}
-						{{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
-						{{ form_row(annonceForm.style_recherche, {'attr' : {'class': 'mr-4'}}) }}
-						<div class="row ml-2">
-							{{ form_row(annonceForm.submit, {'attr' : {'class': 'mr-4 btn btn-success'}}) }}
-							<a class="btn btn-warning" href="{{ path('search_ann') }}">Reset</a>
-						</div>
+					{{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
+					{{ form_row(annonceForm.style_recherche, {'attr' : {'class': 'mr-4'}}) }}
+					<div class="row ml-2">
+						{{ form_row(annonceForm.submit, {'attr' : {'class': 'mr-4 btn btn-success'}}) }}
+						<a class="btn btn-warning" href="{{ path('search_ann') }}">Reset</a>
+					</div>
 					{{ form_end(annonceForm) }}
 
 				</div>
@@ -26,13 +26,11 @@
 		<div>
 
 			<h1>Liste des annonces</h1>
-				{# {{ dump(annonces) }} #}
-				{# {{ dump(infoTriAnnonces) }} #}
-				{# {{ dump(styles) }} #}
+			{# {{ dump(annonces) }} #}
+			{# {{ dump(infoTriAnnonces) }} #}
+			{# {{ dump(styles) }} #}
 
-			<div class="container">
-
-				<div class="row">
+				<div class="container"> <div class="row">
 					{% for annonce in annonces %}
 						{% if infoTriAnnonces.lieu != NULL %}
 							{% if infoTriAnnonces.lieu.name in annonce.lieu.name %}
@@ -76,6 +74,23 @@
 					{% endfor %}
 				</div>
 
+				<div class="row justify-content-around">
+					<div class="col-3">
+						{% if from > 1 %}
+							<a class="btn btn-warning" href="{{path('search_ann', {from : from - 1}) }}">
+								<h3>Précédent</h3>
+							</a>
+						{% endif %}
+					</div>
+					<div class="col-3">
+						<a class="btn btn-warning" style="text-align: end" href="{{ path('search_ann', {from : from + 1}) }}">
+							<h3>Suivant</h3>
+						</a class="btn btn-warning">
+					</div>
+				</div>
+				
 			</div>
+
+			
 
 		{% endblock %}

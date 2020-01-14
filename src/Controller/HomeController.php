@@ -108,7 +108,13 @@ class HomeController extends AbstractController
     }
 
     public function searchAnnonce(Request $request, Security $security){
+        $from = $request->query->get("from");
+        if ($from == 0) {
+            $from++;
+        }
+
         $annonces = $this->annonceRepo->findAll();
+        $annonces = $this->annonceRepo->findPaginatedAnnonces($from);
 
         $infoTriAnnonce = new Annonce();
 
@@ -139,6 +145,7 @@ class HomeController extends AbstractController
         return $this->render("groupe/search_annonce.html.twig", [
             "annonces" => $annonces, 
             "infoTriAnnonces" => $infoTriAnnonce,
+            "from" => $from,
             "annonceForm" => $form->createView()]);
     }
     
