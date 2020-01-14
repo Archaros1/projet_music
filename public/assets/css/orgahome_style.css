@@ -1,0 +1,21 @@
+.container.form{
+    margin-top: 100px;
+    background-color: rgba(240, 255, 240, 0.671);
+    border: 2px solid rgb(2, 0, 0);
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+body{
+    background: #1C6EA4;
+    background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+    background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
+}
+
+h2{
+    color: rgb(252, 92, 0);
+    font-style: oblique;
+    font-size: 20px;
+    text-align: center;
+}

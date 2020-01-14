@@ -2,6 +2,12 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{asset('assets/css/mapage_style.css')}}">
+	<style>
+		body {
+			background-image: url("{{asset('assets/images/fond8.png')}}");
+			background-size: 100% 100vh;
+		}
+	</style>
 {% endblock %}
 
 
@@ -9,7 +15,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="mb-6">mon inscription</h1>
+	<h1 class="mb-6">Je me connecte</h1>
 	<div class="container form">
 		<form method="post">
 			{% if error %}
