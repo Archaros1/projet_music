@@ -7,7 +7,7 @@
       <li class="nav-item">
         <a class="navbar-brand" href="{{ path('user_home') }}">Ma page</a>
       </li>
-      {% if app.user and app.user.roles[0] == "ROLE_GROUPE" %}
+      {% if app.user and "ROLE_GROUPE" in app.user.roles %}
       <li class="nav-item">
         <a class="navbar-brand" href="{{ path('search_ann') }}">Annonces</a>
       </li>
