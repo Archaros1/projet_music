@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+
 	{% include "site-parts/slider.html.twig" %}
 
     
@@ -22,9 +23,8 @@
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h2 class="card-title"><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.type.name}}</a></h2>
+							<h2 class="card-title"><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.name}}</a></h2>
 							<h3 class="card-title">{{event.lieu.name}} à {{event.lieu.ville}}</h3>
-							<h4 class="card-title">{{event.name}}</h4>
                             <h4 class="card-title">{{event.dateBegin | date("d/m/Y")}} au {{event.dateEnd | date("d/m/Y")}}</h4>
                             <h5 class="card-text">{{event.description}}</h5>
 						</div>
@@ -32,6 +32,17 @@
 				</div>
 			</div>
 {% endfor %}
-		{{ knp_pagination_render(events) }}
 
+		<div class="row justify-content-around">
+            <div class="col-3">
+                {% if from > 1 %}
+                    <a class="btn btn-warning" href="{{path('agenda', {page : from - 1}) }}"><h3>Précédent</h3></a>
+                {% endif %}
+            </div>
+            <div class="col-3">
+				{% if not pageFuture is empty %}
+				<a class="btn btn-warning" href="{{ path('agenda', {page : from + 1}) }}"><h3>Suivant</h3></a>
+				{% endif %}
+            </div>
+        </div>
 	{% endblock %}
