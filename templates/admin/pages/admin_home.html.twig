@@ -2,232 +2,270 @@
 
 {% block body %}
 <h1>Accueil admin</h1>
-    <div class="container-fluid mt-5">
-        <h3 class="mt-3 mb-5">Liste des organisateurs : </h3>
-        <div class="row">
-            <div class="col-4">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>                        
-                        <th scope="col">Annonces</th>
-                        <th scope="col">Type</th>      
-                        <th scope="col">Modif</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for organisateur in organisateurs %}
-                        <tr>
-                            <th scope="row">{{ organisateur.id }}</th>
-                            <td>{{ organisateur.name }}</td>
-                            <td>{% for annonce in annonces %}
-                                {{annonce.nomEvent}}
-                            {% endfor %}</td>
-                            <td>{{ organisateur.type.name }}</td>  
-                            <td><a href="{{ path('admin_update_orga', {id : organisateur.id}) }}">Update</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <h3 class="mt-3 mb-5">Liste des annonces : </h3>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Organisateur</th>
-                        <th scope="col">Type-groupe</th>
-                        <th scope="col">Type-event</th>
-                        <th scope="col">Style recherche</th>
-                        <th scope="col">Date-début</th>
-                        <th scope="col">Date-fin</th>
-                        <th scope="col">Lieu</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Modif</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for annonce in annonces %}
-                        <tr>
-                            <th scope="row">{{ annonce.id }}</th>
-                            <td>{{annonce.nomEvent}}</td>
-                            <td>{{annonce.organisateur }}</td>
-                            <td>{{annonce.genreEvent }}</td>
-                            <td>{{annonce.typeEvent }}</td>
-                            <td>{{annonce.styleRecherche }}</td>
-                            <td>{{annonce.dateBegin | date("d/m/Y")}}</td>
-                            <td>{{annonce.dateEnd | date("d/m/Y")}}</td>
-                            <td>{{annonce.lieu }}</td>
-                            <td>{{annonce.description}}</td>
-                            <td><a href="{{ path('admin_update_annonce', {id : annonce.id}) }}">Update</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <h3 class="mt-3 mb-5">Liste des groupes : </h3>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Nombre de membre</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Lieu</th>
-                        <th scope="col">Matériel</th>
-                        <th scope="col">Events</th>
-                        <th scope="col">Style</th>
-                        <th scope="col">Modif</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for groupe in groupes %}
-                        <tr>
-                            <th scope="row">{{ groupe.id }}</th>
-                            <td>{{groupe.name}}</td>
-                            <td>{{groupe.nombreMembre}}</td>
-                            <td>{{groupe.description}}</td>
-                            <td>{{groupe.aDomicile}}</td>
-                            <td>{{groupe.aToutSonMateriel}}</td>
-                            <td>{% for event in events %}
-                                {{groupe.event.description}}
-                            {% endfor %}</td>
-                            <td>{% for style in styles %}
-                                {{groupe.style.name}}
-                            {% endfor %}</td>
-                            <td><a href="{{ path('admin_update_groupe', {id : groupe.id}) }}">Update</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <h3 class="mt-3 mb-5">Liste des offres : </h3>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">interlocuteur</th>
-                        <th scope="col">Validation</th>
-                        <th scope="col">Groupe</th>
-                        <th scope="col">Annonce</th>
-                        <th scope="col">Modif</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for offre in offres %}
-                        <tr>
-                            <th scope="row">{{ offre.id }}</th>
-                            <td>{{offre.message}}</td>
-                            <td>{{offre.caller}}</td>
-                            <td>{{offre.validated}}</td>
-                            <td>{% for groupe in groupes %}
-                                {{groupe.name}}
-                            {% endfor %}</td>
-                            <td>{% for annonce in annonces %}
-                                {{annonce.nomEvent}}
-                            {% endfor %}</td>
-                            <td><a href="{{ path('admin_update_offre', {id : offre.id}) }}">Update</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <h3 class="mt-3 mb-5">Liste des évènements : </h3>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Date-début</th>
-                        <th scope="col">Date-fin</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Lieu</th>
-                        <th scope="col">Groupes</th>
-                        <th scope="col">Style</th>
-                        <th scope="col">Modif</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for event in events %}
-                        <tr>
-                            <th scope="row">{{ event.id }}</th>
-                            <td>{{event.name}}</td>
-                            <td>{{event.description}}</td>
-                            <td>{{event.dateBegin | date("d/m/Y")}}</td>
-                            <td>{{event.dateEnd | date("d/m/Y")}}</td>
-                            <td>{{event.type.name}}</td>
-                            <td>{{event.lieu}}</td>
-                            <td>{% for groupe in groupes %}
-                                {{groupe.name}}
-                            {% endfor %}</td>
-                           <td>{% for style in styles %}
-                                {{style.name}}
-                            {% endfor %}</td>
-                            <td><a href="{{ path('admin_update_event', {id : event.id}) }}">Update</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            <h3 class="mt-3 mb-5">Liste des évènements terminés : </h3>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Date-début</th>
-                        <th scope="col">Date-fin</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Lieu</th>
-                        <th scope="col">Groupes</th>
-                        <th scope="col">Style</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for event in events %}
-                        <tr>
-                            <th scope="row">{{ event.id }}</th>
-                            <td>{{event.name}}</td>
-                            <td>{{event.description}}</td>
-                            <td>{{event.dateBegin | date("d/m/Y")}}</td>
-                            <td>{{event.dateEnd | date("d/m/Y")}}</td>
-                            <td>{{event.type.name}}</td>
-                            <td>{{event.lieu}}</td>
-                            <td>{{event.contacts.fb}}</td>
-                            <td>{% for groupe in groupes %}
-                                {{groupe.name}}
-                            {% endfor %}</td>
-                            <td>{% for style in styles %}
-                                {{style.name}}
-                            {% endfor %}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-    </div>
+<div class="container-fluid mt-5">
+	<h3 class="mt-3 mb-5">Liste des organisateurs :</h3>
+	<div class="row">
+		<div class="col-4">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Type</th>
+						<th scope="col">Modif</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for organisateur in organisateurs %}
+			<tr>
+				<th scope="row">{{ organisateur.id }}</th>
+				<td>{{ organisateur.name }}</td>
+				<td>{{ organisateur.type.name }}</td>
+				<td>
+					<a class="btn btn-info" href="{{ path('admin_update_orga', {id : organisateur.id}) }}">Update</a class="btn btn-info">
+				</td>
+			</tr>
+		{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<h3 class="mt-3 mb-5">Liste des annonces :
+	</h3>
+	<div class="row">
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Organisateur</th>
+						<th scope="col">Genre</th>
+						<th scope="col">Style recherche</th>
+						<th scope="col">Date-début</th>
+						<th scope="col">Date-fin</th>
+						<th scope="col">Lieu</th>
+						<th scope="col">Description</th>
+						<th scope="col">Modif</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for annonce in annonces %}
+						<tr>
+							<td scope="row">{{ annonce.id }}</td>
+							<td>{{annonce.nomEvent}}</td>
+							<td>{{annonce.organisateur.name}}</td>
+							<td>{{annonce.genreEvent }}</td>
+							<td>
+								{% for style in annonce.styleRecherche %}
+									{{ style }}
+								{% endfor %}
+							</td>
+							<td>{{annonce.dateBegin | date("d/m/Y")}}</td>
+							<td>{{annonce.dateEnd | date("d/m/Y")}}</td>
+							<td>
+								{{annonce.lieu.name}}, 
+								{{annonce.lieu.ville}}, 
+								{{annonce.lieu.departement}}
+							</td>
+							<td>{{annonce.description}}</td>
+							<td><a class="btn btn-info" href="{{ path('admin_update_annonce', {id : annonce.id}) }}">Update</a class="btn btn-info"></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<h3 class="mt-3 mb-5">Liste des groupes :</h3>
+	<div class="row">
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Nombre de membre</th>
+						<th scope="col">Description</th>
+						<th scope="col">Type</th>
+						<th scope="col">A domicile</th>
+						<th scope="col">Matériel</th>
+						<th scope="col">Style</th>
+						<th scope="col">Modif</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for groupe in groupes %}
+					<tr>
+						<td scope="row">{{ groupe.id }}</td>
+						<td><a href="{{ path('vitrine_groupe', {id : groupe.id })}}">{{groupe.name}}</a></td>
+						<td>{{groupe.nombreMembre}}</td>
+						<td>{{groupe.description}}</td>
+						<td>{{ groupe.type.name }}
+						</td>
+						<td>{{groupe.aDomicile == 1 ? 'oui' : 'non'}}</td>
+						<td>{{groupe.aToutSonMateriel == 1 ? 'oui' : 'non'}}</td>
+						<td>
+							{% for style in groupe.style %}
+								{{style.name}}
+							{% endfor %}
+						</td>
+						<td>
+							<a class="btn btn-info" href="{{ path('admin_update_groupe', {id : groupe.id}) }}">Update</a class="btn btn-info">
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<h3 class="mt-3 mb-5">Liste des offres :</h3>
+	<div class="row">
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Message</th>
+						<th scope="col">interlocuteur</th>
+						<th scope="col">Validation</th>
+						<th scope="col">Groupe</th>
+						<th scope="col">Annonce</th>
+						<th scope="col">Modif</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for offre in offres %}
+						<tr>
+							<th scope="row">{{ offre.id }}</th>
+							<td>{{offre.message}}</td>
+							<td>{{offre.caller}}</td>
+							<td>{{offre.validated}}</td>
+							<td>
+								{% for groupe in offre.groupes %}
+									{{groupe.name}}
+								{% endfor %}
+							</td>
+							<td>
+								{% for annonce in annonces %}
+									{{annonce.nomEvent}}
+								{% endfor %}
+							</td>
+							<td>
+								<a class="btn btn-info" href="{{ path('admin_update_offre', {id : offre.id}) }}">Update</a>
+							</td>
+							<td>
+								<a class="btn btn-danger" href="{{ path('admin_update_offre', {id : offre.id}) }}">Delete</a class="btn btn-info">
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<h3 class="mt-3 mb-5">Liste des évènements :</h3>
+	<div class="row">
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Description</th>
+						<th scope="col">Date-début</th>
+						<th scope="col">Date-fin</th>
+						{# <th scope="col">Type</th> #}
+						<th scope="col">Lieu</th>
+						<th scope="col">Groupes</th>
+						<th scope="col">Style</th>
+						<th scope="col">Modif</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for event in events %}
+						{% if date(event.dateEnd) > date() %}
+							<tr>
+								<th scope="row">{{ event.id }}</th>
+								<td><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.name}}</a></td>
+								<td>{{event.description}}</td>
+								<td>{{event.dateBegin | date("d/m/Y")}}</td>
+								<td>{{event.dateEnd | date("d/m/Y")}}</td>
+								{# <td>{{event.type.name}}</td> #}
+								<td>
+									{{event.lieu.ville}}
+								</td>
+								<td>
+									{% for groupe in event.groupes %}
+										{{groupe.name}}
+									{% endfor %}
+								</td>
+								<td>
+									{% for style in event.style %}
+										{{style.name}}
+									{% endfor %}
+								</td>
+								<td>
+									<a class="btn btn-info" href="{{ path('admin_update_event', {id : event.id}) }}">Update</a><br>
+									<a class="btn btn-danger" href="{{ path('admin_delete_event', {idEvent : event.id}) }}">Delete</a class="btn btn-danger">
+								</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<h3 class="mt-3 mb-5">Liste des évènements terminés :</h3>
+	<div class="row">
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Description</th>
+						<th scope="col">Date-début</th>
+						<th scope="col">Date-fin</th>
+						{# <th scope="col">Type</th> #}
+						<th scope="col">Lieu</th>
+						<th scope="col">Groupes</th>
+						<th scope="col">Style</th>
+						<th scope="col">Purge</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for event in events %}
+						{% if date(event.dateEnd) < date() %}
+							<tr>
+								<th scope="row">{{ event.id }}</th>
+								<td><a href="{{ path('vitrine_event', {idEvent : event.id}) }}">{{event.name}}</a></td>
+								<td>{{event.description}}</td>
+								<td>{{event.dateBegin | date("d/m/Y")}}</td>
+								<td>{{event.dateEnd | date("d/m/Y")}}</td>
+								{# <td>{{event.type.name}}</td> #}
+								<td>
+									{{event.lieu.ville}}
+								</td>
+								<td>
+									{% for groupe in event.groupes %}
+										{{groupe.name}}
+									{% endfor %}
+								</td>
+								<td>
+									{% for style in event.style %}
+										{{style.name}}
+									{% endfor %}
+								</td>
+								<td>
+									<a class="btn btn-info" href="{{ path('admin_update_event', {id : event.id}) }}">Update</a>
+									<a href="{{ path('admin_delete_event', {idEvent : event.id}) }}" class="btn btn-danger">Purge</a>
+								</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 {% endblock %}
-
-

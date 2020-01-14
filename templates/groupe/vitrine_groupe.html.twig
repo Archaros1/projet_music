@@ -27,8 +27,14 @@
         {% else %}
           <p>Ce groupe n'a pas tout son matériel.</p>
         {% endif %}
-
-        <a href="{{ path('offre', {idGroupe : groupe.id}) }}" class="btn btn-primary">Envoyer une offre</a>
+        {% if 'ROLE_ORGA' in app.user.roles %}
+          <a href="{{ path('offre', {idGroupe : groupe.id}) }}" class="btn btn-primary">Envoyer une offre</a>
+          <a href="{{ path('blacklist', {idGroupe : groupe.id}) }}" class="btn btn-dark">Blacklister</a>
+        {% else %}
+          <a class="btn btn-info" href="{{ path('admin_update_groupe', {id : groupe.id}) }}">Update</a class="btn btn-info">
+        {% endif %}
+        
+        
 
       </div>
   </div>

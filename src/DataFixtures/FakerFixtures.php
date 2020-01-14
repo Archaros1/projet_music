@@ -103,11 +103,27 @@ class FakerFixtures extends Fixture
             ->setDateEnd(new \DateTime('1'.$i.' September 200'.($i+1)))
             ->setType($eventType)
             ->setLieu($lieu)
+            ->setOrganisateur($orga)
+            ->setValidated(true)
             ;
 
             $manager->persist($event);
-            
+        }
 
+        for ($i=0; $i < 3; $i++) { 
+            $event = new Event();
+
+            $event->setName($this->faker->cityPrefix.$this->faker->lastName)
+            ->setDescription($this->faker->realText(200, 2))
+            ->setDateBegin(new \DateTime('1'.($i+4).' October 200'.($i+1)))
+            ->setDateEnd(new \DateTime('1'.$i.' October 200'.($i+2)))
+            ->setType($eventType)
+            ->setLieu($lieu)
+            ->setOrganisateur($orga)
+            ->setValidated(false)
+            ;
+
+            $manager->persist($event);
         }
 
         // FAKE USER pour test
@@ -130,9 +146,44 @@ class FakerFixtures extends Fixture
             ->setType($groupeType)
             ->setAccount($account);
 
-        $manager->persist($orga);
+        // $manager->persist($orga);
         $manager->persist($account);
 
+
+        // FAKE ORGA pour test
+        $orga = new Organisateur();
+        $accountOrga = new Account();
+            
+        $accountOrga->setEmail("orgatest@hotmail.fr")
+        ->setRoles(['ROLE_USER', 'ROLE_ORGA'])
+        ->setPassword($this->passwordEncoder->encodePassword($accountOrga, 'webforce'));
+
+        $orga->setName($this->faker->name)
+        ->setType($orgaType)
+        ->setAccount($accountOrga)
+        ->addBlacklist($groupe)
+        ;
+
+        $manager->persist($orga);
+        $manager->persist($accountOrga);
+
+
+        // FAKE GROUPE pour test
+        $account = new Account();
+        $account->setEmail("groupetest@hotmail.fr")
+            ->setPassword($this->passwordEncoder->encodePassword($account, "webforce"))
+            ->setRoles(['ROLE_USER', 'ROLE_GROUPE']);
+
+        $groupe = new Groupe();
+        $groupe->setName($this->faker->name)
+            ->setNombreMembre(rand(0, 5))
+            ->setDescription($this->faker->realText(200, 2))
+            ->setADomicile(rand(0,1) < 0.5) //bool random
+            ->setAToutSonMateriel(rand(0,1) < 0.5)
+            ->setType($groupeType)
+            ->setAccount($account);
+
+        $manager->persist($account);
 
         $manager->flush();
     }

@@ -6,35 +6,35 @@
     {{ form_start(annonceForm) }}
     <div class="form-group mt-5">
         <div class="row">
-            <div class="col-2">
+            <div class="col-2 mb-4">
                 {{ form_row(annonceForm.nom_event, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-4">
+            <div class="col-4 mb-4">
                 {{ form_row(annonceForm.organisateur, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 {{ form_row(annonceForm.genreEvent, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-2">
+            <div class="col-2 mb-4">
                 {{ form_row(annonceForm.typeEvent, {'attr': {class : "form-control"}}) }}
             </div>
-             <div class="col-2">
+             <div class="col-2 mb-4">
                 {{ form_row(annonceForm.styleRecherche, {'attr': {class : "form-control"}}) }}
             </div>
-             <div class="col-2">
+             <div class="col-2 mb-4">
                 {{ form_row(annonceForm.dateBegin, {'attr': {class : "form-control"}}) }}
             </div>
-             <div class="col-2">
+             <div class="col-2 mb-4">
                 {{ form_row(annonceForm.dateEnd, {'attr': {class : "form-control"}}) }}
             </div>
-             <div class="col-2">
+             <div class="col-12 mb-4">
                 {{ form_row(annonceForm.lieu, {'attr': {class : "form-control"}}) }}
             </div>
-             <div class="col-2">
+             <div class="col-12 mb-4">
                 {{ form_row(annonceForm.description, {'attr': {class : "form-control"}}) }}
             </div>
-            <div class="col-4 mt-5">
-                {{ form_row(annonceForm.ajouter, {'attr' : {class : "btn btn-primary"}}) }}
+            <div class="col-12">
+                {{ form_row(annonceForm.submit, {'attr' : {class : "btn btn-primary"}}) }}
             </div>
             
 
