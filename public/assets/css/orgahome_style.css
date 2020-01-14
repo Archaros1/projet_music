@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+h1 {
+    text-align: center;
+    color: #fbf9f9;
+    font-size: 72px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+    font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 2px #082132;
+}
+
 .container.form{
-    margin-top: 100px;
     background-color: rgba(240, 255, 240, 0.671);
     border: 2px solid rgb(2, 0, 0);
     -webkit-border-radius: 10px 10px 10px 10px;
