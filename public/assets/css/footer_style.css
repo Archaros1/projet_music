@@ -12,3 +12,7 @@ footer div {
 footer div a img:not(.carre) {
     border-radius: 50%;
 }
+
+p{
+    color: black;
+}
