@@ -64,7 +64,7 @@ class FormController extends AbstractController
         $formAccount = $this->createForm(AccountFormType::class, $account);
         $formAccount->handleRequest($request);
 
-        if ($formAccount->isSubmitted()) {
+        if ($formAccount->isSubmitted() && $formAccount->isValid()) {
             $account = $formAccount->getData();
             $account->setPassword($this->passwordEncoder->encodePassword($account, $account->getPassword()));
 
