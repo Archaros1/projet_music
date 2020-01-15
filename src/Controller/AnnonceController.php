@@ -73,7 +73,6 @@ class AnnonceController extends AbstractController
         
     }
 
-    
     public function chercheGroupe()
     {
         $idAnnonce = $_SESSION['annonceCourante'];

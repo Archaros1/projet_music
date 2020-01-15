@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+h1{
+    text-align: center;
+    font-size: 52px;
+    font-weight: bold;
+    font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 2px #082132;
+}
+
+form{
+    margin: auto;
+    background-color: rgba(240, 255, 240, 0.671);
+    border: 2px solid rgb(2, 0, 0);
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    width: 70%;
+    text-align: center;
+    }

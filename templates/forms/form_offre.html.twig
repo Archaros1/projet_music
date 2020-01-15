@@ -1,14 +1,29 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('assets/css/form_offre_style.css')}}">
+    <style>
+        body{
+            background-image: url("{{asset('assets/images/fond10.jpg')}}");
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-<div class="container">
-{{ form_start(offreForm) }}
 
-    <h1>Offre</h1>
-    {{ form_row(offreForm.message, {'attr' : {placeholder : "Envoyer votre message à ce groupe, en vous présentant, vous et votre évènement.", 'class': 'form-control mt-2'}, 'label' : false}) }}
-    {{ form_row(offreForm.submit, {'attr' : {placeholder : "", 'class': 'mt-2'}, 'label' : "Envoyer"}) }}
+	<h1>Proposition</h1>
 
-{{ form_end(offreForm) }}
-</div>
+	<div class="container">
+		<div class="row form">
+			{{ form_start(offreForm) }}
+            <div class="col mt-4 mb-4">
+            {{ form_row(offreForm.message, {'attr' : {placeholder : "Envoyer votre message à ce groupe, en vous présentant, vous et votre évènement.", 'class': 'form-control mt-2'}, 'label' : false}) }}
+        </div>
+        <div class="col mb-4">
+			{{ form_row(offreForm.submit, {'attr' : {placeholder : "", 'class': ''}, 'label' : "Envoyer"}) }}
+        </div>
+			{{ form_end(offreForm) }}
+		</div>
+	</div>
 
 {% endblock %}

@@ -1,19 +1,26 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
-{# {{ dump(groupes) }} #}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/search_groupe_style.css')}}">
+{% endblock %}
 
-<div class="row">
-{% for groupe in groupes %}
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-        <h5 class="card-title">{{ groupe.name }}</h5>
-        <p class="card-text">{{ groupe.description|length > 50 ? groupe.description|slice(0, 120) ~ '...' : groupe.description.text }}</p>
-        <a href="{{ path('vitrine_groupe', {id : groupe.id })}}" class="btn btn-primary">Voir la vitrine</a>
-        </div>
-    </div>
-{% endfor %}
-</div>
+{% block body %}
+	{# {{ dump(groupes) }} #}
+
+	<h1>Groupes disponibles</h1>
+
+	<div class="container">
+		<div class="row form">
+			{% for groupe in groupes %}
+				<div class="card mr-3 mb-3 postIt" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">{{ groupe.name }}</h5>
+						<p class="card-text">{{ groupe.description|length > 50 ? groupe.description|slice(0, 120) ~ '...' : groupe.description }}</p>
+						<a href="{{ path('vitrine_groupe', {id : groupe.id })}}" class="btn btn-primary">Voir la vitrine</a>
+					</div>
+				</div>
+			{% endfor %}
+	</div>
 
 
 {% endblock %}

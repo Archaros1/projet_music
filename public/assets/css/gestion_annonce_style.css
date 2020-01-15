@@ -1,41 +1,41 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
-h1{
+h1 {
     text-align: center;
-    font-size: 30px;
-    font-weight: bold;
+    color: #fbf9f9;
+    font-size: 72px;
+    margin-bottom: 40px;
+    margin-top: 40px;
     font-family: 'Pacifico', Arial, Helvetica, sans-serif;
-    color: white;
-    margin-top: 30px;
-    margin-bottom: 30px;
     text-shadow: 2px 2px 2px #082132;
-}
+  }
 
-h2{
+  h2 {
     text-align: center;
+    color: hsl(234, 44%, 92%);
     font-size: 35px;
-    font-weight: bold;
+    margin-bottom: 40px;
+    margin-top: 40px;
     font-family: 'Pacifico', Arial, Helvetica, sans-serif;
-    color: white;
-    margin-top: 30px;
-    margin-bottom: 30px;
     text-shadow: 2px 2px 2px #082132;
-}
+  }
 
-p{
-    color: white;
-    text-align: center;
-}
-
-.button{
-    margin-left: 370px;
-}
-
-body{
+ body{
     background: #1C6EA4;
     background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
     background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
+}
+
+.info{
+    margin: auto;
+    padding: 30px;
+    background-color: rgba(240, 255, 240, 0.671);
+    border: 2px solid rgb(2, 0, 0);
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    width: 70%;
+    text-align: center;
 }
 
 .form{
@@ -50,7 +50,12 @@ body{
      -webkit-box-shadow: 5px 4px 8px 0px rgba(0,0,0,0.74); 
      box-shadow: 5px 4px 8px 0px rgba(0,0,0,0.74);
  }
- 
+
  .postIt p{
-     color: black;
- }
+    color: black;
+}
+
+.validation{
+    margin-left: 370px;
+}
+

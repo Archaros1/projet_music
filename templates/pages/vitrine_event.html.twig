@@ -1,22 +1,35 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/vitrine_event_style.css')}}">
+{% endblock %}
+
 {% block body %}
-<div class="container">
-<h1 class="card-title">{{ event.name }}</h1>
-  <p class="card-text">Description : {{ event.description }}</p>
-  <p class="card-text">Du {{ event.dateBegin | date('d/m/Y') }} au {{ event.dateEnd | date('d/m/Y') }}</p>
-  <p class="card-text">{{ event.lieu.name }} à {{ event.lieu.ville }} ({{ event.lieu.departement }})</p>
-  <p>
-    Vous y retrouverez 
-      {% for groupe in event.groupes %}
-        {{ groupe.name }}, 
-      {% endfor %}
-  </p>
-  <p>
-    Dans les styles 
-      {% for style in event.style %}
-        {{ style.name }}, 
-      {% endfor %}
-  </p>
-</div>
+<h1>{{ event.name }}</h1>
+	<div class="container">
+		<div class="vitrine">
+			<p class="card-text">Description :
+				{{ event.description }}</p>
+			<p class="card-text">Du
+				{{ event.dateBegin | date('d/m/Y') }}
+				au
+				{{ event.dateEnd | date('d/m/Y') }}</p>
+			<p class="card-text">{{ event.lieu.name }}
+				à
+				{{ event.lieu.ville }}
+				({{ event.lieu.departement }})</p>
+			<p>
+				Vous y retrouverez :
+				{% for groupe in event.groupes %}
+					{{ groupe.name }},
+				{% endfor %}
+			</p>
+			<p>
+				Dans les styles :
+				{% for style in event.style %}
+					{{ style.name }},
+				{% endfor %}
+			</p>
+		</div>
+	</div>
 {% endblock %}
