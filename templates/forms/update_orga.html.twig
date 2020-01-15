@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container">
+	{{ form_start(orgaForm) }}
+		<div class="row">
+			<div class="col-9">
+				{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur", 'class': 'form-control'}, 'label' : false}) }}
+
+			</div>
+		</div>
+		<div class="row">
+			{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "Update"}) }}
+			</div>
+		</div>
+
+	{{ form_end(orgaForm) }}
+	</div>
+{% endblock %}

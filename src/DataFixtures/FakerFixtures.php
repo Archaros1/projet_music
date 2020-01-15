@@ -110,6 +110,8 @@ class FakerFixtures extends Fixture
             $manager->persist($event);
         }
 
+        $lieu->setVille('Strasbourg');
+
         for ($i=0; $i < 3; $i++) { 
             $event = new Event();
 

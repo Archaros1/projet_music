@@ -33,15 +33,16 @@ use App\Form\OffreFormType;
 
 class FormController extends AbstractController
 {
-    // private $orgaRepo;
+    private $orgaRepo;
     private $user;
     private $security;
     private $groupeRepo;
     private $accountRepo;
     private $annonceRepo;
 
-    public function __construct(AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security){
+    public function __construct(AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security, OrganisateurRepository $orgaRepository){
         $this->groupeRepo = $groupeRepository;
+        $this->orgaRepo = $orgaRepository;
         $this->accountRepo = $accountRepository;
         $this->offreRepo = $offreRepository;
         $this->annonceRepo = $annonceRepository;
@@ -194,7 +195,32 @@ class FormController extends AbstractController
         return $this->render("forms/update_groupe.html.twig", [
             "groupeForm" => $formGroupe->createView()
         ]);
+    }
 
+
+    public function updateOrga(Request $request)
+    {
+        $idAccount = $this->user->getId();
+        $account = $this->accountRepo->find($idAccount);
+        $orga = $this->orgaRepo->find($account->getOrganisateur());
+
+        $formOrga = $this->createForm(OrganisateurFormType::class, $orga);
+        $formOrga->handleRequest($request);
+        if ($formOrga->isSubmitted()) {
+            $orga = $formOrga->getData();
+
+            $orga->setAccount($account);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($orga);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("user_home");
+        }
+        
+        return $this->render("forms/update_orga.html.twig", [
+            "orgaForm" => $formOrga->createView()
+        ]);
     }
 
     public function createOffre($idGroupe, Request $request)
