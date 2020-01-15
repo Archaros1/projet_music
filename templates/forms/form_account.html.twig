@@ -19,13 +19,19 @@
 	{{ form_start(accountForm) }}
 		<div class="row mt-3">
 			<div class="col-6">
-			{{ form_row(accountForm.email, {'attr' : {placeholder : "Email : (il vous servira d'identifiant)", 'class': 'form-control'}, 'label' : false}) }}
+			{{ form_row(accountForm.email, {'attr' : {placeholder : "Email (il vous servira d'identifiant)", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 
 		<div class="row mt-2">
 			<div class="col-6">
-			{{ form_row(accountForm.password, {'attr' : {placeholder : "Mot de passe :", 'class': 'form-control'}, 'label' : false}) }}
+			{{ form_row(accountForm.password.first, {'attr' : {placeholder : "Mot de passe", 'class': 'form-control'}, 'label' : false}) }}
+			</div>
+		</div>
+
+		<div class="row mt-2">
+			<div class="col-6">
+			{{ form_row(accountForm.password.second, {'attr' : {placeholder : "Répétez le mot de passe", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 
