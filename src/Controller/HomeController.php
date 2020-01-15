@@ -81,7 +81,7 @@ class HomeController extends AbstractController
         
      }
         $from = $request->query->get("from");
-        $donnees = $this->eventRepo->findAll();
+        $donnees = $this->eventRepo->findByValidated(true);
 
         $pageFuture = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
