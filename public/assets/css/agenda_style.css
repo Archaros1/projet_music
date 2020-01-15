@@ -28,7 +28,7 @@ h1 {
      border-radius: 20px 20px 20px 20px;
  }
 
- img{
+ .dim img{
      margin-top: 60; 
      margin-left:  6px;
      box-shadow: 5px 5px 15px 5px hsl(0, 0%, 86%);  ;

@@ -2,7 +2,7 @@
 
 h1{
     text-align: center;
-    font-size: 30px;
+    font-size: 52px;
     font-weight: bold;
     font-family: 'Pacifico', Arial, Helvetica, sans-serif;
     color: white;
@@ -27,9 +27,7 @@ p{
     text-align: center;
 }
 
-.button{
-    margin-left: 370px;
-}
+
 
 body{
     background: #1C6EA4;
@@ -38,19 +36,20 @@ body{
     background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
 }
 
+
 .form{
-    margin-left: 110px;
- } 
- 
- .postIt{
-     background: #F7FF86;
-     background: -moz-linear-gradient(left, #F7FF86 0%, #FDFFA4 50%, #FFF281 100%);
-     background: -webkit-linear-gradient(left, #F7FF86 0%, #FDFFA4 50%, #FFF281 100%);
-     background: linear-gradient(to right, #F7FF86 0%, #FDFFA4 50%, #FFF281 100%);
-     -webkit-box-shadow: 5px 4px 8px 0px rgba(0,0,0,0.74); 
-     box-shadow: 5px 4px 8px 0px rgba(0,0,0,0.74);
- }
- 
- .postIt p{
-     color: black;
- }
+   margin-left: 110px;
+   
+} 
+
+.postIt{
+    background: #7BFF22;
+    background: -moz-linear-gradient(left, #7BFF22 0%, #C2FF81 50%, #3EB620 100%);
+    background: -webkit-linear-gradient(left, #7BFF22 0%, #C2FF81 50%, #3EB620 100%);background: linear-gradient(to right, #7BFF22 0%, #C2FF81 50%, #3EB620 100%);
+    -webkit-box-shadow: 5px 4px 8px 0px rgba(0,0,0,0.74); 
+    box-shadow: 5px 4px 8px 0px rgba(0,0,0,0.74);
+}
+
+.postIt p{
+    color: black;
+}

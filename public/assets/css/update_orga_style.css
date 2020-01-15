@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
 .form{
-    margin: auto;
+    margin-top: 20px;
+    margin-top: 30px;
     background-color: rgba(240, 255, 240, 0.671);
     border: 2px solid rgb(2, 0, 0);
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
-    width: 70%;
-    text-align: center;
+    width: 40%;
 }
 
 h1{
     text-align: center;
-    font-size: 72px;
+    font-size: 52px;
     font-weight: bold;
     font-family: 'Pacifico', Arial, Helvetica, sans-serif;
     color: white;
@@ -21,10 +21,6 @@ h1{
     text-shadow: 2px 2px 2px #082132;
 }
 
-
 body{
-    background: #1C6EA4;
-    background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-    background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
+    background-image: url("{{asset('assets/images/fond7.jpg')}}");
 }

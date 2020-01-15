@@ -1,43 +1,57 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/update_groupe_style.css')}}">
+	<style>
+		body {
+			background-image: url("{{asset('assets/images/fond6.jpg')}}");
+			background-size: cover;
+		}
+	</style>
+{% endblock %}
+
 {% block body %}
-	<div class="container">
-	{{ form_start(groupeForm) }}
+
+	<h1>Modifier mes infos</h1>
+	<div class="container form">
+		{{ form_start(groupeForm) }}
 		<div class="row">
-			<div class="col-9">
+			<div class="col-9 mt-4 mb-4">
 				{{ form_row(groupeForm.name, {'attr' : {placeholder : "Nom du groupe", 'class': 'form-control'}, 'label' : false}) }}
 
 			</div>
-			<div class="col-3">
+			<div class="col-3 mb-4 mt-4">
 				{{ form_row(groupeForm.nombre_membre, {'attr' : {placeholder : "Nombre de membre", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col">
+			<div class="col mb-4">
 				{{ form_row(groupeForm.description, {'attr' : {placeholder : "Descrivez votre groupe en quelques mots", 'class': 'form-control'}, 'label' : false}) }}
 			</div>
 		</div>
 		<div class="row">
-			<div class="col">
+			<div class="col-4 mb-4">
 				{{ form_row(groupeForm.a_domicile, {'attr' : {'class': 'ml-1'}, 'label' : "Joue à domicile"}) }}
 			</div>
-			<div class="col">
+			<div class="col-4 mb-4">
 				{{ form_row(groupeForm.a_tout_son_materiel, {'attr' : {'class': 'ml-1'}}) }}
 			</div>
-			<div class="col">
+		</div>
+		<div class="row">
+			<div class="col-6 mb-4">
 				{{ form_row(groupeForm.style, {'attr' : {'class': 'ml-1'}, 'label' : "Style : "}) }}
 			</div>
-			<div class="col">
+			<div class="col-12 mb-4">
 				{{ form_row(groupeForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col">
-				{{ form_row(groupeForm.submit, {'attr' : {'class': ''}, 'label' : "Update"}) }}
+				{{ form_row(groupeForm.submit, {'attr' : {'class': ''}, 'label' : "Modifier"}) }}
 			</div>
 		</div>
 
-	{{ form_end(groupeForm) }}
+		{{ form_end(groupeForm) }}
 	</div>
 {% endblock %}

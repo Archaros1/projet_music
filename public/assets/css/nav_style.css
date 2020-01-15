@@ -1,11 +1,7 @@
-a:hover{
-    color: rgb(255, 0, 0);
- }
- 
 .navbar a{
     color: #fbf9f9;
 }
 
-.navbar {
-    background-color: rgba(128, 128, 128, 0.3);
+a:hover{
+    color: rgb(255, 166, 0);
 }

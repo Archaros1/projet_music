@@ -1,5 +1,13 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+	<style>
+		body{
+			background-color: rgb(245, 245, 153);
+		}
+	</style>
+{% endblock %}
+
 {% block body %}
 <h1>Accueil admin</h1>
 <div class="container-fluid mt-5">
@@ -142,7 +150,7 @@
 							<td>{{offre.caller}}</td>
 							<td>{{offre.validated}}</td>
 							<td>
-								{% for groupe in offre.groupes %}
+								{% for groupe in groupes %}
 									{{groupe.name}}
 								{% endfor %}
 							</td>

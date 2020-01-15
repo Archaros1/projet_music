@@ -1,24 +1,37 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/update_orga_style.css')}}">
+	<style>
+		body {
+			background-image: url("{{asset('assets/images/fond6.jpg')}}");
+			background-size: cover;
+		}
+	</style>
+{% endblock %}
+
 {% block body %}
-	<div class="container">
-	{{ form_start(orgaForm) }}
+
+	<h1>Modifier mes infos</h1>
+	<div class="container form">
+		{{ form_start(orgaForm) }}
 		<div class="row">
-			<div class="col-9">
+			<div class="col-8 mt-4 mb-4">
 				{{ form_row(orgaForm.name, {'attr' : {placeholder : "Nom de l'organisateur", 'class': 'form-control'}, 'label' : false}) }}
-
 			</div>
 		</div>
 		<div class="row">
-			{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
-		</div>
-		
-		<div class="row">
-			<div class="col">
-				{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "Update"}) }}
+			<div class="col-8 mb-4">
+				{{ form_row(orgaForm.type, {'attr' : {'class': 'ml-1'}, 'label' : "Type : "}) }}
 			</div>
 		</div>
 
-	{{ form_end(orgaForm) }}
+		<div class="row">
+			<div class="col mb-3">
+				{{ form_row(orgaForm.submit, {'attr' : {'class': ''}, 'label' : "Valider"}) }}
+			</div>
+		</div>
+
+		{{ form_end(orgaForm) }}
 	</div>
 {% endblock %}
