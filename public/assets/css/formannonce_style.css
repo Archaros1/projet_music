@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+.form{
+    margin-top: 20px;
+    margin-top: 30px;
+    background-color: rgba(240, 255, 240, 0.671);
+    border: 2px solid rgb(2, 0, 0);
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    width: 50%;
+}
+
+h1{
+    text-align: center;
+    font-size: 72px;
+    font-weight: bold;
+    font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 2px #082132;
+}
+
+
+body{
+    background: #1C6EA4;
+    background: -moz-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+    background: -webkit-linear-gradient(left, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
+    background: linear-gradient(to right, #1C6EA4 0%, #2388CB 50%, #144E75 100%);;
+}
