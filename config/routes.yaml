@@ -39,11 +39,11 @@ groupe_home:
   controller: App\Controller\GroupeController::index
 
 groupe_update:
-  path: /update_infos
+  path: /update_infos/groupe
   controller: App\Controller\FormController::updateGroupe
 
 orga_update:
-  path: /update_infos
+  path: /update_infos/organisateur
   controller: App\Controller\FormController::updateOrga
 
 
