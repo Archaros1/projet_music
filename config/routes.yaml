@@ -15,7 +15,7 @@ home:
   controller: App\Controller\HomeController::home
 
 form_account:
-  path: /form-inscription
+  path: /form-inscription/{typeUser}
   controller: App\Controller\FormController::createAccount
 
 form_orga:

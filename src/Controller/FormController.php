@@ -30,6 +30,9 @@ use App\Entity\Offre;
 use App\Repository\OffreRepository;
 use App\Form\OffreFormType;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+
 
 class FormController extends AbstractController
 {
@@ -39,33 +42,36 @@ class FormController extends AbstractController
     private $groupeRepo;
     private $accountRepo;
     private $annonceRepo;
+    private $passwordEncoder;
 
-    public function __construct(AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security, OrganisateurRepository $orgaRepository){
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security, OrganisateurRepository $orgaRepository){
         $this->groupeRepo = $groupeRepository;
         $this->orgaRepo = $orgaRepository;
         $this->accountRepo = $accountRepository;
         $this->offreRepo = $offreRepository;
         $this->annonceRepo = $annonceRepository;
         $this->security = $security;
+        $this->passwordEncoder = $passwordEncoder;
         $this->user = $security->getUser();
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
 
     }
 
-    public function createAccount(Request $request){
+    public function createAccount(Request $request, $typeUser){
         $account = new Account();
-        $typeUser = $_GET['typeUser'];
+        // $typeUser = $_GET['typeUser'];
 
         $formAccount = $this->createForm(AccountFormType::class, $account);
         $formAccount->handleRequest($request);
 
         if ($formAccount->isSubmitted()) {
             $account = $formAccount->getData();
+            $account->setPassword($this->passwordEncoder->encodePassword($account, $account->getPassword()));
 
             if ($typeUser == 'orga') {
-                $account->setRoles = ['ROLE_USER', 'ROLE_ORGA'];
+                $account->setRoles(['ROLE_USER', 'ROLE_ORGA']);
             } elseif ($typeUser == 'groupe') {
-                $account->setRoles = ['ROLE_USER', 'ROLE_GROUPE'];
+                $account->setRoles(['ROLE_USER', 'ROLE_GROUPE']);
             } else {
                 return $this->redirectToRoute("home");
             }
@@ -86,7 +92,8 @@ class FormController extends AbstractController
             }
         }
         return $this->render("forms/form_account.html.twig", [
-            "accountForm" => $formAccount->createView()]);
+            "accountForm" => $formAccount->createView()
+            ]);
     }
 
     public function createOrga(Request $request){
