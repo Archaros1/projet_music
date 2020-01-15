@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('assets/css/formannonce_style.css')}}">
+{% endblock %}
+
 {% block body %}
 
-<div class="container">
+<h1>mon évènement</h1>
+
+<div class="container form">
+
 {{ form_start(annonceForm) }}
 <div class="row mt-3">
-   <div class="col">
+   <div class="col ">
       {{ form_row(annonceForm.nom_event, {'attr' : {placeholder : "Nom de l'évenement", 'class': 'form-control'}, 'label' : false}) }}
    </div>
 </div>
@@ -17,13 +24,11 @@
 </div>
 
 <div class="row mt-3">
-   <div class="col">
+   <div class="col-6">
       {{ form_row(annonceForm.date_begin, {'attr' : {'class': ''}, 'label' : 'Date de début'}) }}
    </div>
-</div>
 
-<div class="row mt-3">
-   <div class="col">
+   <div class="col-6">
       {{ form_row(annonceForm.date_end, {'attr' : {'class': ''}, 'label' : "Date de fin"}) }}
    </div>
 </div>
@@ -34,7 +39,7 @@
    </div>
 </div>
 
-<div class="row mt-3">
+<div class="row mt-3 ml-1">
       {{ form_row(annonceForm.lieu, {'attr' : {'class': 'mr-4'}}) }}
       {# {{ form_row(annonceForm.type_event, {'attr' : {'class': ''}}) }} #}
 </div>
@@ -47,7 +52,7 @@
 
 <div class="row mt-3">
    <div class="col">
-      {{ form_row(annonceForm.submit, {'attr' : {'class': ''}}) }}
+      {{ form_row(annonceForm.submit, {'attr' : {'class': ''}, 'label': "Créer event"}) }}
    </div>
 </div>
             
