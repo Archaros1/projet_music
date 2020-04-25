@@ -7,21 +7,18 @@
 {% block body %}
 	{# {{ dump(app.user) }} #}
 	<div class="container ">
-		<h1>Vous êtes sur la page utilisateur de
-			{{orga.name}}</h1>
-		<p>Vous êtes un
-			<strong>organisateur</strong>
-			catégorisé en tant que
-			<strong>{{orga.type.name}}</strong>.</p>
+		<div class="col">
+			<h1>Vous êtes sur la page utilisateur de {{orga.name}}</h1>
+			<p>Vous êtes un <strong>organisateur</strong> catégorisé en tant que <strong>{{orga.type.name}}</strong>.</p>
 
-		<p>Votre email identifiant est
-			<strong>{{orga.account.email}}</strong>
-		</p>
+			<p>Votre email identifiant est <strong>{{orga.account.email}}</strong></p>
 
-		<div class="button">
-			<a href="{{ path('form_ann') }}" class="btn btn-info">Créer une annonce</a>
-			<a href="{{path('orga_update')}}" class="btn btn-info">Modifier mes informations</a>
+			<div class="row text-center block">
+				<a href="{{ path('form_ann') }}" class=" btn btn-info">Créer une annonce</a>
+				<a href="{{path('orga_update')}}" class=" btn btn-info">Modifier mes informations</a>
+			</div>
 		</div>
+		
 
 		<h2>Vos annonces</h2>
 		<div class="row form">

@@ -80,7 +80,7 @@ class HomeController extends AbstractController
         $page = $_GET['page'];
         
      }
-        $from = $request->query->get("from");
+        // $from = $request->query->get("from");
         $donnees = $this->eventRepo->findByValidated(true);
 
         $pageFuture = $paginator->paginate(
@@ -97,7 +97,7 @@ class HomeController extends AbstractController
         
         return $this->render('pages/agenda.html.twig', [
             "events" => $events, 
-            "from" => $page, 
+            "page" => $page, 
             "pageFuture" => $pageFuture]);
     }
 

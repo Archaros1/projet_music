@@ -9,17 +9,32 @@
 
 	<h1>Groupes disponibles</h1>
 
-	<div class="container">
-		<div class="row form">
-			{% for groupe in groupes %}
-				<div class="card mr-3 mb-3 postIt" style="width: 18rem;">
-					<div class="card-body">
-						<h5 class="card-title">{{ groupe.name }}</h5>
-						<p class="card-text">{{ groupe.description|length > 50 ? groupe.description|slice(0, 120) ~ '...' : groupe.description }}</p>
-						<a href="{{ path('vitrine_groupe', {id : groupe.id })}}" class="btn btn-primary">Voir la vitrine</a>
+	<div class="container-fluid">
+		<div class="col">
+			<div class="row ">
+				{% for groupe in groupes %}
+					<div class="card mr-3 mb-3 postIt" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title">{{ groupe.name }}</h5>
+							<p class="card-text">{{ groupe.description|length > 50 ? groupe.description|slice(0, 120) ~ '...' : groupe.description }}</p>
+							<a href="{{ path('vitrine_groupe', {id : groupe.id })}}" class="btn btn-primary">Voir la vitrine</a>
+						</div>
 					</div>
+				{% endfor %}
+			</div>
+			<div class="row justify-content-around">
+				<div class="col-3">
+					{% if page > 1 %}
+						<a href="{{ path('search_groupe', {slug : slug, page : page - 1}) }}"><img width="200" src="{{asset('assets/images/preced.png')}}"></a>
+					{% endif %}
 				</div>
-			{% endfor %}
+				<div class="col-3">
+					{% if not pageFuture is empty %}
+						<a href="{{ path('search_groupe', {slug : slug, page : page + 1}) }}"><img width="200" src="{{asset('assets/images/suivant.png')}}"></a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 	</div>
 
 

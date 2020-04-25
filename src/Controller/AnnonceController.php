@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 use App\Entity\Organisateur;
@@ -74,8 +75,13 @@ class AnnonceController extends AbstractController
         
     }
 
-    public function chercheGroupe($slug)
+    public function chercheGroupe($slug, PaginatorInterface $paginator)
     {
+        $page = 1;
+        if(isset($_GET['page'])) {
+        $page = $_GET['page'];
+        }
+
         $idOrgaUser = $this->user->getOrganisateur()->getId();
 
         $annonce = new Annonce();
@@ -105,10 +111,25 @@ class AnnonceController extends AbstractController
                 $ban = false;
                 
             }
+
+            $pageFuture = $paginator->paginate(
+                $groupesNotBlacklisted, // Requête contenant les données à paginer (ici nos articles)
+                ($page+1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+                8 // Nombre de résultats par page
+            );
+
+            $groupesNotBlacklisted = $paginator->paginate(
+                $groupesNotBlacklisted, // Requête contenant les données à paginer (ici nos articles)
+                $page, // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+                8 // Nombre de résultats par page
+            );
         }
 
         return $this->render('annonce/search_groupe.html.twig', [
-            'groupes' => $groupesNotBlacklisted
+            'groupes' => $groupesNotBlacklisted, 
+            "page" => $page, 
+            "pageFuture" => $pageFuture,
+            "slug" => $slug
         ]);
     }
 

@@ -36,13 +36,13 @@
 
 		<div class="row justify-content-around">
             <div class="col-3">
-                {% if from > 1 %}
-                    <a href="{{path('agenda', {page : from - 1}) }}"><img width="200" src="{{asset('assets/images/preced.png')}}"></a>
+                {% if page > 1 %}
+                    <a href="{{path('agenda', {page : page - 1}) }}"><img width="200" src="{{asset('assets/images/preced.png')}}"></a>
                 {% endif %}
             </div>
             <div class="col-3">
 				{% if not pageFuture is empty %}
-				<a href="{{ path('agenda', {page : from + 1}) }}"><img width="200" src="{{asset('assets/images/suivant.png')}}"></a>
+				<a href="{{ path('agenda', {page : page + 1}) }}"><img width="200" src="{{asset('assets/images/suivant.png')}}"></a>
 				{% endif %}
             </div>
         </div>

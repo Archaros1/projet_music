@@ -27,8 +27,10 @@ p{
     text-align: center;
 }
 
-.button{
-    margin-left: 370px;
+.block{
+    display: block;
+    margin: auto;
+
 }
 
 body{
