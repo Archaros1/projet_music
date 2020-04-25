@@ -85,11 +85,11 @@ form_event:
   controller: App\Controller\HomeController::form_event
 
 gestion_ann:
-  path: /gestion-annonce
+  path: /gestion-annonce/{slug}
   controller: App\Controller\AnnonceController::index
 
 search_groupe:
-  path: /gestion-annonce/search-groupe
+  path: /gestion-annonce/{slug}/search-groupe
   controller: App\Controller\AnnonceController::chercheGroupe
 
 vitrine_event:

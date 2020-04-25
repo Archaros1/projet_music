@@ -35,7 +35,7 @@
 				{% endfor %}
 			</ul>
 
-			<a href="{{ path('search_groupe') }}" class="btn btn-primary mb-3">Chercher des groupes</a>
+			<a href="{{ path('search_groupe', {slug : annonce.slug}) }}" class="btn btn-primary mb-3">Chercher des groupes</a>
 		</div>
 
 		<h2>Vos offres envoyées</h2>

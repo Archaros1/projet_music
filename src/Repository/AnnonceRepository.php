@@ -73,6 +73,18 @@ class AnnonceRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findOneBySlugAndOrga($slug, $orga)
+    {
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.slug = :slug')
+        ->andWhere('a.organisateur = :organisateur')
+        ->setParameters(['slug' => $slug, 'organisateur' => $orga])
+        ->orderBy('a.id', 'ASC')
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
+
     public function findPaginatedAnnonces($from){
         // Create our query
         $query = $this->createQueryBuilder('p')

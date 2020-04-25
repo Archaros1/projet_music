@@ -52,18 +52,19 @@ class AnnonceController extends AbstractController
     /**
      * @Route("/annonce", name="annonce")
      */
-    public function index()
+    public function index($slug)
     {
-        $idAnnonce = $_GET['id'];
+        // $idAnnonce = $_GET['id'];
         $idOrgaUser = $this->user->getOrganisateur()->getId();
 
         $annonce = new Annonce();
-        $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idOrgaUser);
+        // $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idOrgaUser);
+        $annonce = $this->annonceRepo->findOneBySlugAndOrga($slug, $idOrgaUser);
 
         if (is_null($annonce)) {
             return $this->redirectToRoute("user_home");
         } else {
-            $_SESSION['annonceCourante'] = $idAnnonce;
+            $_SESSION['annonceCourante'] = $slug;
             $offres = $annonce->getOffres();
             return $this->render('annonce/annonce_gestion.html.twig', [
                 'annonce' => $annonce, 
@@ -73,13 +74,12 @@ class AnnonceController extends AbstractController
         
     }
 
-    public function chercheGroupe()
+    public function chercheGroupe($slug)
     {
-        $idAnnonce = $_SESSION['annonceCourante'];
         $idOrgaUser = $this->user->getOrganisateur()->getId();
 
         $annonce = new Annonce();
-        $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($idAnnonce, $idOrgaUser);
+        $annonce = $this->annonceRepo->findOneBySlug($slug);
 
         if (is_null($annonce)) {
             return $this->redirectToRoute("user_home");

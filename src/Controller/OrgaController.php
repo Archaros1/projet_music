@@ -64,7 +64,12 @@ class OrgaController extends AbstractController
         $events = $this->eventRepo->findByOrganisateur($orga->getId());
 
 
-        return $this->render('organisateur/orga_home.html.twig', ["orga"=>$orga, "annonces"=>$annonces, "events"=>$events]);
+        return $this->render('organisateur/orga_home.html.twig', 
+        [
+            "orga"=>$orga, 
+            "annonces"=>$annonces, 
+            "events"=>$events
+        ]);
     }
 
     public function blacklist($idGroupe)

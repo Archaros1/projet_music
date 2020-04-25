@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+// use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 use App\Entity\Organisateur;
 use App\Repository\OrganisateurRepository;
@@ -43,14 +45,16 @@ class FormController extends AbstractController
     private $accountRepo;
     private $annonceRepo;
     private $passwordEncoder;
+    private $slugger;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security, OrganisateurRepository $orgaRepository){
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, AnnonceRepository $annonceRepository, OffreRepository $offreRepository, GroupeRepository $groupeRepository, AccountRepository $accountRepository, Security $security, OrganisateurRepository $orgaRepository, SluggerInterface $slugger){
         $this->groupeRepo = $groupeRepository;
         $this->orgaRepo = $orgaRepository;
         $this->accountRepo = $accountRepository;
         $this->offreRepo = $offreRepository;
         $this->annonceRepo = $annonceRepository;
         $this->security = $security;
+        $this->slugger = $slugger;
         $this->passwordEncoder = $passwordEncoder;
         $this->user = $security->getUser();
         // echo '<pre>' . var_export($this->user, true) . '</pre>';
@@ -163,7 +167,11 @@ class FormController extends AbstractController
             $annonce = $formAnnonce->getData();
 
             $userOrga = $this->user->getOrganisateur();
-            $annonce->setOrganisateur($userOrga);
+            
+            $randomToken = bin2hex(random_bytes(16));;
+            $slug = $this->slugger->slug($annonce->getNomEvent())."-".$randomToken;
+            $annonce->setOrganisateur($userOrga)
+                    ->setSlug($slug);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($annonce);
@@ -240,7 +248,8 @@ class FormController extends AbstractController
         if ($formOffre->isSubmitted()) {
             $offre = $formOffre->getData();
 
-            $annonce = $this->annonceRepo->findAnnonceByIdAndOrga($_SESSION['annonceCourante'], $this->user->getOrganisateur()->getId());
+            $annonce = $this->annonceRepo->findOneBySlug($_SESSION['annonceCourante']);
+            
             $groupe = $this->groupeRepo->findOneById($idGroupe);
 
             $offre->setCaller('organisateur')
@@ -254,7 +263,7 @@ class FormController extends AbstractController
             $entityManager->flush();
 
             // return $this->redirectToRoute("gestion_ann", ['id' => $annonce->getId()]);
-            return $this->redirectToRoute("search_groupe");
+            return $this->redirectToRoute("search_groupe", ['slug' => $_SESSION['annonceCourante']]);
             // search_groupe
             // return $this->redirectToRoute("orga_home");
 

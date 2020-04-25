@@ -70,6 +70,11 @@ class Annonce
      */
     private $organisateur;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -230,6 +235,18 @@ class Annonce
     public function setOrganisateur(?Organisateur $organisateur): self
     {
         $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

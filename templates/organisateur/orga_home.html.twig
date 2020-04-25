@@ -33,7 +33,7 @@
 						<p class="card-text">{{annonce.dateBegin | date("d/m/Y")}}
 							-
 							{{annonce.dateEnd | date("d/m/Y")}}</p>
-						<a href="{{ path('gestion_ann', {id : annonce.id}) }}" class="btn btn-primary">Détails</a>
+						<a href="{{ path('gestion_ann', {slug : annonce.slug}) }}" class="btn btn-primary">Détails</a>
 					</div>
 				</div>
 

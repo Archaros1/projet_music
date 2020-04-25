@@ -39,5 +39,6 @@ security:
         - { path: ^/home-groupe, roles: ROLE_GROUPE }
         - { path: ^/home-organisateur, roles: ROLE_ORGA }
         - { path: ^/recherche-annonce, roles: ROLE_GROUPE }
+        - { path: ^/search-groupe, roles: ROLE_ORGA }
         - { path: ^/form-annonce, roles: ROLE_ORGA }
         - { path: ^/offre, roles: ROLE_USER }
