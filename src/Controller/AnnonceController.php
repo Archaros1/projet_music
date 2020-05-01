@@ -169,6 +169,9 @@ class AnnonceController extends AbstractController
         if ($annonce->getOrganisateur()->getAccount()->getId() == $this->user->getId())
         {
             $entityManager = $this->getDoctrine()->getManager();
+            foreach ($annonce->getOffres() as $offre) {
+                $entityManager->remove($offre);
+            }
             $entityManager->remove($annonce);
             $entityManager->flush();
         }

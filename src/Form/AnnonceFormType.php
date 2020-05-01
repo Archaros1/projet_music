@@ -34,18 +34,12 @@ class AnnonceFormType extends AbstractType
                 'class' => Style::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                // 'mapped' => false,
                 'expanded' => true,
                 'label' => 'Style(s) recherché(s)',
                 'choice_attr' => function() {
                     return ['class' => 'ml-2 mr-1'];
                 },
             ])
-            // ->add('type_event', EntityType::class, [
-            //     'class' => EventType::class,
-            //     'choice_label' => 'name'
-            // ])
-            // SUBMIT
             ->add('submit', SubmitType::class)
         ;
     }
