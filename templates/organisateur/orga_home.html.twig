@@ -40,7 +40,7 @@
 		<h2>Vos évènements</h2>
 		<div class="row form">
 			{% for event in events %}
-				{% if date(event.dateEnd) < date() %}
+				{% if date(event.dateEnd) > date() %}
 					<div class="card mr-3 mb-3 postIt" style="width: 18rem;">
 						<div class="card-body">
 							<h5 class="card-title">{{event.name}}</h5>

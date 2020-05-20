@@ -10,11 +10,11 @@
 <div class="card mb-3" style="max-width: 700px;">
   <div class="row no-gutters">
     <div class="col-4">
-      <img src="{{asset('assets/images/pg.jpg')}}" class="card-img" alt="...">
+      <img src="{{asset('assets/images/pg.jpg')}}" class="card-img" alt="">
     </div>
       <div class="card-body mt-0">
         <h5 class="card-title">Nom du groupe : {{groupe.name}}</h5>
-        <h5 class="card-title">type de groupe : {{groupe.type.name}}</h5>
+        <h5 class="card-title">Type de groupe : {{groupe.type.name}}</h5>
         <h5 class="card-title">Nombre de musicien : {{groupe.nombreMembre}}</h5>
         <p class="card-text">Description : {{groupe.description}}</p>
         {% if groupe.aDomicile %}
